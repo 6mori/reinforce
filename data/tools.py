@@ -1,13 +1,22 @@
 
 import pygame as pg
 
-keybinding = {
-    'action': pg.K_SPACE,
-    'jump': pg.K_UP,
-    'left': pg.K_LEFT,
-    'right':pg.K_RIGHT,
-    'down': pg.K_DOWN
-}
+keybinding = [
+    {
+        'action': pg.K_SPACE,
+        'jump': pg.K_w,
+        'left': pg.K_a,
+        'right':pg.K_d,
+        'down': pg.K_s
+    },
+    {
+        'action': pg.K_KP0,
+        'jump': pg.K_UP,
+        'left': pg.K_LEFT,
+        'right':pg.K_RIGHT,
+        'down': pg.K_DOWN
+    }
+]
 
 class Control(object):
     ''' Control object for entire project '''

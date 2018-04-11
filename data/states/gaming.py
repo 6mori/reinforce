@@ -19,7 +19,7 @@ class gaming(tools._State):
         self.game_info[c.CURRENT_TIME] = current_time
 
         self.setup_bricks()
-        self.setup_character()
+        self.setup_characters()
         self.setup_bullets()
         #self.setup_spritegroups()
 
@@ -46,11 +46,18 @@ class gaming(tools._State):
         bricks.add(brick.Brick(x, y))
 
 
-    def setup_character(self):
-        self.character = gun_guy.Gun_guy()
-        self.character.rect.x = 0
-        self.character.rect.y = 0
-        self.character.state = c.FALL
+    def setup_characters(self):
+        player_1 = gun_guy.Gun_guy()
+        player_1.rect.x = 0
+        player_1.rect.y = 0
+        player_1.state = c.FALL
+
+        player_2 = gun_guy.Gun_guy()
+        player_2.rect.right = c.SCREEN_WIDTH
+        player_2.rect.y = 0
+        player_2.state = c.FALL
+
+        self.characters_group = Group(player_1, player_2)
 
 
     def setup_bullets(self):
@@ -68,76 +75,79 @@ class gaming(tools._State):
 
 
     def update_all_sprites(self, keys):
-        self.character.update(keys, self.game_info, self.bullets_group)
+        for character, keybinding in zip(self.characters_group.sprites(), tools.keybinding):
+            character.update(keys, keybinding,  self.game_info, self.bullets_group)
         self.adjust_sprite_positions()
         self.bullets_group.update()
 
 
     def adjust_sprite_positions(self):
-        self.adjust_character_position()
+        self.adjust_characters_position()
         self.adjust_bullets_position()
 
 
-    def adjust_character_position(self):
-        self.character.rect.x += round(self.character.x_vel)
-        self.check_character_x_edge()
-        self.check_character_x_collisions()
+    def adjust_characters_position(self):
+        for character in self.characters_group.sprites():
+            character.rect.x += round(character.x_vel)
+            self.check_character_x_edge(character)
+            self.check_character_x_collisions(character)
 
-        self.character.rect.y += round(self.character.y_vel)
-        self.check_character_y_collisions()
-
-
-    def check_character_x_edge(self):
-        if self.character.rect.left < 0:
-            self.character.rect.left = 0
-        if self.character.rect.right > c.SCREEN_WIDTH:
-            self.character.rect.right = c.SCREEN_WIDTH
+            character.rect.y += round(character.y_vel)
+            self.check_character_y_collisions(character)
 
 
-    def check_character_x_collisions(self):
-        brick = pg.sprite.spritecollideany(self.character, self.bricks_group)
-
-        if brick:
-            self.adjust_character_for_x_collisions(brick)
-
-
-    def adjust_character_for_x_collisions(self, collider):
-        if self.character.rect.x < collider.rect.x:
-            self.character.rect.right = collider.rect.left
-        else:
-            self.character.rect.left = collider.rect.right
-
-        self.character.x_vel = 0
+    def check_character_x_edge(self, character):
+        if character.rect.left < 0:
+            character.rect.left = 0
+        if character.rect.right > c.SCREEN_WIDTH:
+            character.rect.right = c.SCREEN_WIDTH
 
 
-    def check_character_y_collisions(self):
-        brick = pg.sprite.spritecollideany(self.character, self.bricks_group)
+    def check_character_x_collisions(self, character):
+        brick = pg.sprite.spritecollideany(character, self.bricks_group)
 
         if brick:
-            self.adjust_character_for_y_collisions(brick)
-
-        self.check_if_character_is_falling()
+            self.adjust_character_for_x_collisions(character, brick)
 
 
-    def adjust_character_for_y_collisions(self, collider):
-        print(self.character.rect.y, collider.rect.y)
-        if self.character.rect.y < collider.rect.y:
-            self.character.rect.bottom = collider.rect.top
-            self.character.state = c.WALK
+    def adjust_character_for_x_collisions(self, character, collider):
+        print(character.rect.x, collider.rect.x)
+        if character.rect.x < collider.rect.x:
+            character.rect.right = collider.rect.left
         else:
-            self.character.rect.top = collider.rect.bottom
+            character.rect.left = collider.rect.right
 
-        self.character.y_vel = 0
+        character.x_vel = 0
 
 
-    def check_if_character_is_falling(self):
-        self.character.rect.y += 1
+    def check_character_y_collisions(self, character):
+        brick = pg.sprite.spritecollideany(character, self.bricks_group)
+
+        if brick:
+            self.adjust_character_for_y_collisions(character, brick)
+
+        self.check_if_character_is_falling(character)
+
+
+    def adjust_character_for_y_collisions(self, character, collider):
+        print(character.rect.y, collider.rect.y)
+        if character.rect.y < collider.rect.y:
+            character.rect.bottom = collider.rect.top
+            character.state = c.WALK
+        else:
+            character.rect.top = collider.rect.bottom
+
+        character.y_vel = 0
+
+
+    def check_if_character_is_falling(self, character):
+        character.rect.y += 1
         test_collide_group = pg.sprite.Group(self.bricks_group)
 
-        if pg.sprite.spritecollideany(self.character, test_collide_group) is None:
-                if self.character.state != c.JUMP:
-                    self.character.state = c.FALL
-        self.character.rect.y -= 1
+        if pg.sprite.spritecollideany(character, test_collide_group) is None:
+                if character.state != c.JUMP:
+                    character.state = c.FALL
+        character.rect.y -= 1
 
 
     def adjust_bullets_position(self):
@@ -167,7 +177,8 @@ class gaming(tools._State):
     def blit_everything(self, surface):
         # For test
         surface.fill(c.BG_COLOR)
-        pg.draw.rect(surface, self.character.color, self.character.rect)
+        for character in self.characters_group.sprites():
+            pg.draw.rect(surface, character.color, character.rect)
         for brick in self.bricks_group.sprites():
             pg.draw.rect(surface, brick.color, brick.rect)
         for bullet in self.bullets_group.sprites():
