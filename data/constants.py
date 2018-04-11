@@ -21,7 +21,7 @@ ORANGE       = (255, 128,   0)
 PURPLE       = (255,   0, 255)
 CYAN         = (  0, 255, 255)
 BLACK        = (  0,   0,   0)
-NEAR_BLACK    = ( 19,  15,  48)
+NEAR_BLACK   = ( 19,  15,  48)
 COMBLUE      = (233, 232, 255)
 GOLD         = (255, 215,   0)
 
@@ -46,9 +46,9 @@ CLIMB = 'climb'
 
 MAX_X_VEL    = 1
 MAX_Y_VEL    = 11
-JUMP_VEL     = -10
-GRAVITY      = 1.01
-JUMP_GRAVITY = 0.31
+JUMP_VEL     = -2
+GRAVITY      = 0.05
+JUMP_GRAVITY = 0.02
 
 # Player1 property
 
