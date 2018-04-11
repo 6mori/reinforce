@@ -2,7 +2,7 @@
 import pygame as pg
 
 keybinding = {
-    'fire': pg.K_SPACE,
+    'action': pg.K_SPACE,
     'jump': pg.K_UP,
     'left': pg.K_LEFT,
     'right':pg.K_RIGHT,

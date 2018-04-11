@@ -24,6 +24,7 @@ class Character(Sprite):
     def setup_state_booleans(self):
         self.facing_right = True
         self.allow_jump = True
+        self.allow_action = True
         self.dead = False
         self.in_transition_state = False
 
@@ -37,29 +38,34 @@ class Character(Sprite):
         self.gravity = c.GRAVITY
 
 
-    def update(self, keys, game_info):
+    def update(self, keys, game_info, action_group):
         self.current_time = game_info[c.CURRENT_TIME]
-        self.handle_state(keys)
+        self.handle_state(keys, action_group)
         #self.check_for_special_state()
         #self.animation()
 
 
-    def handle_state(self, keys):
+    def handle_state(self, keys, action_group):
         if self.state == c.STAND:
-            self.stand(keys)
+            self.stand(keys, action_group)
         elif self.state == c.WALK:
-            self.walk(keys)
+            self.walk(keys, action_group)
         elif self.state == c.JUMP:
-            self.jump(keys)
+            self.jump(keys, action_group)
         elif self.state == c.FALL:
-            self.fall(keys)
+            self.fall(keys, action_group)
 
 
-    def stand(self, keys):
+    def stand(self, keys, action_group):
         self.check_to_allow_jump(keys)
+        self.check_to_allow_action(keys)
 
         self.x_vel = 0
         self.y_vel = 0
+
+        if keys[tools.keybinding['action']]:
+            if self.allow_action:
+                self.action(action_group)
 
         if keys[tools.keybinding['left']]:
             self.facing_right = False
@@ -77,8 +83,13 @@ class Character(Sprite):
             self.state = c.STAND
 
 
-    def walk(self, keys):
+    def walk(self, keys, action_group):
         self.check_to_allow_jump(keys)
+        self.check_to_allow_action(keys)
+
+        if keys[tools.keybinding['action']]:
+            if self.allow_action:
+                self.action(action_group)
 
         if keys[tools.keybinding['jump']]:
             if self.allow_jump:
@@ -99,14 +110,14 @@ class Character(Sprite):
             else:
                 self.x_vel = 0
 
-
-
         else:
             if self.y_vel == 0:
                 self.state = c.STAND
             self.x_vel = 0
 
-    def jump(self, keys):
+    def jump(self, keys, action_group):
+        self.check_to_allow_action(keys)
+
         self.allow_jump = False
         self.gravity = c.JUMP_GRAVITY
         self.y_vel += self.gravity
@@ -115,6 +126,10 @@ class Character(Sprite):
             self.gravity = c.GRAVITY
             self.state = c.FALL
 
+        if keys[tools.keybinding['action']]:
+            if self.allow_action:
+                self.action(action_group)
+
         if keys[tools.keybinding['left']]:
             self.facing_right = False
             self.x_vel = -self.max_x_vel
@@ -127,21 +142,36 @@ class Character(Sprite):
             self.state = c.FALL
 
 
-    def fall(self, keys):
+    def fall(self, keys, action_group):
+        self.check_to_allow_action(keys)
+
         if self.y_vel < c.MAX_Y_VEL:
             self.y_vel += self.gravity
+
+        if keys[tools.keybinding['action']]:
+            if self.allow_action:
+                self.action(action_group)
+
+        if keys[tools.keybinding['left']]:
+            self.facing_right = False
+            self.x_vel = -self.max_x_vel
+        elif keys[tools.keybinding['right']]:
+            self.facing_right = True
+            self.x_vel = self.max_x_vel
+
+
+    def action(self, action_group):
+        pass
 
 
     def check_to_allow_jump(self, keys):
         if not keys[tools.keybinding['jump']]:
             self.allow_jump = True
 
-        if keys[tools.keybinding['left']]:
-            self.facing_right = False
-            self.x_vel = self.max_x_vel
-        elif keys[tools.keybinding['right']]:
-            self.facing_right = True
-            self.x_vel = -self.max_x_vel
+
+    def check_to_allow_action(self, keys):
+        if not keys[tools.keybinding['action']]:
+            self.allow_action = True
 
 
     def blitme(self):
