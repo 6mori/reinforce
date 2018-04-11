@@ -1,5 +1,5 @@
-SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
 
 SCREEN_SIZE = (SCREEN_WIDTH,SCREEN_HEIGHT)
 
@@ -50,6 +50,11 @@ JUMP_VEL     = -10
 GRAVITY      = 1.01
 JUMP_GRAVITY = 0.31
 
+# Player1 property
+
+P1_NAME = 'cindy'
+P1_DAMAGE = 2
+
 # Game info
 
 CURRENT_TIME = 'current time'
@@ -57,11 +62,18 @@ KEYBINDING  = 'keybinding'
 
 # Brick property
 
-BRICK_WIDTH  = 15
-BRICK_HEIGHT = 20
+BRICK_WIDTH  = 20
+BRICK_HEIGHT = 15
+BRICK_DUR    = 5
+
+# Bullet property
+
+BULLET_VEL    = 3
+BULLET_WIDTH  = 15
+BULLET_HEIGHT = 10
 
 # For test
 
-WIDTH  = 15
-HEIGHT = 20
+WIDTH  = 20
+HEIGHT = 15
 BG_COLOR = GRAY
