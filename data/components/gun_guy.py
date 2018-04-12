@@ -7,8 +7,9 @@ class Gun_guy(character.Character):
     def __init__(self):
         super(Gun_guy, self).__init__()
 
-        self.name = c.P1_NAME
         self.bullet_damage = c.P1_DAMAGE
+
+        self.HP = 10
 
 
     def action(self, action_group):

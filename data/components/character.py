@@ -27,6 +27,9 @@ class Character(Sprite):
         # For test
         self.rect = pg.Rect((0, 0), (c.WIDTH, c.HEIGHT))
         self.color = c.RED
+        self.name = 'baby'
+
+        self.HP = 0
 
 
     def setup_state_booleans(self):
@@ -60,7 +63,6 @@ class Character(Sprite):
                 self.commands[command] = True
             else:
                 self.commands[command] = False
-        print(self.commands)
 
 
     def handle_state(self, action_group):

@@ -51,11 +51,13 @@ class gaming(tools._State):
         player_1.rect.x = 0
         player_1.rect.y = 0
         player_1.state = c.FALL
+        player_1.name = 'cindy'
 
         player_2 = gun_guy.Gun_guy()
         player_2.rect.right = c.SCREEN_WIDTH
         player_2.rect.y = 0
         player_2.state = c.FALL
+        player_2.name = 'candy'
 
         self.characters_group = Group(player_1, player_2)
 
@@ -160,11 +162,16 @@ class gaming(tools._State):
 
 
     def check_bullet_x_collisions(self, bullet):
-        #character = pg.sprite.spritecollideany(bullet, self.character)
+        character = pg.sprite.spritecollideany(bullet, self.characters_group)
         brick = pg.sprite.spritecollideany(bullet, self.bricks_group)
 
-        #if character:
-        #    pass
+        if character:
+            if bullet.owner != character.name:
+                character.HP -= bullet.damage
+                if character.HP <= 0:
+                    character.kill()
+                    self.done = True
+                bullet.kill()
 
         if brick:
             brick.dur -= bullet.damage
