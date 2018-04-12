@@ -52,7 +52,6 @@ JUMP_GRAVITY = 0.02
 
 # Player1 property
 
-P1_NAME = 'cindy'
 P1_DAMAGE = 2
 
 # Game info
@@ -68,7 +67,7 @@ BRICK_DUR    = 5
 
 # Bullet property
 
-BULLET_VEL    = 3
+BULLET_VEL    = 2
 BULLET_WIDTH  = 15
 BULLET_HEIGHT = 10
 

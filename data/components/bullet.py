@@ -8,6 +8,7 @@ class Bullet(Sprite):
         super().__init__()
 
         self.rect = pg.Rect((0, 0), (c.BULLET_WIDTH, c.BULLET_HEIGHT))
+        self.owner = owner
         self.damage = damage
         self.x_vel = 0
 
