@@ -46,7 +46,7 @@ CLIMB = 'climb'
 
 MAX_X_VEL    = 1
 MAX_Y_VEL    = 11
-JUMP_VEL     = -2
+JUMP_VEL     = -2.1
 GRAVITY      = 0.05
 JUMP_GRAVITY = 0.02
 
