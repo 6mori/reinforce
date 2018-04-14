@@ -9,8 +9,10 @@ class Character(Sprite):
     def __init__(self):
         super().__init__()
 
-        #self.image = pygame.image.load('images/')
-        #self.rect = self.image.get_rect()
+        self.image = pg.image.load('images/ch1_r.png')
+        self.rect = self.image.get_rect()
+
+
         self.state = c.STAND
 
         self.commands = {
@@ -25,9 +27,9 @@ class Character(Sprite):
         self.setup_state_booleans()
 
         # For test
-        self.rect = pg.Rect((0, 0), (c.WIDTH, c.HEIGHT))
-        self.color = c.RED
-        self.name = 'baby'
+        # self.rect = pg.Rect((0, 0), (c.WIDTH, c.HEIGHT))
+        # self.color = c.RED
+        # self.name = 'baby'
 
         self.HP = 0
 
@@ -53,9 +55,15 @@ class Character(Sprite):
         self.bind_keys(keys, keybinding)
         self.current_time = game_info[c.CURRENT_TIME]
         self.handle_state(action_group)
+        self.character_direction()
         #self.check_for_special_state()
         #self.animation()
 
+    def character_direction(self):
+        if self.facing_right:
+            self.image = pg.image.load('images/ch1_r.png')
+        else:
+            self.image = pg.image.load('images/ch1_l.png')
 
     def bind_keys(self, keys, keybinding):
         for command in self.commands.keys():
@@ -74,6 +82,7 @@ class Character(Sprite):
             self.jump(action_group)
         elif self.state == c.FALL:
             self.fall(action_group)
+
 
 
     def stand(self, action_group):
@@ -117,6 +126,7 @@ class Character(Sprite):
                 self.y_vel = self.jump_vel
 
         if self.commands['left']:
+
             self.facing_right = False
             if self.x_vel >= 0:
                 self.x_vel = -self.max_x_vel
@@ -124,6 +134,7 @@ class Character(Sprite):
                 self.x_vel = 0
 
         elif self.commands['right']:
+
             self.facing_right = True
             if self.x_vel <= 0:
                 self.x_vel = self.max_x_vel
@@ -194,7 +205,7 @@ class Character(Sprite):
             self.allow_action = True
 
 
-    def blitme(self):
-        self.screen.blit( self.image, self.rect )
+    def blitme(self,screen):
+        screen.blit( self.image, self.rect )
 
     # for test
