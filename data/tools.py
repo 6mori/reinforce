@@ -3,14 +3,16 @@ import pygame as pg
 
 keybinding = [
     {
-        'action': pg.K_SPACE,
+        'action': pg.K_j,
+        'skill' : pg.K_l,
         'jump': pg.K_w,
         'left': pg.K_a,
         'right':pg.K_d,
         'down': pg.K_s
     },
     {
-        'action': pg.K_KP0,
+        'action': pg.K_KP1,
+        'skill' : pg.K_KP3,
         'jump': pg.K_UP,
         'left': pg.K_LEFT,
         'right':pg.K_RIGHT,

@@ -9,7 +9,9 @@ class Character(Sprite):
     def __init__(self):
         super().__init__()
 
-        self.image = pg.image.load('images/ch1_r.png')
+        self.image = pg.transform.scale(pg.image.load('images/dnf_s.png'),c.CHARACTER_SIZE)
+        self.image_right = self.image
+        self.image_left = pg.transform.flip(self.image_right, True, False)
         self.rect = self.image.get_rect()
 
 
@@ -26,12 +28,9 @@ class Character(Sprite):
         self.setup_forces()
         self.setup_state_booleans()
 
-        # For test
-        # self.rect = pg.Rect((0, 0), (c.WIDTH, c.HEIGHT))
-        # self.color = c.RED
-        # self.name = 'baby'
-
         self.HP = 0
+
+        self.walk_counter=0
 
 
     def setup_state_booleans(self):
@@ -61,9 +60,9 @@ class Character(Sprite):
 
     def character_direction(self):
         if self.facing_right:
-            self.image = pg.image.load('images/ch1_r.png')
+            self.image = self.image_right
         else:
-            self.image = pg.image.load('images/ch1_l.png')
+            self.image = self.image_left
 
     def bind_keys(self, keys, keybinding):
         for command in self.commands.keys():
@@ -88,6 +87,9 @@ class Character(Sprite):
     def stand(self, action_group):
         self.check_to_allow_jump()
         self.check_to_allow_action()
+
+        self.image_right = pg.transform.scale(pg.image.load('images/dnf_s.png'), c.CHARACTER_SIZE)
+        self.image_left = pg.transform.flip(self.image_right, True, False)
 
         self.x_vel = 0
         self.y_vel = 0
@@ -115,6 +117,12 @@ class Character(Sprite):
     def walk(self, action_group):
         self.check_to_allow_jump()
         self.check_to_allow_action()
+
+        image_address='images/dnf_w_%d.png'%(self.walk_counter//c.CHARACTER_MOVING_SPEED)
+        self.walk_counter+=1
+        self.walk_counter%=4*c.CHARACTER_MOVING_SPEED
+        self.image_right= pg.transform.scale(pg.image.load(image_address),c.CHARACTER_SIZE)
+        self.image_left = pg.transform.flip(self.image_right, True, False)
 
         if self.commands['action']:
             if self.allow_action:
