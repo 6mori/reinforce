@@ -68,11 +68,13 @@ BRICK_DUR    = 5
 # Bullet property
 
 BULLET_VEL    = 2
-BULLET_WIDTH  = 15
-BULLET_HEIGHT = 10
+BULLET_SIZE = (50,30)
 
 # For test
-
-WIDTH  = 20
-HEIGHT = 15
 BG_COLOR = GRAY
+
+#Character moving speed(higher = slower)
+CHARACTER_MOVING_SPEED = 25
+
+#Character size
+CHARACTER_SIZE=(94,60)
