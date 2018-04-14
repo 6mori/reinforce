@@ -189,4 +189,4 @@ class gaming(tools._State):
         for brick in self.bricks_group.sprites():
             pg.draw.rect(surface, brick.color, brick.rect)
         for bullet in self.bullets_group.sprites():
-            pg.draw.rect(surface, bullet.color, bullet.rect)
+            bullet.blitme(surface)
