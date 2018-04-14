@@ -185,7 +185,7 @@ class gaming(tools._State):
         # For test
         surface.fill(c.BG_COLOR)
         for character in self.characters_group.sprites():
-            pg.draw.rect(surface, character.color, character.rect)
+            character.blitme(surface)
         for brick in self.bricks_group.sprites():
             pg.draw.rect(surface, brick.color, brick.rect)
         for bullet in self.bullets_group.sprites():
