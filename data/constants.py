@@ -44,7 +44,7 @@ CLIMB = 'climb'
 
 # Character property
 
-MAX_X_VEL    = 1
+MAX_X_VEL    = 2
 MAX_Y_VEL    = 11
 JUMP_VEL     = -2.1
 GRAVITY      = 0.05
