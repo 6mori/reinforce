@@ -41,6 +41,7 @@ WALK  = 'walk'
 JUMP  = 'jump'
 FALL  = 'fall'
 CLIMB = 'climb'
+SKILL = 'skill'
 
 # Character property
 
@@ -68,13 +69,14 @@ BRICK_DUR    = 5
 # Bullet property
 
 BULLET_VEL    = 2
-BULLET_SIZE = (50,30)
+BULLET_SIZE = (50,10)
 
 # For test
 BG_COLOR = GRAY
 
-#Character moving speed(higher = slower)
-CHARACTER_MOVING_SPEED = 25
+#Character speeds(higher = slower)
+CHARACTER_MOVING_SPEED = 35
+CHARACTER_SKILL_SPEED = 15
 
 #Character size
-CHARACTER_SIZE=(94,60)
+CHARACTER_SIZE=(103,133)

@@ -13,13 +13,13 @@ class gaming(tools._State):
 
     #def get_event(self, event):
 
-    def startup(self, current_time, persist):
+    def startup(self, current_time, persist,screen):
         self.game_info = persist
         self.persist = self.game_info
         self.game_info[c.CURRENT_TIME] = current_time
 
         self.setup_bricks()
-        self.setup_characters()
+        self.setup_characters(screen)
         self.setup_bullets()
         #self.setup_spritegroups()
 
@@ -46,14 +46,14 @@ class gaming(tools._State):
         bricks.add(brick.Brick(x, y))
 
 
-    def setup_characters(self):
-        player_1 = gun_guy.Gun_guy()
+    def setup_characters(self,screen):
+        player_1 = gun_guy.Gun_guy(screen)
         player_1.rect.x = 0
         player_1.rect.y = 0
         player_1.state = c.FALL
         player_1.name = 'cindy'
 
-        player_2 = gun_guy.Gun_guy()
+        player_2 = gun_guy.Gun_guy(screen)
         player_2.rect.right = c.SCREEN_WIDTH
         player_2.rect.y = 0
         player_2.state = c.FALL
@@ -185,7 +185,7 @@ class gaming(tools._State):
         # For test
         surface.fill(c.BG_COLOR)
         for character in self.characters_group.sprites():
-            character.blitme(surface)
+            character.blitme()
         for brick in self.bricks_group.sprites():
             pg.draw.rect(surface, brick.color, brick.rect)
         for bullet in self.bullets_group.sprites():
