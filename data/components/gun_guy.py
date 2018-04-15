@@ -37,7 +37,7 @@ class Gun_guy(character.Character):
         self.image_left = pg.transform.flip(self.image_right, True, False)
 
         if self.skill_counter == 16 * c.CHARACTER_SKILL_SPEED-1:
-            self.state = c.WALK
+            self.state = c.FALL
 
 
 

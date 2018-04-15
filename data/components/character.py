@@ -58,8 +58,9 @@ class Character(Sprite):
     def update(self, keys, keybinding, game_info, action_group):
         self.bind_keys(keys, keybinding)
         self.current_time = game_info[c.CURRENT_TIME]
-        self.character_direction()
+        # self.character_direction()
         self.handle_state(action_group)
+        self.character_direction()
         # self.character_direction()
         #self.check_for_special_statle()
         #self.animation()
@@ -110,6 +111,7 @@ class Character(Sprite):
         if self.commands['skill']:
             if self.allow_skill:
                 self.state = c.SKILL
+                return
 
         if self.commands['left']:
             self.facing_right = False
@@ -192,6 +194,7 @@ class Character(Sprite):
         if self.commands['skill']:
             if self.allow_skill:
                 self.state = c.SKILL
+                return
 
         if self.commands['left']:
             self.facing_right = False
