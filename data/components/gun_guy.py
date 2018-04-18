@@ -16,7 +16,7 @@ class Gun_guy(character.Character):
     def action(self, action_group):
         self.allow_action = False
 
-        firing_bullet = bullet.Bullet(self.name, self.bullet_damage)
+        firing_bullet = bullet.Bullet(self.name, self.bullet_damage,self.facing_right)
         if self.facing_right:
             firing_bullet.x_vel = c.BULLET_VEL
             firing_bullet.rect.left = self.rect.right
@@ -29,7 +29,6 @@ class Gun_guy(character.Character):
     def skill(self):
         self.allow_skill = False
 
-        # self.skill_animation()
         action_image_address = 'images/m_shoter/skill/action/dnf_r_%d.png' % (self.skill_counter // c.CHARACTER_SKILL_SPEED)
 
         self.skill_counter += 1
@@ -43,13 +42,4 @@ class Gun_guy(character.Character):
 
 
 
-    def skill_animation(self):
-        for i in range(16*c.CHARACTER_SKILL_SPEED):
-            image_address = 'images/m_shoter/skill/action/dnf_r_%d.png' % (self.skill_counter // c.CHARACTER_SKILL_SPEED)
-            self.skill_counter += 1
-            self.skill_counter %= 16*c.CHARACTER_SKILL_SPEED
 
-            self.image_right = pg.transform.scale(pg.image.load(image_address), c.CHARACTER_SIZE)
-            self.image_left = pg.transform.flip(self.image_right, True, False)
-            self.blitme()
-            self.image_left = pg.transform.flip(self.image_right, True, False)
