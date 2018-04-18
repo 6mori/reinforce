@@ -5,18 +5,20 @@ from . import bullet
 import pygame as pg
 
 class Gun_guy(character.Character):
-    def __init__(self,screen):
+    def __init__(self,screen,player_num):
         super(Gun_guy, self).__init__(screen)
 
         self.bullet_damage = c.P1_DAMAGE
-
+        self.player_num = player_num
         self.HP = 10
 
 
     def action(self, action_group):
         self.allow_action = False
-
-        firing_bullet = bullet.Bullet(self.name, self.bullet_damage,self.facing_right)
+        if self.player_num == 1:
+            firing_bullet = bullet.Bullet(self.name, self.bullet_damage,self.facing_right,'flamebow')
+        else:
+            firing_bullet = bullet.Bullet(self.name, self.bullet_damage, self.facing_right, 'freezebow')
         if self.facing_right:
             firing_bullet.x_vel = c.BULLET_VEL
             firing_bullet.rect.left = self.rect.right
