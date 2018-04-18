@@ -62,8 +62,8 @@ KEYBINDING  = 'keybinding'
 
 # Brick property
 
-BRICK_WIDTH  = 20
-BRICK_HEIGHT = 15
+BRICK_WIDTH  = 40
+BRICK_HEIGHT = 30
 BRICK_DUR    = 5
 
 # Bullet property
