@@ -30,10 +30,11 @@ class Gun_guy(character.Character):
         self.allow_skill = False
 
         # self.skill_animation()
-        image_address = 'images/dnf_r_%d.png' % (self.skill_counter // c.CHARACTER_SKILL_SPEED)
+        action_image_address = 'images/m_shoter/skill/action/dnf_r_%d.png' % (self.skill_counter // c.CHARACTER_SKILL_SPEED)
+
         self.skill_counter += 1
         self.skill_counter %= 16 * c.CHARACTER_SKILL_SPEED
-        self.image_right = pg.transform.scale(pg.image.load(image_address), c.CHARACTER_SIZE)
+        self.image_right = pg.transform.scale(pg.image.load(action_image_address), c.CHARACTER_SIZE)
         self.image_left = pg.transform.flip(self.image_right, True, False)
 
         if self.skill_counter == 16 * c.CHARACTER_SKILL_SPEED-1:
@@ -44,7 +45,7 @@ class Gun_guy(character.Character):
 
     def skill_animation(self):
         for i in range(16*c.CHARACTER_SKILL_SPEED):
-            image_address = 'images/dnf_r_%d.png' % (self.skill_counter // c.CHARACTER_SKILL_SPEED)
+            image_address = 'images/m_shoter/skill/action/dnf_r_%d.png' % (self.skill_counter // c.CHARACTER_SKILL_SPEED)
             self.skill_counter += 1
             self.skill_counter %= 16*c.CHARACTER_SKILL_SPEED
 

@@ -9,7 +9,7 @@ class Bullet(Sprite):
 
         #加载子弹图片并设置子弹大小
 
-        self.image=pg.transform.scale(pg.image.load('images/arrow.png'),c.BULLET_SIZE)
+        self.image=pg.transform.scale(pg.image.load('images/bullet/1.png'),c.BULLET_SIZE)
         self.rect = self.image.get_rect()
 
 
