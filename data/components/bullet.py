@@ -4,11 +4,11 @@ from pygame.sprite import Sprite
 from .. import constants as c
 
 class Bullet(Sprite):
-    def __init__(self, owner, damage,facing_right):
+    def __init__(self, owner, damage,facing_right,bullet_style):
         super().__init__()
 
         #加载子弹图片并设置子弹大小
-        self.image=pg.transform.scale(pg.image.load('images/bullet/1.png'),c.BULLET_SIZE)
+        self.image=pg.transform.scale(pg.image.load('images/bullet/'+bullet_style+'/0.png'),c.BULLET_SIZE)
         if not facing_right:
             self.image = pg.transform.flip(self.image, True, False)
         self.rect = self.image.get_rect()

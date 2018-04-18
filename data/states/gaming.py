@@ -47,13 +47,13 @@ class gaming(tools._State):
 
 
     def setup_characters(self,screen):
-        player_1 = gun_guy.Gun_guy(screen)
+        player_1 = gun_guy.Gun_guy(screen,1)
         player_1.rect.x = 0
         player_1.rect.y = 0
         player_1.state = c.FALL
         player_1.name = 'cindy'
 
-        player_2 = gun_guy.Gun_guy(screen)
+        player_2 = gun_guy.Gun_guy(screen,2)
         player_2.rect.right = c.SCREEN_WIDTH
         player_2.rect.y = 0
         player_2.state = c.FALL
