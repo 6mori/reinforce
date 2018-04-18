@@ -45,7 +45,7 @@ SKILL = 'skill'
 
 # Character property
 
-MAX_X_VEL    = 2
+MAX_X_VEL    = 3
 MAX_Y_VEL    = 11
 JUMP_VEL     = -2.1
 GRAVITY      = 0.05
@@ -75,7 +75,7 @@ BULLET_SIZE = (50,10)
 BG_COLOR = GRAY
 
 #Character speeds(higher = slower)
-CHARACTER_MOVING_SPEED = 40
+CHARACTER_MOVING_SPEED = 20
 CHARACTER_SKILL_SPEED = 15
 
 #Character size
