@@ -16,7 +16,7 @@ class Brick(Sprite):
         self.rect.left = x
         self.rect.top = y
 
-        self.dur = c.BRICK_DUR
+        self.HP = c.BRICK_DUR
 
         # for test
         self.color = c.ORANGE

@@ -6,16 +6,13 @@ from .. import constants as c
 
 class Character(Sprite):
 
-    def __init__(self,screen):
+    def __init__(self):
         super().__init__()
-
-        self.screen=screen
 
         self.image = pg.transform.scale(pg.image.load('images/m_shoter/stand/dnf_s.png'),c.CHARACTER_SIZE)
         self.image_right = self.image
         self.image_left = pg.transform.flip(self.image_right, True, False)
         self.rect = self.image.get_rect()
-
 
         self.state = c.STAND
 
@@ -253,6 +250,7 @@ class Character(Sprite):
 
 
     def blitme(self):
-        self.screen.blit( self.image, self.rect )
+    #    self.screen.blit( self.image, self.rect )
+        pass
 
     # for test
