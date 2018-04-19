@@ -1,15 +1,14 @@
+import pygame as pg
 
 from .. import constants as c
 from . import character
 from . import bullet
-import pygame as pg
 
 class Gun_guy(character.Character):
-    def __init__(self,screen,player_num):
-        super(Gun_guy, self).__init__(screen)
-
-        self.bullet_damage = c.P1_DAMAGE
+    def __init__(self, player_num):
+        super(Gun_guy, self).__init__()
         self.player_num = player_num
+        self.bullet_damage = c.P1_DAMAGE
         self.HP = 10
 
 
@@ -25,8 +24,11 @@ class Gun_guy(character.Character):
         else:
             firing_bullet.x_vel = -c.BULLET_VEL
             firing_bullet.rect.right = self.rect.left
+
         firing_bullet.rect.centery = self.rect.centery-23
+
         action_group.add(firing_bullet)
+
 
     def skill(self):
         self.allow_skill = False

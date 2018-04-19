@@ -29,7 +29,7 @@ BGCOLOR = WHITE
 
 # Game states
 
-MAIN_MENU = 'main menu'
+MENU      = 'menu'
 LOADING   = 'loading'
 GAMING    = 'gaming'
 GAME_OVER = 'game over'
@@ -69,7 +69,16 @@ BRICK_DUR    = 5
 # Bullet property
 
 BULLET_VEL    = 2
+BULLET_WIDTH  = 50
+BULLET_HEIGHT = 10
 BULLET_SIZE = (50,10)
+
+# Sword property
+
+SWORD_DAMAGE    = 2
+SWORD_WIDTH     = 25
+SWORD_HEIGHT    = 20
+SWORD_LAST_TIME = 0.5
 
 # For test
 BG_COLOR = GRAY
