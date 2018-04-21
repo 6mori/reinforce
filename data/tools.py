@@ -3,20 +3,39 @@ import pygame as pg
 
 keybinding = [
     {
-        'action': pg.K_SPACE,
+        'action': pg.K_j,
+        'skill' : pg.K_l,
         'jump': pg.K_w,
         'left': pg.K_a,
         'right':pg.K_d,
         'down': pg.K_s
     },
     {
-        'action': pg.K_KP0,
+        'action': pg.K_KP1,
+        'skill' : pg.K_KP3,
         'jump': pg.K_UP,
         'left': pg.K_LEFT,
         'right':pg.K_RIGHT,
         'down': pg.K_DOWN
     }
 ]
+
+kindOfBrick={
+                    'grass_left':{'name':'images/grass_left.png','dur':5},
+                    'grass_middle':{'name':'images/grass_middle.png','dur':5 },
+                    'grass_right': {'name': 'images/grass_right.png', 'dur': 5},
+                    'grass_inside': {'name': 'images/grass_inside.png', 'dur': 5},
+                    'long_wood':{'name':'images/long_wood.png', 'dur': 5},
+                    'long_stone':{'name':'images/long_stone.png', 'dur': 5}
+
+            }#砖块种类
+
+kindOfGround={
+                    'grass_surface':['grass_left','grass_middle','grass_right'],
+                    'grass_soil':['grass_inside','grass_inside','grass_inside'],
+                    'long_wood':['long_wood','long_wood','long_wood'],
+                    'long_stone':['long_stone','long_stone','long_stone'],
+             }
 
 class Control(object):
     ''' Control object for entire project '''
@@ -38,7 +57,7 @@ class Control(object):
 
         # For test
         persist = self.state.cleanup()
-        self.state.startup(self.current_time, persist)
+        self.state.startup(self.current_time, persist, self.screen)
 
     def update(self):
         self.current_time = pg.time.get_ticks()

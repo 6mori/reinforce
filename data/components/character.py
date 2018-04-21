@@ -9,12 +9,16 @@ class Character(Sprite):
     def __init__(self):
         super().__init__()
 
-        #self.image = pygame.image.load('images/')
-        #self.rect = self.image.get_rect()
+        self.image = pg.transform.scale(pg.image.load('images/m_shoter/stand/dnf_s.png'),c.CHARACTER_SIZE)
+        self.image_right = self.image
+        self.image_left = pg.transform.flip(self.image_right, True, False)
+        self.rect = self.image.get_rect()
+
         self.state = c.STAND
 
         self.commands = {
             'action': False,
+            'skill': False,
             'jump' : False,
             'left' : False,
             'right': False,
@@ -24,20 +28,19 @@ class Character(Sprite):
         self.setup_forces()
         self.setup_state_booleans()
 
-        # For test
-        self.rect = pg.Rect((0, 0), (c.WIDTH, c.HEIGHT))
-        self.color = c.RED
-        self.name = 'baby'
-
         self.HP = 0
+
+        self.walk_counter=0
+        self.skill_counter=0
 
 
     def setup_state_booleans(self):
         self.facing_right = True
         self.allow_jump = True
         self.allow_action = True
+        self.allow_skill = True
         self.dead = False
-        self.in_transition_state = False
+        #self.skill_done = False
 
 
     def setup_forces(self):
@@ -52,10 +55,18 @@ class Character(Sprite):
     def update(self, keys, keybinding, game_info, action_group):
         self.bind_keys(keys, keybinding)
         self.current_time = game_info[c.CURRENT_TIME]
+        # self.character_direction()
         self.handle_state(action_group)
-        #self.check_for_special_state()
+        self.character_direction()
+        # self.character_direction()
+        #self.check_for_special_statle()
         #self.animation()
 
+    def character_direction(self):
+        if self.facing_right:
+            self.image = self.image_right
+        else:
+            self.image = self.image_left
 
     def bind_keys(self, keys, keybinding):
         for command in self.commands.keys():
@@ -74,11 +85,18 @@ class Character(Sprite):
             self.jump(action_group)
         elif self.state == c.FALL:
             self.fall(action_group)
+        elif self.state == c.SKILL:
+            self.skill()
+
 
 
     def stand(self, action_group):
         self.check_to_allow_jump()
         self.check_to_allow_action()
+        self.check_to_allow_skill()
+
+        self.image_right = pg.transform.scale(pg.image.load('images\m_shoter\stand\dnf_s.png'), c.CHARACTER_SIZE)
+        self.image_left = pg.transform.flip(self.image_right, True, False)
 
         self.x_vel = 0
         self.y_vel = 0
@@ -86,6 +104,11 @@ class Character(Sprite):
         if self.commands['action']:
             if self.allow_action:
                 self.action(action_group)
+
+        if self.commands['skill']:
+            if self.allow_skill:
+                self.state = c.SKILL
+                return
 
         if self.commands['left']:
             self.facing_right = False
@@ -106,10 +129,22 @@ class Character(Sprite):
     def walk(self, action_group):
         self.check_to_allow_jump()
         self.check_to_allow_action()
+        self.check_to_allow_skill()
+
+        #加载贴图
+        image_address='images\m_shoter\walk\dnf_w_%d.png'%(self.walk_counter//c.CHARACTER_MOVING_SPEED)
+        self.walk_counter+=1
+        self.walk_counter%=4*c.CHARACTER_MOVING_SPEED
+        self.image_right= pg.transform.scale(pg.image.load(image_address),c.CHARACTER_SIZE)
+        self.image_left = pg.transform.flip(self.image_right, True, False)
 
         if self.commands['action']:
             if self.allow_action:
                 self.action(action_group)
+
+        if self.commands['skill']:
+            if self.allow_skill:
+                self.state = c.SKILL
 
         if self.commands['jump']:
             if self.allow_jump:
@@ -117,6 +152,7 @@ class Character(Sprite):
                 self.y_vel = self.jump_vel
 
         if self.commands['left']:
+
             self.facing_right = False
             if self.x_vel >= 0:
                 self.x_vel = -self.max_x_vel
@@ -124,6 +160,7 @@ class Character(Sprite):
                 self.x_vel = 0
 
         elif self.commands['right']:
+
             self.facing_right = True
             if self.x_vel <= 0:
                 self.x_vel = self.max_x_vel
@@ -137,6 +174,7 @@ class Character(Sprite):
 
     def jump(self, action_group):
         self.check_to_allow_action()
+        self.check_to_allow_skill()
 
         self.allow_jump = False
         self.gravity = c.JUMP_GRAVITY
@@ -149,6 +187,11 @@ class Character(Sprite):
         if self.commands['action']:
             if self.allow_action:
                 self.action(action_group)
+
+        if self.commands['skill']:
+            if self.allow_skill:
+                self.state = c.SKILL
+                return
 
         if self.commands['left']:
             self.facing_right = False
@@ -164,6 +207,7 @@ class Character(Sprite):
 
     def fall(self, action_group):
         self.check_to_allow_action()
+        self.check_to_allow_skill()
 
         if self.y_vel < c.MAX_Y_VEL:
             self.y_vel += self.gravity
@@ -171,6 +215,10 @@ class Character(Sprite):
         if self.commands['action']:
             if self.allow_action:
                 self.action(action_group)
+
+        if self.commands['skill']:
+            if self.allow_skill:
+                self.state = c.SKILL
 
         if self.commands['left']:
             self.facing_right = False
@@ -183,6 +231,9 @@ class Character(Sprite):
     def action(self, action_group):
         pass
 
+    def skill(self):
+        pass
+
 
     def check_to_allow_jump(self):
         if not self.commands['jump']:
@@ -193,8 +244,13 @@ class Character(Sprite):
         if not self.commands['action']:
             self.allow_action = True
 
+    def check_to_allow_skill(self):
+        if not self.commands['skill']:
+            self.allow_skill = True
+
 
     def blitme(self):
-        self.screen.blit( self.image, self.rect )
+    #    self.screen.blit( self.image, self.rect )
+        pass
 
     # for test
