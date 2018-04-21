@@ -28,24 +28,33 @@ class Gaming(tools._State):
 
     def setup_bricks(self):
         self.bricks_group = Group()
-        self.create_bricks(self.bricks_group, 0, 20, 40, 2)
-        self.create_bricks(self.bricks_group, 35, 0, 1, 15)
-        self.create_bricks(self.bricks_group, 35, 20, 1, 10)
-        self.create_bricks(self.bricks_group, 20, 0, 5, 15)
-        self.create_bricks(self.bricks_group, 0, 15, 30, 1)
+        self.create_bricks(self.bricks_group, 0, 10, 18, 1,'grass_surface')
+        self.create_bricks(self.bricks_group, 18, 14, 2, 1,'grass_surface')
+        self.create_bricks(self.bricks_group, 17, 0, 1, 7,'long_wood')
+        self.create_bricks(self.bricks_group, 17, 11, 1, 4,'grass_soil')
+        self.create_bricks(self.bricks_group, 10, 0, 3, 7,'long_wood')
+        self.create_bricks(self.bricks_group, 0, 7, 7, 1,'grass_surface')
+        self.create_bricks(self.bricks_group, 0, 8, 7, 1, 'grass_soil')
+        self.create_bricks(self.bricks_group, 0, 9, 7, 1, 'grass_soil')
+        self.create_bricks(self.bricks_group, 0, 10, 7, 1, 'grass_soil')
 
 
-    def create_bricks(self, bricks, x, y, width, height):
+
+    def create_bricks(self, bricks, x, y, width, height,ground_kind):#ground_kind为表示什么砖块条的字符串
         for row in list(range(x, x+width)):
             for col in list(range(y, y+height)):
-                self.create_brick(bricks, row, col)
+                if(row==x):
+                    self.create_brick(bricks,row,col,tools.kindOfGround[ground_kind][0])
+                elif(row==x+width-1):
+                    self.create_brick(bricks, row, col, tools.kindOfGround[ground_kind][2])
+                else:
+                    self.create_brick(bricks, row, col, tools.kindOfGround[ground_kind][1])
 
 
-    def create_brick(self, bricks, row, col):
+    def create_brick(self, bricks, row, col,brick_kind):
         x = row * c.BRICK_WIDTH
         y = col * c.BRICK_HEIGHT
-
-        bricks.add(brick.Brick(x, y))
+        bricks.add(brick.Brick(x, y,brick_kind))
 
 
     def setup_characters(self):
@@ -212,6 +221,6 @@ class Gaming(tools._State):
         for character in self.characters_group.sprites():
             surface.blit(character.image, character.rect)
         for brick in self.bricks_group.sprites():
-            pg.draw.rect(surface, brick.color, brick.rect)
+            brick.blitme(surface)
         for bullet in self.bullets_group.sprites():
             bullet.blitme(surface)

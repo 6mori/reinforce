@@ -20,6 +20,23 @@ keybinding = [
     }
 ]
 
+kindOfBrick={
+                    'grass_left':{'name':'images/grass_left.png','dur':5},
+                    'grass_middle':{'name':'images/grass_middle.png','dur':5 },
+                    'grass_right': {'name': 'images/grass_right.png', 'dur': 5},
+                    'grass_inside': {'name': 'images/grass_inside.png', 'dur': 5},
+                    'long_wood':{'name':'images/long_wood.png', 'dur': 5},
+                    'long_stone':{'name':'images/long_stone.png', 'dur': 5}
+
+            }#砖块种类
+
+kindOfGround={
+                    'grass_surface':['grass_left','grass_middle','grass_right'],
+                    'grass_soil':['grass_inside','grass_inside','grass_inside'],
+                    'long_wood':['long_wood','long_wood','long_wood'],
+                    'long_stone':['long_stone','long_stone','long_stone'],
+             }
+
 class Control(object):
     ''' Control object for entire project '''
     def __init__(self, caption):

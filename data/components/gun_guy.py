@@ -9,6 +9,7 @@ class Gun_guy(character.Character):
         super(Gun_guy, self).__init__()
         self.player_num = player_num
         self.bullet_damage = c.P1_DAMAGE
+
         self.HP = 10
 
 
