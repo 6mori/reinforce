@@ -29,7 +29,7 @@ BGCOLOR = WHITE
 
 # Game states
 
-MENU      = 'menu'
+MAIN_MENU = 'main menu'
 LOADING   = 'loading'
 GAMING    = 'gaming'
 GAME_OVER = 'game over'
@@ -68,24 +68,18 @@ BRICK_DUR    = 5
 
 # Bullet property
 
-BULLET_VEL    = 2
-BULLET_WIDTH  = 50
-BULLET_HEIGHT = 10
+BULLET_VEL    = 5
 BULLET_SIZE = (50,10)
-
-# Sword property
-
-SWORD_DAMAGE    = 2
-SWORD_WIDTH     = 25
-SWORD_HEIGHT    = 20
-SWORD_LAST_TIME = 0.5
 
 # For test
 BG_COLOR = GRAY
 
 #Character speeds(higher = slower)
-CHARACTER_MOVING_SPEED = 20
-CHARACTER_SKILL_SPEED = 15
+CHARACTER_MOVING_SPEED = 25
+
 
 #Character size
-CHARACTER_SIZE=(103//2,133//2)
+CHARACTER_SIZE=(103//4,133//4)
+
+#Character skill
+SKILL_SPEED_DARLING = 10
