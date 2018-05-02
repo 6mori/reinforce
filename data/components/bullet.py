@@ -4,27 +4,19 @@ from pygame.sprite import Sprite
 from .. import constants as c
 
 class Bullet(Sprite):
-    def __init__(self, owner, damage, facing_right, bullet_style):
+    def __init__(self, owner, damage,direction,bullet_style):
         super().__init__()
 
         #加载子弹图片并设置子弹大小
         self.image=pg.transform.scale(pg.image.load('images/bullet/'+bullet_style+'/0.png'),c.BULLET_SIZE)
-        if not facing_right:
-            self.image = pg.transform.flip(self.image, True, False)
-        self.rect = self.image.get_rect()
-
-        self.HP = 1
+        self.direction=direction
+        self.handle_bullet_direction()
 
         self.owner = owner
         self.damage = damage
         self.x_vel = 0
         self.y_vel = 0
-        self.x = 0
-        self.y = 0
 
-
-    def set_x(self):
-        self.x = float(self.rect.x)
 
 
     def update(self):
@@ -33,3 +25,20 @@ class Bullet(Sprite):
 
     def blitme(self,screen):
         screen.blit(self.image, self.rect)
+
+    def handle_bullet_direction(self):
+        if self.direction == 'left':
+            self.image = pg.transform.rotate(self.image, 180)
+        elif self.direction == 'up':
+            self.image = pg.transform.rotate(self.image,90)
+        elif self.direction == 'down':
+            self.image = pg.transform.rotate(self.image, 270)
+        elif self.direction == 'right_up':
+            self.image = pg.transform.rotate(self.image, 45)
+        elif self.direction == 'left_up':
+            self.image = pg.transform.rotate(self.image, 135)
+        elif self.direction == 'right_down':
+            self.image = pg.transform.rotate(self.image, 315)
+        elif self.direction == 'left_down':
+            self.image = pg.transform.rotate(self.image, 225)
+        self.rect = self.image.get_rect()

@@ -6,13 +6,15 @@ from .. import constants as c
 
 class Character(Sprite):
 
-    def __init__(self):
+    def __init__(self,screen,player_num):
         super().__init__()
+        #大招次数  默认为3
+        self.skill_power = 3
 
-        self.image = pg.transform.scale(pg.image.load('images/m_shoter/stand/dnf_s.png'),c.CHARACTER_SIZE)
-        self.image_right = self.image
-        self.image_left = pg.transform.flip(self.image_right, True, False)
-        self.rect = self.image.get_rect()
+        self.screen=screen
+        #默认贴图为Darling
+        self.setup_character_image_initial('Darling')
+        self.player_num = player_num
 
         self.state = c.STAND
 
@@ -33,6 +35,22 @@ class Character(Sprite):
         self.walk_counter=0
         self.skill_counter=0
 
+    def setup_character_image_initial(self,character_name):
+        self.image = pg.transform.scale(pg.image.load('images/'+character_name+'/stand/0.png'), c.CHARACTER_SIZE)
+        self.image_right = self.image
+        self.image_left = pg.transform.flip(self.image_right, True, False)
+        self.rect = self.image.get_rect()
+
+    def setup_character_image_stand(self, character_name):
+        self.image_right = pg.transform.scale(pg.image.load('images/'+character_name+'/stand/0.png'), c.CHARACTER_SIZE)
+        self.image_left = pg.transform.flip(self.image_right, True, False)
+
+    def setup_character_image_walk(self, character_name,max_frame_number):
+        image_address = 'images/'+character_name+'/walk/%d.png' % (self.walk_counter // c.CHARACTER_MOVING_SPEED)
+        self.walk_counter += 1
+        self.walk_counter %= max_frame_number * c.CHARACTER_MOVING_SPEED
+        self.image_right = pg.transform.scale(pg.image.load(image_address), c.CHARACTER_SIZE)
+        self.image_left = pg.transform.flip(self.image_right, True, False)
 
     def setup_state_booleans(self):
         self.facing_right = True
@@ -40,8 +58,6 @@ class Character(Sprite):
         self.allow_action = True
         self.allow_skill = True
         self.dead = False
-        #self.skill_done = False
-
 
     def setup_forces(self):
         self.x_vel = 0
@@ -51,16 +67,11 @@ class Character(Sprite):
         self.jump_vel = c.JUMP_VEL
         self.gravity = c.GRAVITY
 
-
     def update(self, keys, keybinding, game_info, action_group):
         self.bind_keys(keys, keybinding)
         self.current_time = game_info[c.CURRENT_TIME]
-        # self.character_direction()
         self.handle_state(action_group)
         self.character_direction()
-        # self.character_direction()
-        #self.check_for_special_statle()
-        #self.animation()
 
     def character_direction(self):
         if self.facing_right:
@@ -75,7 +86,6 @@ class Character(Sprite):
             else:
                 self.commands[command] = False
 
-
     def handle_state(self, action_group):
         if self.state == c.STAND:
             self.stand(action_group)
@@ -86,17 +96,14 @@ class Character(Sprite):
         elif self.state == c.FALL:
             self.fall(action_group)
         elif self.state == c.SKILL:
-            self.skill()
-
-
+            self.skill(action_group)
 
     def stand(self, action_group):
         self.check_to_allow_jump()
         self.check_to_allow_action()
         self.check_to_allow_skill()
 
-        self.image_right = pg.transform.scale(pg.image.load('images\m_shoter\stand\dnf_s.png'), c.CHARACTER_SIZE)
-        self.image_left = pg.transform.flip(self.image_right, True, False)
+        self.setup_character_image_stand('Darling')
 
         self.x_vel = 0
         self.y_vel = 0
@@ -125,18 +132,13 @@ class Character(Sprite):
         else:
             self.state = c.STAND
 
-
     def walk(self, action_group):
         self.check_to_allow_jump()
         self.check_to_allow_action()
         self.check_to_allow_skill()
 
         #加载贴图
-        image_address='images\m_shoter\walk\dnf_w_%d.png'%(self.walk_counter//c.CHARACTER_MOVING_SPEED)
-        self.walk_counter+=1
-        self.walk_counter%=4*c.CHARACTER_MOVING_SPEED
-        self.image_right= pg.transform.scale(pg.image.load(image_address),c.CHARACTER_SIZE)
-        self.image_left = pg.transform.flip(self.image_right, True, False)
+        self.setup_character_image_walk('Darling',4)
 
         if self.commands['action']:
             if self.allow_action:
@@ -204,7 +206,6 @@ class Character(Sprite):
             self.gravity = c.GRAVITY
             self.state = c.FALL
 
-
     def fall(self, action_group):
         self.check_to_allow_action()
         self.check_to_allow_skill()
@@ -227,30 +228,24 @@ class Character(Sprite):
             self.facing_right = True
             self.x_vel = self.max_x_vel
 
-
     def action(self, action_group):
         pass
 
     def skill(self):
         pass
 
-
     def check_to_allow_jump(self):
         if not self.commands['jump']:
             self.allow_jump = True
-
 
     def check_to_allow_action(self):
         if not self.commands['action']:
             self.allow_action = True
 
     def check_to_allow_skill(self):
-        if not self.commands['skill']:
+        if (not self.commands['skill']) and (self.skill_power>0):
             self.allow_skill = True
 
-
     def blitme(self):
-    #    self.screen.blit( self.image, self.rect )
-        pass
+        self.screen.blit( self.image, self.rect )
 
-    # for test
