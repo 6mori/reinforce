@@ -5,8 +5,8 @@ from . import bullet
 import pygame as pg
 
 class Gun_guy(character.Character):
-    def __init__(self,screen,player_num):
-        super().__init__(screen,player_num)
+    def __init__(self, player_num):
+        super().__init__(player_num)
 
         self.bullet_damage = c.P1_DAMAGE
         self.HP = 10

@@ -22,7 +22,7 @@ class Brick(Sprite):
         self.color = c.ORANGE
 
     #def update(self):
-    def blitme(self,screen):
-        screen.blit( self.image, self.rect )
+    #def blitme(self,screen):
+    #    screen.blit( self.image, self.rect )
 
     # for test
