@@ -7,7 +7,7 @@ from . import sword
 
 class Sword_guy(character.Character):
     def __init__(self, player_num):
-        super(Sword_guy, self).__init__()
+        super(Sword_guy, self).__init__(player_num)
 
         self.sword_damage = c.P1_DAMAGE
         self.player_num = player_num

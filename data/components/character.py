@@ -6,12 +6,11 @@ from .. import constants as c
 
 class Character(Sprite):
 
-    def __init__(self,screen,player_num):
+    def __init__(self, player_num):
         super().__init__()
         #大招次数  默认为3
         self.skill_power = 3
 
-        self.screen=screen
         #默认贴图为Darling
         self.setup_character_image_initial('Darling')
         self.player_num = player_num
@@ -246,6 +245,6 @@ class Character(Sprite):
         if (not self.commands['skill']) and (self.skill_power>0):
             self.allow_skill = True
 
-    def blitme(self):
-        self.screen.blit( self.image, self.rect )
+    #def blitme(self):
+    #    self.screen.blit( self.image, self.rect )
 

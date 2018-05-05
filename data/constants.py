@@ -69,7 +69,9 @@ BRICK_DUR    = 5
 # Bullet property
 
 BULLET_VEL    = 5
-BULLET_SIZE = (50,10)
+BULLET_WIDTH  = 50
+BULLET_HEIGHT = 10
+BULLET_SIZE   = (50,10)
 
 # For test
 BG_COLOR = GRAY
@@ -83,3 +85,7 @@ CHARACTER_SIZE=(103//4,133//4)
 
 #Character skill
 SKILL_SPEED_DARLING = 10
+
+# Sword property
+SWORD_WIDTH  = 50
+SWORD_HEIGHT = 20
