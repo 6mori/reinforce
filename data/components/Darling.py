@@ -2,15 +2,15 @@ from . import gun_guy
 from .. import constants as c
 import pygame as pg
 
-class Darling(gun_guy.Gun_guy):
-    def __init__(self,screen,player_num):
-        super().__init__(screen,player_num)
+class Darling(gun_guy.GunGuy):
+    def __init__(self):
+        super().__init__()
 
         self.bullet_damage = 5
         self.HP = 10
         self.skill_power = 3
 
-    def skill(self,action_group):
+    def skill(self, action_group):
         self.allow_skill = False
 
         action_image_address = 'images/Darling/skill/action/dnf_r_%d.png' % (self.skill_counter // c.SKILL_SPEED_DARLING)

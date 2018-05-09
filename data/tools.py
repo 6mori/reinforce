@@ -57,7 +57,7 @@ class Control(object):
 
         # For test
         persist = self.state.cleanup()
-        self.state.startup(self.current_time, persist,self.screen)
+        self.state.startup(self.current_time, persist)
 
     def update(self):
         self.current_time = pg.time.get_ticks()

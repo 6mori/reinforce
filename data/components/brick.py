@@ -9,7 +9,7 @@ class Brick(Sprite):
         super().__init__()
         #self.rect = pg.Rect((x, y), (c.BRICK_WIDTH, c.BRICK_HEIGHT))
 
-        self.image =  pg.transform.scale(pg.image.load(t.kindOfBrick[kind]['name']),(c.BRICK_WIDTH*width,c.BRICK_HEIGHT*height))
+        self.image = pg.transform.scale(pg.image.load(t.kindOfBrick[kind]['name']),(c.BRICK_WIDTH*width,c.BRICK_HEIGHT*height))
         self.rect = self.image.get_rect()
         #self.rect.width=x
         #self.rect.bottom=y
@@ -22,7 +22,7 @@ class Brick(Sprite):
         self.color = c.ORANGE
 
     #def update(self):
-    def blitme(self,screen):
-        screen.blit( self.image, self.rect )
+    #def blitme(self,screen):
+    #    screen.blit( self.image, self.rect )
 
     # for test
