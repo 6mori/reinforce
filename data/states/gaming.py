@@ -8,16 +8,17 @@ from .. components import Darling
 from .. components import sword_guy
 
 
-class gaming(tools._State):
+class Gaming(tools._State):
     def __init__(self):
-        super(gaming, self).__init__()
+        super(Gaming, self).__init__()
 
     #def get_event(self, event):
 
-    def startup(self, current_time, persist,screen):
+    def startup(self, current_time, persist):
         self.game_info = persist
         self.persist = self.game_info
         self.game_info[c.CURRENT_TIME] = current_time
+        self.next = c.GAME_OVER
 
         self.setup_bricks()
         self.setup_characters()
@@ -57,23 +58,29 @@ class gaming(tools._State):
 
 
     def setup_characters(self):
-        player_1 = Darling.Darling(1)
+        characters = {
+            c.DARING: Darling.Darling(),
+            c.GUAN: sword_guy.SwordGuy()
+        }
+
+        player_1 = characters[self.game_info[c.P1_CHARACTER]]
+        player_1.player_num = 1
         player_1.rect.x = 0
         player_1.rect.y = 0
         player_1.state = c.FALL
-        player_1.name = 'cindy'
 
-        player_2 = sword_guy.Sword_guy(2)
+        player_2 = characters[self.game_info[c.P2_CHARACTER]]
+        player_2.player_num = 2
         player_2.rect.right = c.SCREEN_WIDTH
         player_2.rect.y = 0
         player_2.state = c.FALL
-        player_2.name = 'candy'
 
         self.characters_group = Group(player_1, player_2)
 
 
     def setup_bullets(self):
         self.bullets_group = Group()
+
 
     def setup_swords(self):
         self.swords_group = Group()
@@ -109,6 +116,7 @@ class gaming(tools._State):
 
             character.rect.y += round(character.y_vel)
             self.check_character_y_collisions(character)
+            self.check_character_under_bottom(character)
 
 
     def check_character_x_edge(self, character):
@@ -126,7 +134,6 @@ class gaming(tools._State):
 
 
     def adjust_character_for_x_collisions(self, character, collider):
-        print(character.rect.x, collider.rect.x)
         if character.rect.x < collider.rect.x:
             character.rect.right = collider.rect.left
         else:
@@ -145,7 +152,6 @@ class gaming(tools._State):
 
 
     def adjust_character_for_y_collisions(self, character, collider):
-        print(character.rect.y, collider.rect.y)
         if character.rect.y < collider.rect.y:
             character.rect.bottom = collider.rect.top
             character.state = c.WALK
@@ -153,6 +159,12 @@ class gaming(tools._State):
             character.rect.top = collider.rect.bottom
 
         character.y_vel = 0
+
+
+    def check_character_under_bottom(self, character):
+        if character.rect.top >= c.SCREEN_HEIGHT:
+            character.HP = 0
+            self.set_result()
 
 
     def check_if_character_is_falling(self, character):
@@ -167,9 +179,9 @@ class gaming(tools._State):
 
     def adjust_bullets_position(self):
         for bullet in self.bullets_group:
-            if bullet.rect.left < 0:
+            if bullet.rect.right < 0:
                 bullet.kill()
-            if bullet.rect.right > c.SCREEN_WIDTH:
+            if bullet.rect.left > c.SCREEN_WIDTH:
                 bullet.kill()
             self.check_bullet_x_collisions(bullet)
 
@@ -179,11 +191,11 @@ class gaming(tools._State):
         brick = pg.sprite.spritecollideany(bullet, self.bricks_group)
 
         if character:
-            if bullet.owner != character.name:
+            if bullet.owner != character.player_num:
                 character.HP -= bullet.damage
                 if character.HP <= 0:
-                    character.kill()
-                    self.done = True
+                    character.HP = 0
+                    self.set_result()
                 bullet.kill()
 
         if brick:
@@ -218,3 +230,12 @@ class gaming(tools._State):
             surface.blit(brick.image, brick.rect)
         for bullet in self.bullets_group.sprites():
             surface.blit(bullet.image, bullet.rect)
+
+
+    def set_result(self):
+        for character in self.characters_group.sprites():
+            if character.player_num == 1:
+                self.game_info[c.P1_HP] = character.HP
+            else:
+                self.game_info[c.P2_HP] = character.HP
+        self.done = True

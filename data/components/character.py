@@ -6,14 +6,14 @@ from .. import constants as c
 
 class Character(Sprite):
 
-    def __init__(self, player_num):
+    def __init__(self):
         super().__init__()
         #大招次数  默认为3
         self.skill_power = 3
 
         #默认贴图为Darling
         self.setup_character_image_initial('Darling')
-        self.player_num = player_num
+        self.player_num = 0
 
         self.state = c.STAND
 
