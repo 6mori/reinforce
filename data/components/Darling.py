@@ -2,9 +2,9 @@ from . import gun_guy
 from .. import constants as c
 import pygame as pg
 
-class Darling(gun_guy.Gun_guy):
-    def __init__(self, player_num):
-        super().__init__(player_num)
+class Darling(gun_guy.GunGuy):
+    def __init__(self):
+        super().__init__()
 
         self.bullet_damage = 5
         self.HP = 10
