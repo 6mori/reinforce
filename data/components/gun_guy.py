@@ -4,9 +4,9 @@ from . import character
 from . import bullet
 import pygame as pg
 
-class Gun_guy(character.Character):
-    def __init__(self,screen,player_num):
-        super().__init__(screen,player_num)
+class GunGuy(character.Character):
+    def __init__(self):
+        super().__init__()
 
         self.bullet_damage = c.P1_DAMAGE
         self.HP = 10
@@ -15,9 +15,9 @@ class Gun_guy(character.Character):
         self.allow_action = False
         # 子弹类型
         if self.facing_right:
-            firing_bullet = self.get_bullet_type('Darling', 'right')
+            firing_bullet = self.get_bullet_type(c.DARING, c.RIGHT)
         else:
-            firing_bullet = self.get_bullet_type('Darling', 'left')
+            firing_bullet = self.get_bullet_type(c.DARING, c.LEFT)
         # 子弹方向
         self.handle_bullet_direction(firing_bullet)
         # 子弹发射位置
@@ -25,16 +25,16 @@ class Gun_guy(character.Character):
         # 子弹组
         action_group.add(firing_bullet)
 
-    def skill(self):
+    def skill(self, action_group):
         pass
 
     def get_bullet_type(self,character_name,direction):
         #默认为Darling
-        if character_name == 'Darling':
-            if self.player_num == 1:
-                return bullet.Bullet(self.name, self.bullet_damage,direction,'flamebow')
+        if character_name == c.DARING:
+            if self.player_num == 0:
+                return bullet.Bullet(self.player_num, self.bullet_damage,direction,'flamebow')
             else:
-                return bullet.Bullet(self.name, self.bullet_damage, direction, 'freezebow')
+                return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'freezebow')
 
     def handle_bullet_direction(self,Mybullet):
         if self.facing_right:

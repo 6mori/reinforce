@@ -5,28 +5,30 @@ from .. import tools, setup
 from .. import constants as c
 from .. components import brick
 from .. components import Darling
+from .. components import sword_guy
 
 
-class gaming(tools._State):
+class Gaming(tools._State):
     def __init__(self):
-        super(gaming, self).__init__()
+        super(Gaming, self).__init__()
 
     #def get_event(self, event):
 
-    def startup(self, current_time, persist,screen):
+    def startup(self, current_time, persist):
         self.game_info = persist
         self.persist = self.game_info
         self.game_info[c.CURRENT_TIME] = current_time
+        self.next = c.GAME_OVER
 
         self.setup_bricks()
-        self.setup_characters(screen)
-        self.setup_bullets()
+        self.setup_characters()
+        self.setup_killing_items()
         #self.setup_spritegroups()
 
 
     def setup_bricks(self):
         self.bricks_group = Group()
-        self.create_bricks(self.bricks_group, 0, 10, 18, 1,'grass_surface')
+        self.create_bricks(self.bricks_group, 0, 10, 40, 1,'grass_surface')
         self.create_bricks(self.bricks_group, 18, 14, 2, 1,'grass_surface')
         self.create_bricks(self.bricks_group, 17, 0, 1, 7,'long_wood')
         self.create_bricks(self.bricks_group, 17, 11, 1, 4,'grass_soil')
@@ -37,8 +39,7 @@ class gaming(tools._State):
         self.create_bricks(self.bricks_group, 0, 10, 7, 1, 'grass_soil')
 
 
-
-    def create_bricks(self, bricks, x, y, width, height,ground_kind):#ground_kind为表示什么砖块条的字符串
+    def create_bricks(self, bricks, x, y, width, height, ground_kind):#ground_kind为表示什么砖块条的字符串
         for row in list(range(x, x+width)):
             for col in list(range(y, y+height)):
                 if(row==x):
@@ -55,25 +56,46 @@ class gaming(tools._State):
         bricks.add(brick.Brick(x, y,brick_kind))
 
 
+    def setup_characters(self):
+        characters = {
+            c.DARING: Darling.Darling(),
+            c.GUAN: sword_guy.SwordGuy()
+        }
 
-    def setup_characters(self,screen):
-        player_1 = Darling.Darling(screen,1)
+        player_1 = characters[self.game_info[c.P1_CHARACTER]]
+        player_1.player_num = 0
         player_1.rect.x = 0
         player_1.rect.y = 0
-        player_1.state = c.FALL
-        player_1.name = 'cindy'
+        player_1.state = c.FALLING
 
-        player_2 = Darling.Darling(screen,2)
+        player_2 = characters[self.game_info[c.P2_CHARACTER]]
+        player_2.player_num = 1
         player_2.rect.right = c.SCREEN_WIDTH
         player_2.rect.y = 0
-        player_2.state = c.FALL
-        player_2.name = 'candy'
+        player_2.state = c.FALLING
 
         self.characters_group = Group(player_1, player_2)
 
 
+    def setup_killing_items(self):
+        self.setup_bullets()
+        self.setup_swords()
+
+        action_group = {
+            c.DARING: self.bullets_group,
+            c.GUAN: self.swords_group
+        }
+
+        self.killing_items = [action_group[self.game_info[c.P1_CHARACTER]],
+                              action_group[self.game_info[c.P2_CHARACTER]]]
+
+
     def setup_bullets(self):
         self.bullets_group = Group()
+
+
+    def setup_swords(self):
+        self.swords_group = Group()
 
 
     def update(self, surface, keys, current_time):
@@ -87,8 +109,9 @@ class gaming(tools._State):
 
 
     def update_all_sprites(self, keys):
-        for character, keybinding in zip(self.characters_group.sprites(), tools.keybinding):
-            character.update(keys, keybinding,  self.game_info, self.bullets_group)
+        for character in self.characters_group.sprites():
+            character.update(keys, tools.keybinding[character.player_num],
+                             self.game_info, self.killing_items[character.player_num])
         self.adjust_sprite_positions()
         self.bullets_group.update()
 
@@ -106,6 +129,7 @@ class gaming(tools._State):
 
             character.rect.y += round(character.y_vel)
             self.check_character_y_collisions(character)
+            self.check_character_under_bottom(character)
 
 
     def check_character_x_edge(self, character):
@@ -123,7 +147,6 @@ class gaming(tools._State):
 
 
     def adjust_character_for_x_collisions(self, character, collider):
-        print(character.rect.x, collider.rect.x)
         if character.rect.x < collider.rect.x:
             character.rect.right = collider.rect.left
         else:
@@ -142,14 +165,19 @@ class gaming(tools._State):
 
 
     def adjust_character_for_y_collisions(self, character, collider):
-        print(character.rect.y, collider.rect.y)
         if character.rect.y < collider.rect.y:
             character.rect.bottom = collider.rect.top
-            character.state = c.WALK
+            character.state = c.WALKING
         else:
             character.rect.top = collider.rect.bottom
 
         character.y_vel = 0
+
+
+    def check_character_under_bottom(self, character):
+        if character.rect.top >= c.SCREEN_HEIGHT:
+            character.HP = 0
+            self.set_result()
 
 
     def check_if_character_is_falling(self, character):
@@ -157,16 +185,18 @@ class gaming(tools._State):
         test_collide_group = pg.sprite.Group(self.bricks_group)
 
         if pg.sprite.spritecollideany(character, test_collide_group) is None:
-                if character.state != c.JUMP and character.state != c.SKILL:        #飞起来
-                    character.state = c.FALL
+                if character.state != c.JUMPING and character.state != c.SKILLING:        #飞起来
+                    character.state = c.FALLING
         character.rect.y -= 1
 
 
     def adjust_bullets_position(self):
         for bullet in self.bullets_group:
-            if bullet.rect.left < 0:
+            if bullet.rect.right < 0:
                 bullet.kill()
-            if bullet.rect.right > c.SCREEN_WIDTH:
+            if bullet.rect.left > c.SCREEN_WIDTH:
+                bullet.kill()
+            if bullet.rect.bottom < 0:
                 bullet.kill()
             self.check_bullet_x_collisions(bullet)
 
@@ -176,11 +206,11 @@ class gaming(tools._State):
         brick = pg.sprite.spritecollideany(bullet, self.bricks_group)
 
         if character:
-            if bullet.owner != character.name:
+            if bullet.owner != character.player_num:
                 character.HP -= bullet.damage
                 if character.HP <= 0:
-                    character.kill()
-                    self.done = True
+                    character.HP = 0
+                    self.set_result()
                 bullet.kill()
 
         if brick:
@@ -190,13 +220,38 @@ class gaming(tools._State):
             bullet.kill()
 
 
+    def check_swords_collisions(self):
+        self.apply_swords_damage(pg.sprite.groupcollide(self.swords_group, self.bricks_group, False, False))
+        pg.sprite.groupcollide(self.swords_group, self.bullets_group, False, False)
+        pg.sprite.groupcollide(self.swords_group, self.characters_group, False, False)
+
+        self.swords_group.empty()
+
+
+    def apply_swords_damage(self, coll_dict):
+        print('a')
+        for sword in coll_dict.keys():
+            for collider in coll_dict[sword][:]:
+                collider.HP -= sword.damage
+                if collider.HP <= 0:
+                    collider.kill()
+
 
     def blit_everything(self, surface):
         # For test
         surface.fill(c.BG_COLOR)
         for character in self.characters_group.sprites():
-            character.blitme()
+            surface.blit(character.image, character.rect)
         for brick in self.bricks_group.sprites():
-            brick.blitme(surface)
+            surface.blit(brick.image, brick.rect)
         for bullet in self.bullets_group.sprites():
-            bullet.blitme(surface)
+            surface.blit(bullet.image, bullet.rect)
+
+
+    def set_result(self):
+        for character in self.characters_group.sprites():
+            if character.player_num == 0:
+                self.game_info[c.P1_HP] = character.HP
+            else:
+                self.game_info[c.P2_HP] = character.HP
+        self.done = True
