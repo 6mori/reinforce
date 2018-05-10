@@ -4,7 +4,7 @@ from pygame.sprite import Sprite
 from .. import constants as c
 
 class Bullet(Sprite):
-    def __init__(self, owner, damage,direction,bullet_style):
+    def __init__(self, owner, damage, direction, bullet_style):
         super().__init__()
 
         #加载子弹图片并设置子弹大小
@@ -23,22 +23,24 @@ class Bullet(Sprite):
         self.rect.x += round(self.x_vel)
         self.rect.y += round(self.y_vel)
 
+
     def blitme(self,screen):
         screen.blit(self.image, self.rect)
 
+
     def handle_bullet_direction(self):
-        if self.direction == 'left':
+        if self.direction == c.LEFT:
             self.image = pg.transform.rotate(self.image, 180)
-        elif self.direction == 'up':
+        elif self.direction == c.UP:
             self.image = pg.transform.rotate(self.image,90)
-        elif self.direction == 'down':
+        elif self.direction == c.DOWN:
             self.image = pg.transform.rotate(self.image, 270)
-        elif self.direction == 'right_up':
+        elif self.direction == c.RIGHT_UP:
             self.image = pg.transform.rotate(self.image, 45)
-        elif self.direction == 'left_up':
+        elif self.direction == c.LEFT_UP:
             self.image = pg.transform.rotate(self.image, 135)
-        elif self.direction == 'right_down':
+        elif self.direction == c.RIGHT_DOWN:
             self.image = pg.transform.rotate(self.image, 315)
-        elif self.direction == 'left_down':
+        elif self.direction == c.LEFT_DOWN:
             self.image = pg.transform.rotate(self.image, 225)
         self.rect = self.image.get_rect()
