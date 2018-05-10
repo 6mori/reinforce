@@ -15,9 +15,9 @@ class GunGuy(character.Character):
         self.allow_action = False
         # 子弹类型
         if self.facing_right:
-            firing_bullet = self.get_bullet_type('Darling', 'right')
+            firing_bullet = self.get_bullet_type(c.DARING, c.RIGHT)
         else:
-            firing_bullet = self.get_bullet_type('Darling', 'left')
+            firing_bullet = self.get_bullet_type(c.DARING, c.LEFT)
         # 子弹方向
         self.handle_bullet_direction(firing_bullet)
         # 子弹发射位置
@@ -25,13 +25,13 @@ class GunGuy(character.Character):
         # 子弹组
         action_group.add(firing_bullet)
 
-    def skill(self):
+    def skill(self, action_group):
         pass
 
     def get_bullet_type(self,character_name,direction):
         #默认为Darling
-        if character_name == 'Darling':
-            if self.player_num == 1:
+        if character_name == c.DARING:
+            if self.player_num == 0:
                 return bullet.Bullet(self.player_num, self.bullet_damage,direction,'flamebow')
             else:
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'freezebow')

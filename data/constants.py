@@ -37,12 +37,21 @@ GAME_OVER = 'game over'
 
 # Character states
 
-STAND = 'stand'
-WALK  = 'walk'
-JUMP  = 'jump'
-FALL  = 'fall'
-CLIMB = 'climb'
-SKILL = 'skill'
+STANDING = 'standing'
+WALKING  = 'walking'
+JUMPING  = 'jumping'
+FALLING  = 'falling'
+CLIMBING = 'climbing'
+SKILLING = 'skilling'
+
+# Character command
+
+ACTION = 'action'
+SKILL  = 'skill'
+JUMP   = 'jump'
+LEFT   = 'left'
+RIGHT  = 'right'
+DOWN   = 'down'
 
 # Character property
 
@@ -68,9 +77,9 @@ KEYBINDING   = 'keybinding'
 
 # Brick property
 
-BRICK_WIDTH  = 40
-BRICK_HEIGHT = 30
-BRICK_DUR    = 5
+BRICK_WIDTH  = 20
+BRICK_HEIGHT = 25
+BRICK_DUR    = 25
 
 # Bullet property
 
@@ -103,5 +112,16 @@ SWORD_HEIGHT = 20
 
 # Character name
 
-DARING = 'daring'
+DARING = 'Darling'
 GUAN   = 'guan'
+
+# Direction
+
+RIGHT      = 'right'
+LEFT       = 'left'
+UP         = 'up'
+DOWN       = 'down'
+RIGHT_UP   = 'right_up'
+RIGHT_DOWN = 'right_down'
+LEFT_UP    = 'left_up'
+LEFT_DOWN  = 'left_down'
