@@ -27,7 +27,6 @@ kindOfBrick={
                     'grass_inside': {'name': 'images/grass_inside.png', 'dur': 5},
                     'long_wood':{'name':'images/long_wood.png', 'dur': 5},
                     'long_stone':{'name':'images/long_stone.png', 'dur': 5}
-
             }#砖块种类
 
 kindOfGround={

@@ -8,7 +8,7 @@ class Bullet(Sprite):
         super().__init__()
 
         #加载子弹图片并设置子弹大小
-        self.image=pg.transform.scale(pg.image.load('images/bullet/'+bullet_style+'/0.png'),c.BULLET_SIZE)
+        self.image=pg.transform.scale(pg.image.load('images/bullet/'+bullet_style+'/0.png'), c.BULLET_SIZE)
         self.direction=direction
         self.handle_bullet_direction()
 
