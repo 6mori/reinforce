@@ -155,9 +155,13 @@ class Gaming(tools._State):
 
     def check_character_x_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
+        prop = pg.sprite.spritecollideany(character, self.props_group)
 
         if brick:
             self.adjust_character_for_x_collisions(character, brick)
+
+        if prop:
+            self.adjust_character_for_x_collisions(character, prop)
 
 
     def adjust_character_for_x_collisions(self, character, collider):
@@ -171,9 +175,13 @@ class Gaming(tools._State):
 
     def check_character_y_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
+        prop = pg.sprite.spritecollideany(character, self.props_group)
 
         if brick:
             self.adjust_character_for_y_collisions(character, brick)
+
+        if prop:
+            self.adjust_character_for_y_collisions(character, prop)
 
         self.check_if_character_is_falling(character)
 
