@@ -4,6 +4,7 @@ from pygame.sprite import Group
 from .. import tools, setup
 from .. import constants as c
 from .. components import brick
+from .. components import props
 from .. components import Darling
 from .. components import sword_guy
 
@@ -24,6 +25,19 @@ class Gaming(tools._State):
         self.setup_characters()
         self.setup_killing_items()
         #self.setup_spritegroups()
+
+        self.setup_props()
+
+    def setup_props(self):
+        self.props_group = Group()
+        self.create_prop(self.props_group, 1, 1, 'red_prop')
+        self.create_prop(self.props_group, 4, 4, 'blue_prop')
+
+
+    def create_prop(self, props_group, row, col,prop_kind):
+        x = row * c.BRICK_WIDTH
+        y = col * c.BRICK_HEIGHT
+        props_group.add(props.Prop(x, y, prop_kind))
 
 
     def setup_bricks(self):
@@ -53,7 +67,7 @@ class Gaming(tools._State):
     def create_brick(self, bricks, row, col,brick_kind):
         x = row * c.BRICK_WIDTH
         y = col * c.BRICK_HEIGHT
-        bricks.add(brick.Brick(x, y,brick_kind))
+        bricks.add(brick.Brick(x, y, brick_kind))
 
 
     def setup_characters(self):
@@ -246,6 +260,8 @@ class Gaming(tools._State):
             surface.blit(brick.image, brick.rect)
         for bullet in self.bullets_group.sprites():
             surface.blit(bullet.image, bullet.rect)
+        for prop_item in self.props_group.sprites():
+            surface.blit(prop_item.image, prop_item.rect)
 
 
     def set_result(self):

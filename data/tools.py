@@ -22,21 +22,29 @@ keybinding = [
     }
 ]
 
+#砖块种类
 kindOfBrick={
-                    'grass_left':{'name':'images/grass_left.png','dur':25},
-                    'grass_middle':{'name':'images/grass_middle.png','dur':25 },
-                    'grass_right': {'name': 'images/grass_right.png', 'dur': 25},
-                    'grass_inside': {'name': 'images/grass_inside.png', 'dur': 25},
-                    'long_wood':{'name':'images/long_wood.png', 'dur': 25},
-                    'long_stone':{'name':'images/long_stone.png', 'dur': 25}
-            }#砖块种类
+    'grass_left':{'name':'images/grass_left.png','dur':25},
+    'grass_middle':{'name':'images/grass_middle.png','dur':25 },
+    'grass_right': {'name': 'images/grass_right.png', 'dur': 25},
+    'grass_inside': {'name': 'images/grass_inside.png', 'dur': 25},
+    'long_wood':{'name':'images/long_wood.png', 'dur': 25},
+    'long_stone':{'name':'images/long_stone.png', 'dur': 25},
+}
 
+#背景种类
 kindOfGround={
-                    'grass_surface':['grass_left','grass_middle','grass_right'],
-                    'grass_soil':['grass_inside','grass_inside','grass_inside'],
-                    'long_wood':['long_wood','long_wood','long_wood'],
-                    'long_stone':['long_stone','long_stone','long_stone'],
-             }
+    'grass_surface':['grass_left', 'grass_middle', 'grass_right'],
+    'grass_soil':['grass_inside', 'grass_inside', 'grass_inside'],
+    'long_wood':['long_wood', 'long_wood', 'long_wood'],
+    'long_stone':['long_stone', 'long_stone', 'long_stone'],
+ }
+
+#道具种类
+kindOfProps={
+    'red_prop':{'name':'images/prop_red.png', 'dur': 25},
+    'blue_prop':{'name':'images/prop_blue.png', 'dur': 25}
+}
 
 class Control(object):
     ''' Control object for entire project '''
