@@ -17,6 +17,8 @@ class Bullet(Sprite):
         self.x_vel = 0
         self.y_vel = 0
 
+        self.HP = 1
+
 
 
     def update(self):

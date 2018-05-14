@@ -126,13 +126,14 @@ class Gaming(tools._State):
         for character in self.characters_group.sprites():
             character.update(keys, tools.keybinding[character.player_num],
                              self.game_info, self.killing_items[character.player_num])
-        self.adjust_sprite_positions()
         self.bullets_group.update()
+        self.adjust_sprite_positions()
 
 
     def adjust_sprite_positions(self):
         self.adjust_characters_position()
         self.adjust_bullets_position()
+        self.check_swords_collisions()
 
 
     def adjust_characters_position(self):
@@ -236,22 +237,30 @@ class Gaming(tools._State):
                 bullet.kill()
 
         if brick:
-            brick.dur -= bullet.damage
-            if brick.dur <= 0:
+            brick.HP -= bullet.damage
+            if brick.HP <= 0:
                 brick.kill()
             bullet.kill()
 
 
     def check_swords_collisions(self):
-        self.apply_swords_damage(pg.sprite.groupcollide(self.swords_group, self.bricks_group, False, False))
-        pg.sprite.groupcollide(self.swords_group, self.bullets_group, False, False)
-        pg.sprite.groupcollide(self.swords_group, self.characters_group, False, False)
+        bricks = pg.sprite.groupcollide(self.swords_group, self.bricks_group, False, False)
+        bullets = pg.sprite.groupcollide(self.swords_group, self.bullets_group, False, False)
+        characters = pg.sprite.groupcollide(self.swords_group, self.characters_group, False, False)
+
+        if bricks:
+            self.apply_swords_damage(bricks)
+
+        if bullets:
+            self.apply_swords_damage(bullets)
+
+        if characters:
+            self.apply_swords_damage(characters)
 
         self.swords_group.empty()
 
 
     def apply_swords_damage(self, coll_dict):
-        print('a')
         for sword in coll_dict.keys():
             for collider in coll_dict[sword][:]:
                 collider.HP -= sword.damage

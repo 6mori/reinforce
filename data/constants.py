@@ -46,12 +46,12 @@ SKILLING = 'skilling'
 
 # Character command
 
-ACTION = 'action'
-SKILL  = 'skill'
-JUMP   = 'jump'
-LEFT   = 'left'
-RIGHT  = 'right'
-DOWN   = 'down'
+ACTION   = 'action'
+SKILL    = 'skill'
+JUMP     = 'jump'
+GO_LEFT  = 'go left'
+GO_RIGHT = 'go right'
+GO_DOWN  = 'go down'
 
 # Character property
 
@@ -83,7 +83,7 @@ BRICK_DUR    = 25
 
 # Bullet property
 
-BULLET_VEL    = 5
+BULLET_VEL    = 1
 BULLET_WIDTH  = 50
 BULLET_HEIGHT = 10
 BULLET_SIZE   = (50,10)
