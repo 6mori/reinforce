@@ -18,12 +18,12 @@ class Character(Sprite):
         self.state = c.STANDING
 
         self.commands = {
-            c.ACTION: False,
-            c.SKILL : False,
-            c.JUMP  : False,
-            c.LEFT  : False,
-            c.RIGHT : False,
-            c.DOWN  : False
+            c.ACTION  : False,
+            c.SKILL   : False,
+            c.JUMP    : False,
+            c.GO_LEFT : False,
+            c.GO_RIGHT: False,
+            c.GO_DOWN : False
         }
 
         self.setup_forces()
@@ -126,11 +126,11 @@ class Character(Sprite):
                 self.state = c.SKILLING
                 return
 
-        if self.commands[c.LEFT]:
+        if self.commands[c.GO_LEFT]:
             self.facing_right = False
             self.state = c.WALKING
             self.x_vel = -self.max_x_vel
-        elif self.commands[c.RIGHT]:
+        elif self.commands[c.GO_RIGHT]:
             self.facing_right = True
             self.state = c.WALKING
             self.x_vel = self.max_x_vel
@@ -163,7 +163,7 @@ class Character(Sprite):
                 self.state = c.JUMPING
                 self.y_vel = self.jump_vel
 
-        if self.commands[c.LEFT]:
+        if self.commands[c.GO_LEFT]:
 
             self.facing_right = False
             if self.x_vel >= 0:
@@ -171,7 +171,7 @@ class Character(Sprite):
             else:
                 self.x_vel = 0
 
-        elif self.commands[c.RIGHT]:
+        elif self.commands[c.GO_RIGHT]:
 
             self.facing_right = True
             if self.x_vel <= 0:
@@ -206,10 +206,10 @@ class Character(Sprite):
                 self.state = c.SKILLING
                 return
 
-        if self.commands[c.LEFT]:
+        if self.commands[c.GO_LEFT]:
             self.facing_right = False
             self.x_vel = -self.max_x_vel
-        elif self.commands[c.RIGHT]:
+        elif self.commands[c.GO_RIGHT]:
             self.facing_right = True
             self.x_vel = self.max_x_vel
 
@@ -233,10 +233,10 @@ class Character(Sprite):
             if self.allow_skill:
                 self.state = c.SKILLING
 
-        if self.commands[c.LEFT]:
+        if self.commands[c.GO_LEFT]:
             self.facing_right = False
             self.x_vel = -self.max_x_vel
-        elif self.commands[c.RIGHT]:
+        elif self.commands[c.GO_RIGHT]:
             self.facing_right = True
             self.x_vel = self.max_x_vel
 

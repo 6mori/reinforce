@@ -5,20 +5,20 @@ from . import constants as c
 
 keybinding = [
     {
-        'action': pg.K_j,
-        'skill' : pg.K_l,
-        'jump': pg.K_w,
-        'left': pg.K_a,
-        'right':pg.K_d,
-        'down': pg.K_s
+        c.ACTION  : pg.K_j,
+        c.SKILL   : pg.K_l,
+        c.JUMP    : pg.K_w,
+        c.GO_LEFT : pg.K_a,
+        c.GO_RIGHT:pg.K_d,
+        c.GO_DOWN : pg.K_s
     },
     {
-        'action': pg.K_KP1,
-        'skill' : pg.K_KP3,
-        'jump': pg.K_UP,
-        'left': pg.K_LEFT,
-        'right':pg.K_RIGHT,
-        'down': pg.K_DOWN
+        c.ACTION  : pg.K_KP1,
+        c.SKILL   : pg.K_KP3,
+        c.JUMP    : pg.K_UP,
+        c.GO_LEFT : pg.K_LEFT,
+        c.GO_RIGHT:pg.K_RIGHT,
+        c.GO_DOWN : pg.K_DOWN
     }
 ]
 

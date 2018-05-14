@@ -7,7 +7,7 @@ class Sword(Sprite):
     def __init__(self, owner, damage):
         super().__init__()
 
-        self.rect = pg.Rect((0, 0), (c.SCREEN_WIDTH, c.SWORD_HEIGHT))
+        self.rect = pg.Rect((0, 0), (c.SWORD_WIDTH, c.SWORD_HEIGHT))
         self.owner = owner
         self.damage = damage
         self.creat_time = 0.0
