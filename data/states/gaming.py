@@ -162,6 +162,7 @@ class Gaming(tools._State):
             self.adjust_character_for_x_collisions(character, brick)
 
         if prop:
+            prop.ActOnCharacters(character)
             prop.kill()
 
 
@@ -182,6 +183,7 @@ class Gaming(tools._State):
             self.adjust_character_for_y_collisions(character, brick)
 
         if prop:
+            prop.ActOnCharacters(character)
             prop.kill()
 
         self.check_if_character_is_falling(character)

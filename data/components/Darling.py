@@ -8,7 +8,7 @@ class Darling(gun_guy.GunGuy):
 
         self.bullet_damage = 5
         self.HP = 10
-        self.skill_power = 3
+        self.MP = 3
 
     def skill(self, action_group):
         self.allow_skill = False
@@ -25,7 +25,7 @@ class Darling(gun_guy.GunGuy):
 
         if self.skill_counter == 16 * c.SKILL_SPEED_DARLING-1:
             self.state = c.FALLING
-            self.skill_power -= 1
+            self.MP -= 1
 
     def action(self, action_group):
         self.allow_action = False
