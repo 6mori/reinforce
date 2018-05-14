@@ -30,7 +30,7 @@ class Gaming(tools._State):
 
     def setup_props(self):
         self.props_group = Group()
-        self.create_prop(self.props_group, 1, 1, 'red_prop')
+        self.create_prop(self.props_group, 2, 1, 'red_prop')
         self.create_prop(self.props_group, 4, 4, 'blue_prop')
 
 
