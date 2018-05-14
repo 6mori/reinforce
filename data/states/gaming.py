@@ -161,7 +161,7 @@ class Gaming(tools._State):
             self.adjust_character_for_x_collisions(character, brick)
 
         if prop:
-            self.adjust_character_for_x_collisions(character, prop)
+            prop.kill()
 
 
     def adjust_character_for_x_collisions(self, character, collider):
@@ -181,7 +181,7 @@ class Gaming(tools._State):
             self.adjust_character_for_y_collisions(character, brick)
 
         if prop:
-            self.adjust_character_for_y_collisions(character, prop)
+            prop.kill()
 
         self.check_if_character_is_falling(character)
 
