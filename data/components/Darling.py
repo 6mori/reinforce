@@ -11,21 +11,10 @@ class Darling(gun_guy.GunGuy):
         self.MP = 3
 
     def skill(self, action_group):
-        self.allow_skill = False
-
-        action_image_address = 'images/Darling/skill/action/dnf_r_%d.png' % (self.skill_counter // c.SKILL_SPEED_DARLING)
+        self.skill_basic_operation_front('Darling',16,'png')
         #发射子弹
         self.wild_shot_bullets(action_group)
-
-        self.skill_counter += 1
-        self.skill_counter %= 16 * c.SKILL_SPEED_DARLING
-        self.image_right = pg.transform.scale(pg.image.load(action_image_address), c.CHARACTER_SIZE)
-        self.image_left = pg.transform.flip(self.image_right, True, False)
-
-
-        if self.skill_counter == 16 * c.SKILL_SPEED_DARLING-1:
-            self.state = c.FALLING
-            self.MP -= 1
+        self.skill_basic_operation_back('Darling',16,'png')
 
     def action(self, action_group):
         self.allow_action = False
@@ -42,17 +31,17 @@ class Darling(gun_guy.GunGuy):
         #子弹组
         action_group.add(firing_bullet)
 
-    def setup_character_image_initial(self,character_name):
-        super().setup_character_image_initial(c.DARING)
+    def setup_character_image_initial(self, character_name, postfix):
+        super().setup_character_image_initial(c.DARING,'png')
 
-    def setup_character_image_stand(self, character_name):
-        super().setup_character_image_stand(c.DARING)
+    def setup_character_image_stand(self, character_name,max_frame_number,postfix):
+        super().setup_character_image_stand(c.DARING,2,'png')
 
-    def setup_character_image_walk(self, character_name,max_frame_number):
-        super().setup_character_image_walk(c.DARING,5)
+    def setup_character_image_walk(self, character_name,max_frame_number,postfix):
+        super().setup_character_image_walk(c.DARING,4,'png')
 
     def wild_shot_bullets(self,action_group):
-        if not self.skill_counter%(c.SKILL_SPEED_DARLING*2):
+        if not self.skill_counter%(c.SKILL_SPEED['Darling']*2):
             bullets = [self.get_bullet_type(c.DARING, c.LEFT), self.get_bullet_type(c.DARING, c.RIGHT),
                        self.get_bullet_type(c.DARING, c.UP), self.get_bullet_type(c.DARING, c.RIGHT_UP),
                        self.get_bullet_type(c.DARING, c.LEFT_UP)]
