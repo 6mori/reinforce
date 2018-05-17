@@ -6,8 +6,8 @@ from .. import constants as c
 from .. components import brick
 from .. components import props
 from .. components import Darling
-from .. components import sword_guy
 from .. components import guan_gong
+from .. components import k
 
 
 class Gaming(tools._State):
@@ -75,6 +75,7 @@ class Gaming(tools._State):
         characters = {
             c.DARING: Darling.Darling(),
             c.GUAN_GONG: guan_gong.Guan_gong()
+
         }
 
         player_1 = characters[self.game_info[c.P1_CHARACTER]]

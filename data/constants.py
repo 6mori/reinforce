@@ -118,6 +118,7 @@ SWORD_HEIGHT = 20
 
 DARING = 'Darling'
 GUAN_GONG   = 'Guan_gong'
+K   = 'k'
 
 # Direction
 
