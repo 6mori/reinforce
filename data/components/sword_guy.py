@@ -21,6 +21,6 @@ class SwordGuy(character.Character):
         else:
             cutting_sword.rect.right = self.rect.left
 
-        cutting_sword.rect.centery = self.rect.centery-23
+        cutting_sword.rect.centery = self.rect.centery
 
         action_group.add(cutting_sword)

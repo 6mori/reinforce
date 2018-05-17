@@ -272,7 +272,6 @@ class Gaming(tools._State):
 
 
     def blit_everything(self, surface):
-        # For test
         surface.fill(c.BG_COLOR)
         for character in self.characters_group.sprites():
             surface.blit(character.image, character.rect)
@@ -282,6 +281,9 @@ class Gaming(tools._State):
             surface.blit(bullet.image, bullet.rect)
         for prop_item in self.props_group.sprites():
             surface.blit(prop_item.image, prop_item.rect)
+        # For test
+        #for sw in self.swords_group.sprites():
+        #    pg.draw.rect(surface, sw.color, sw.rect)
 
 
     def set_result(self):
