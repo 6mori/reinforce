@@ -99,15 +99,27 @@ CHARACTER_MOVING_SPEED = 25
 
 #Character size
 
-CHARACTER_SIZE ={'Guan_gong':(103 // 3, 250 // 3),'Darling':(103 // 3, 133 // 3)}
+CHARACTER_SIZE = {
+    'Guan_gong' : (103 // 3, 250 // 3),
+    'Darling' : (103 // 3, 131 // 3),
+    'k' : (75 // 3, 119 // 3)
+}
 
 
 #Character skill
-SKILL_SPEED ={'Darling':10,'Guan_gong':20}
+SKILL_SPEED = {
+    'Darling' : 10,
+    'Guan_gong' : 20,
+    'k' : 20
+}
 
 
 #Stand animation
-STAND_ANIMATION_SPEED ={'Darling':100,'Guan_gong':30}
+STAND_ANIMATION_SPEED = {
+    'Darling' : 100,
+    'Guan_gong' : 30,
+    'k' : 50
+}
 
 # Sword property
 
