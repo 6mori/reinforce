@@ -37,7 +37,8 @@ class Character(Sprite):
 
 
     def setup_character_image_initial(self,character_name='Darling',postfix='png'):
-        self.image = pg.transform.scale(pg.image.load('images/'+character_name+'/stand/0.%s'%(postfix)), c.CHARACTER_SIZE[character_name])
+        #print('images/%s/stand/0.%s'%(character_name,postfix))
+        self.image = pg.transform.scale(pg.image.load('images/%s/stand/0.%s'%(character_name,postfix)), c.CHARACTER_SIZE[character_name])
         self.image_right = self.image
         self.image_left = pg.transform.flip(self.image_right, True, False)
         self.rect = self.image.get_rect()
@@ -48,11 +49,11 @@ class Character(Sprite):
         self.stand_counter += 1
         self.stand_counter %= max_frame_number * c.STAND_ANIMATION_SPEED[character_name]
         self.image_right = pg.transform.scale(pg.image.load(image_address), c.CHARACTER_SIZE[character_name])
-        self.image_left = pg.transform.flip(self.image_right, True, False)
+        self.image_left = pg.transform.flip(self.image_right, True,  False)
 
 
     def setup_character_image_walk(self, character_name='Darling',max_frame_number='4',postfix='png'):
-        image_address = 'images/'+character_name+'/walk/%d.png' % (self.walk_counter // c.CHARACTER_MOVING_SPEED)
+        image_address = 'images/'+character_name+'/walk/%d.%s' % ((self.walk_counter // c.CHARACTER_MOVING_SPEED), postfix)
         self.walk_counter += 1
         self.walk_counter %= max_frame_number * c.CHARACTER_MOVING_SPEED
         self.image_right = pg.transform.scale(pg.image.load(image_address), c.CHARACTER_SIZE[character_name])

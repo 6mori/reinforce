@@ -16,7 +16,7 @@ class Choosing(tools._State):
 
         # For test
         self.game_info[c.P1_CHARACTER] = c.DARING
-        self.game_info[c.P2_CHARACTER] = c.GUAN_GONG
+        self.game_info[c.P2_CHARACTER] = c.K
         self.done = True
 
 

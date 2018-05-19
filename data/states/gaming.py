@@ -6,8 +6,8 @@ from .. import constants as c
 from .. components import brick
 from .. components import props
 from .. components import Darling
-from .. components import sword_guy
 from .. components import guan_gong
+from .. components import k
 
 
 class Gaming(tools._State):
@@ -74,7 +74,8 @@ class Gaming(tools._State):
     def setup_characters(self):
         characters = {
             c.DARING: Darling.Darling(),
-            c.GUAN_GONG: guan_gong.Guan_gong()
+            c.GUAN_GONG: guan_gong.Guan_gong(),
+            c.K: k.K(),
         }
 
         player_1 = characters[self.game_info[c.P1_CHARACTER]]
@@ -98,11 +99,14 @@ class Gaming(tools._State):
 
         action_group = {
             c.DARING: self.bullets_group,
-            c.GUAN_GONG: self.swords_group
+            c.GUAN_GONG: self.swords_group,
+            c.K: self.swords_group
         }
 
-        self.killing_items = [action_group[self.game_info[c.P1_CHARACTER]],
-                              action_group[self.game_info[c.P2_CHARACTER]]]
+        self.killing_items = [
+            action_group[self.game_info[c.P1_CHARACTER]],
+            action_group[self.game_info[c.P2_CHARACTER]],
+        ]
 
 
     def setup_bullets(self):
