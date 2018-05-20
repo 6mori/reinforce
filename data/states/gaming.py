@@ -281,7 +281,8 @@ class Gaming(tools._State):
             for collider in coll_dict[sword][:]:
                 collider.HP -= sword.damage
                 if collider.HP <= 0:
-                    collider.kill()
+                    collider.HP = 0
+                    self.set_result()
 
 
     def blit_everything(self, surface):
