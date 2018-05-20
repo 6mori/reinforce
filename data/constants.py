@@ -142,3 +142,12 @@ RIGHT_UP   = 'right_up'
 RIGHT_DOWN = 'right_down'
 LEFT_UP    = 'left_up'
 LEFT_DOWN  = 'left_down'
+
+#
+
+TITLE_SCREEN = 'title_screen'
+
+# Main menu options
+
+PLAY = 'play'
+QUIT = 'quit'
