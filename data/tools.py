@@ -9,7 +9,7 @@ keybinding = [
         c.SKILL   : pg.K_l,
         c.JUMP    : pg.K_w,
         c.GO_LEFT : pg.K_a,
-        c.GO_RIGHT:pg.K_d,
+        c.GO_RIGHT: pg.K_d,
         c.GO_DOWN : pg.K_s
     },
     {
@@ -17,7 +17,7 @@ keybinding = [
         c.SKILL   : pg.K_KP3,
         c.JUMP    : pg.K_UP,
         c.GO_LEFT : pg.K_LEFT,
-        c.GO_RIGHT:pg.K_RIGHT,
+        c.GO_RIGHT: pg.K_RIGHT,
         c.GO_DOWN : pg.K_DOWN
     }
 ]

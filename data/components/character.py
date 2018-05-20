@@ -12,7 +12,7 @@ class Character(Sprite):
         self.MP = 3
 
         #默认贴图为Darling
-        self.setup_character_image_initial(c.DARING,'png')
+        self.setup_character_image_initial(c.DARLING,'png')
         self.player_num = 0
 
         self.state = c.STANDING
@@ -117,7 +117,7 @@ class Character(Sprite):
         self.check_to_allow_action()
         self.check_to_allow_skill()
 
-        self.setup_character_image_stand(c.DARING,2,'png')
+        self.setup_character_image_stand(c.DARLING,2,'png')
 
         self.x_vel = 0
         self.y_vel = 0
@@ -153,7 +153,7 @@ class Character(Sprite):
         self.check_to_allow_skill()
 
         #加载贴图
-        self.setup_character_image_walk(c.DARING,2,'png')
+        self.setup_character_image_walk(c.DARLING,2,'png')
 
         if self.commands[c.ACTION]:
             if self.allow_action:

@@ -34,7 +34,7 @@ class MainMenu(tools._State):
 
     def setup_cursor(self):
         self.cursor = pg.sprite.Sprite()
-        self.cursor.image = pg.Surface([100, 50])
+        self.cursor.image = pg.Surface([c.TITLE_CURSOR_WIDTH, c.TITLE_CURSOR_HEIGHT])
         #self.cursor.image.set_colorkey(c.BLACK)
         self.cursor.rect = self.cursor.image.get_rect()
         self.cursor.rect.x = 350
@@ -51,16 +51,16 @@ class MainMenu(tools._State):
 
     def update_cursor(self, keys):
         if self.cursor.state == c.PLAY:
+            self.cursor.rect.y = 400
             if keys[pg.K_DOWN]:
                 self.cursor.state = c.QUIT
-                self.cursor.rect.y = 450
             if keys[pg.K_RETURN]:
                 self.reset_game_info()
                 self.done = True
         elif self.cursor.state == c.QUIT:
+            self.cursor.rect.y = 450
             if keys[pg.K_UP]:
                 self.cursor.state = c.PLAY
-                self.cursor.rect.y = 400
             if keys[pg.K_RETURN]:
                 self.quit = True
 

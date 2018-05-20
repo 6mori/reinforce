@@ -20,9 +20,9 @@ class Darling(gun_guy.GunGuy):
         self.allow_action = False
         #子弹类型
         if self.facing_right:
-            firing_bullet = self.get_bullet_type(c.DARING, c.RIGHT)
+            firing_bullet = self.get_bullet_type(c.DARLING, c.RIGHT)
         else:
-            firing_bullet = self.get_bullet_type(c.DARING, c.LEFT)
+            firing_bullet = self.get_bullet_type(c.DARLING, c.LEFT)
         #子弹方向
         self.handle_bullet_direction(firing_bullet)
         #子弹发射位置
@@ -32,19 +32,19 @@ class Darling(gun_guy.GunGuy):
         action_group.add(firing_bullet)
 
     def setup_character_image_initial(self, character_name, postfix):
-        super().setup_character_image_initial(c.DARING,'png')
+        super().setup_character_image_initial(c.DARLING,'png')
 
     def setup_character_image_stand(self, character_name,max_frame_number,postfix):
-        super().setup_character_image_stand(c.DARING,2,'png')
+        super().setup_character_image_stand(c.DARLING,2,'png')
 
     def setup_character_image_walk(self, character_name,max_frame_number,postfix):
-        super().setup_character_image_walk(c.DARING,4,'png')
+        super().setup_character_image_walk(c.DARLING,4,'png')
 
     def wild_shot_bullets(self,action_group):
         if not self.skill_counter%(c.SKILL_SPEED['Darling']*2):
-            bullets = [self.get_bullet_type(c.DARING, c.LEFT), self.get_bullet_type(c.DARING, c.RIGHT),
-                       self.get_bullet_type(c.DARING, c.UP), self.get_bullet_type(c.DARING, c.RIGHT_UP),
-                       self.get_bullet_type(c.DARING, c.LEFT_UP)]
+            bullets = [self.get_bullet_type(c.DARLING, c.LEFT), self.get_bullet_type(c.DARLING, c.RIGHT),
+                       self.get_bullet_type(c.DARLING, c.UP), self.get_bullet_type(c.DARLING, c.RIGHT_UP),
+                       self.get_bullet_type(c.DARLING, c.LEFT_UP)]
             bullets[0].x_vel = -c.BULLET_VEL
             bullets[4].x_vel = -c.BULLET_VEL
             bullets[1].x_vel = c.BULLET_VEL

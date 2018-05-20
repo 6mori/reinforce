@@ -33,7 +33,7 @@ class GunGuy(character.Character):
 
     def get_bullet_type(self,character_name,direction):
         #默认为Darling
-        if character_name == c.DARING:
+        if character_name == c.DARLING:
             if self.player_num == 0:
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'flamebow')
             else:

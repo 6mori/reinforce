@@ -128,7 +128,7 @@ SWORD_HEIGHT = 20
 
 # Character name
 
-DARING = 'Darling'
+DARLING = 'Darling'
 GUAN_GONG   = 'Guan_gong'
 K   = 'k'
 
@@ -146,8 +146,51 @@ LEFT_DOWN  = 'left_down'
 #
 
 TITLE_SCREEN = 'title_screen'
+CHOOSING_SCREEN = 'choosing_screen'
 
 # Main menu options
 
 PLAY = 'play'
 QUIT = 'quit'
+
+# Choosing absolute position
+
+P1_DARLING = (DARLING, (100, 100))
+P1_GUAN_GONG = (GUAN_GONG, (100, 150))
+P1_K = (K, (150, 100))
+P2_DARLING = (DARLING, (600, 100))
+P2_GUAN_GONG = (GUAN_GONG, (600, 150))
+P2_K = (K, (650, 100))
+
+# Choosing relative position
+
+CHOOSING_POSITION = {
+    P1_DARLING: {
+        DOWN: P1_GUAN_GONG,
+        RIGHT: P1_K,
+    },
+    P1_GUAN_GONG: {
+        UP: P1_DARLING,
+    },
+    P1_K: {
+        LEFT: P1_DARLING,
+    },
+
+    P2_DARLING : {
+        DOWN: P2_GUAN_GONG,
+        RIGHT: P2_K,
+    },
+    P2_GUAN_GONG : {
+        UP: P2_DARLING,
+    },
+    P2_K : {
+        LEFT: P2_DARLING,
+    }
+}
+
+TITLE_CURSOR_WIDTH = 100
+TITLE_CURSOR_HEIGHT = 50
+CHOOSING_CURSOR_WIDTH = 50
+CHOOSING_CURSOR_HEIGHT = 50
+
+CONFIRM = 'confirm'
