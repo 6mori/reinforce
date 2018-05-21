@@ -7,7 +7,7 @@ class Darling(gun_guy.GunGuy):
         super().__init__()
 
         self.bullet_damage = 5
-        self.HP = 10
+        self.HP = 25
         self.MP = 3
 
     def skill(self, action_group):

@@ -11,8 +11,8 @@ class MainMenu(tools._State):
             c.P1_CHARACTER: '',
             c.P2_CHARACTER: '',
             c.CURRENT_TIME: 0.0,
-            c.P1_HP: '',
-            c.P2_HP: '',
+            c.P1_HP: 0,
+            c.P2_HP: 0,
         }
         self.startup(0.0, persist)
 
@@ -81,7 +81,7 @@ class MainMenu(tools._State):
             c.P1_CHARACTER: '',
             c.P2_CHARACTER: '',
             c.CURRENT_TIME: 0.0,
-            c.P1_HP: '',
-            c.P2_HP: '',
+            c.P1_HP: 0,
+            c.P2_HP: 0,
         }
         self.persist = self.game_info
