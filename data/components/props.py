@@ -13,8 +13,6 @@ class Prop(Sprite):
         self.rect.left = x
         self.rect.top = y
         self.dur = c.BRICK_DUR
-
-
     def ActOnCharacters(self, character):
         if self.kind == 'red_prop':
             character.HP = character.HP+1

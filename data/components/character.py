@@ -9,7 +9,7 @@ class Character(Sprite):
     def __init__(self):
         super().__init__()
         #大招次数  默认为3
-        self.skill_power = 3
+        self.MP = 3
 
         #默认贴图为Darling
         self.setup_character_image_initial(c.DARING)
@@ -260,7 +260,7 @@ class Character(Sprite):
 
 
     def check_to_allow_skill(self):
-        if (not self.commands[c.SKILL]) and (self.skill_power>0):
+        if (not self.commands[c.SKILL]) and (self.MP>0):
             self.allow_skill = True
 
 
