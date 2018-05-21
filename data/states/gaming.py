@@ -130,6 +130,7 @@ class Gaming(tools._State):
         self.game_info[c.CURRENT_TIME] = self.current_time = current_time
         self.handle_state(keys)
         self.blit_everything(surface)
+        self.check_if_finish()
 
 
     def handle_state(self, keys):
@@ -141,12 +142,14 @@ class Gaming(tools._State):
             character.update(keys, tools.keybinding[character.player_num],
                              self.game_info, self.killing_items[character.player_num])
         self.bullets_group.update()
+        self.props_group.update()
         self.adjust_sprite_positions()
 
 
     def adjust_sprite_positions(self):
         self.adjust_characters_position()
         self.adjust_bullets_position()
+        self.adjust_props_position()
         self.check_swords_collisions()
 
 
@@ -158,7 +161,7 @@ class Gaming(tools._State):
 
             character.rect.y += round(character.y_vel)
             self.check_character_y_collisions(character)
-            self.check_character_under_bottom(character)
+            self.check_collider_under_bottom(character)
 
 
     def check_character_x_edge(self, character):
@@ -200,7 +203,7 @@ class Gaming(tools._State):
             prop.ActOnCharacters(character)
             prop.kill()
 
-        self.check_if_character_is_falling(character)
+        self.check_if_collider_is_falling(character)
 
 
     def adjust_character_for_y_collisions(self, character, collider):
@@ -213,20 +216,20 @@ class Gaming(tools._State):
         character.y_vel = 0
 
 
-    def check_character_under_bottom(self, character):
-        if character.rect.top >= c.SCREEN_HEIGHT:
-            character.HP = 0
-            self.set_result()
+    def check_collider_under_bottom(self, collider):
+        if collider.rect.top >= c.SCREEN_HEIGHT:
+            collider.kill()
 
 
-    def check_if_character_is_falling(self, character):
-        character.rect.y += 1
+    def check_if_collider_is_falling(self, collider):
+        collider.rect.y += 1
         test_collide_group = pg.sprite.Group(self.bricks_group)
 
-        if pg.sprite.spritecollideany(character, test_collide_group) is None:
-                if character.state != c.JUMPING and character.state != c.SKILLING:        #飞起来
-                    character.state = c.FALLING
-        character.rect.y -= 1
+        if pg.sprite.spritecollideany(collider, test_collide_group) is None:
+            if collider.state != c.JUMPING and collider.state != c.SKILLING:        #飞起来
+                collider.state = c.FALLING
+
+        collider.rect.y -= 1
 
 
     def adjust_bullets_position(self):
@@ -248,8 +251,7 @@ class Gaming(tools._State):
             if bullet.owner != character.player_num:
                 character.HP -= bullet.damage
                 if character.HP <= 0:
-                    character.HP = 0
-                    self.set_result()
+                    character.kill()
                 bullet.kill()
 
         if brick:
@@ -257,6 +259,20 @@ class Gaming(tools._State):
             if brick.HP <= 0:
                 brick.kill()
             bullet.kill()
+
+
+    def adjust_props_position(self):
+        for prop in self.props_group:
+            self.check_and_adjust_prop_for_y_collisions(prop)
+            self.check_collider_under_bottom(prop)
+            self.check_if_collider_is_falling(prop)
+
+
+    def check_and_adjust_prop_for_y_collisions(self, prop):
+        brick = pg.sprite.spritecollideany(prop, self.bricks_group)
+        if brick:
+            prop.state = c.STANDING
+            prop.rect.bottom = brick.rect.top
 
 
     def check_swords_collisions(self):
@@ -281,8 +297,7 @@ class Gaming(tools._State):
             for collider in coll_dict[sword][:]:
                 collider.HP -= sword.damage
                 if collider.HP <= 0:
-                    collider.HP = 0
-                    self.set_result()
+                    collider.kill()
 
 
     def blit_everything(self, surface):
@@ -300,10 +315,11 @@ class Gaming(tools._State):
         #    pg.draw.rect(surface, sw.color, sw.rect)
 
 
-    def set_result(self):
-        for character in self.characters_group.sprites():
-            if character.player_num == 0:
-                self.game_info[c.P1_HP] = character.HP
-            else:
-                self.game_info[c.P2_HP] = character.HP
-        self.done = True
+    def check_if_finish(self):
+        if len(self.characters_group) < 2:
+            for character in self.characters_group.sprites():
+                if character.player_num == 0:
+                    self.game_info[c.P1_HP] = character.HP
+                else:
+                    self.game_info[c.P2_HP] = character.HP
+            self.done = True

@@ -14,9 +14,20 @@ class Prop(Sprite):
         self.rect.left = x
         self.rect.top = y
 
+        self.y_vel = 0
+        self.state = c.FALLING
+
 
     def ActOnCharacters(self, character):
         if self.kind == 'red_prop':
             character.HP = character.HP+1
         elif self.kind == 'blue_prop':
             character.MP = character.MP+1
+
+
+    def update(self):
+        if self.state == c.FALLING:
+            if self.y_vel < c.PROP_MAX_Y_VEL:
+                self.y_vel += c.GRAVITY
+
+            self.rect.y += round(self.y_vel)
