@@ -12,7 +12,7 @@ class Character(Sprite):
         self.MP = 3
 
         #默认贴图为Darling
-        self.setup_character_image_initial(c.DARING)
+        self.setup_character_image_initial(c.DARLING,'png')
         self.player_num = 0
 
         self.state = c.STANDING
@@ -31,27 +31,32 @@ class Character(Sprite):
 
         self.HP = 0
 
+        self.stand_counter=0
         self.walk_counter=0
         self.skill_counter=0
 
 
-    def setup_character_image_initial(self,character_name):
-        self.image = pg.transform.scale(pg.image.load('images/'+character_name+'/stand/0.png'), c.CHARACTER_SIZE)
+    def setup_character_image_initial(self,character_name='Darling',postfix='png'):
+        #print('images/%s/stand/0.%s'%(character_name,postfix))
+        self.image = pg.transform.scale(pg.image.load('images/%s/stand/0.%s'%(character_name,postfix)), c.CHARACTER_SIZE[character_name])
         self.image_right = self.image
         self.image_left = pg.transform.flip(self.image_right, True, False)
         self.rect = self.image.get_rect()
 
 
-    def setup_character_image_stand(self, character_name):
-        self.image_right = pg.transform.scale(pg.image.load('images/'+character_name+'/stand/0.png'), c.CHARACTER_SIZE)
-        self.image_left = pg.transform.flip(self.image_right, True, False)
+    def setup_character_image_stand(self, character_name='Darling',max_frame_number='2',postfix='png'):
+        image_address = 'images/' + character_name + '/stand/%d.%s' % (self.stand_counter // c.STAND_ANIMATION_SPEED[character_name],postfix)
+        self.stand_counter += 1
+        self.stand_counter %= max_frame_number * c.STAND_ANIMATION_SPEED[character_name]
+        self.image_right = pg.transform.scale(pg.image.load(image_address), c.CHARACTER_SIZE[character_name])
+        self.image_left = pg.transform.flip(self.image_right, True,  False)
 
 
-    def setup_character_image_walk(self, character_name,max_frame_number):
-        image_address = 'images/'+character_name+'/walk/%d.png' % (self.walk_counter // c.CHARACTER_MOVING_SPEED)
+    def setup_character_image_walk(self, character_name='Darling',max_frame_number='4',postfix='png'):
+        image_address = 'images/'+character_name+'/walk/%d.%s' % ((self.walk_counter // c.CHARACTER_MOVING_SPEED), postfix)
         self.walk_counter += 1
         self.walk_counter %= max_frame_number * c.CHARACTER_MOVING_SPEED
-        self.image_right = pg.transform.scale(pg.image.load(image_address), c.CHARACTER_SIZE)
+        self.image_right = pg.transform.scale(pg.image.load(image_address), c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
 
 
@@ -112,7 +117,7 @@ class Character(Sprite):
         self.check_to_allow_action()
         self.check_to_allow_skill()
 
-        self.setup_character_image_stand(c.DARING)
+        self.setup_character_image_stand(c.DARLING,2,'png')
 
         self.x_vel = 0
         self.y_vel = 0
@@ -148,7 +153,7 @@ class Character(Sprite):
         self.check_to_allow_skill()
 
         #加载贴图
-        self.setup_character_image_walk(c.DARING,4)
+        self.setup_character_image_walk(c.DARLING,2,'png')
 
         if self.commands[c.ACTION]:
             if self.allow_action:
@@ -263,6 +268,20 @@ class Character(Sprite):
         if (not self.commands[c.SKILL]) and (self.MP>0):
             self.allow_skill = True
 
+    def skill_basic_operation_front(self,character_name,max_frame_number,postfix):
+        self.allow_skill = False
+
+        action_image_address = 'images/%s/skill/%d.%s' % (character_name,self.skill_counter // c.SKILL_SPEED[character_name],postfix)
+
+        self.skill_counter += 1
+        self.skill_counter %= max_frame_number * c.SKILL_SPEED[character_name]
+        self.image_right = pg.transform.scale(pg.image.load(action_image_address), c.CHARACTER_SIZE[character_name])
+        self.image_left = pg.transform.flip(self.image_right, True, False)
+
+    def skill_basic_operation_back(self, character_name, max_frame_number, postfix):
+        if self.skill_counter == max_frame_number * c.SKILL_SPEED[character_name]-1:
+            self.state = c.FALLING
+            self.MP -= 1
 
     #def blitme(self):
     #    self.screen.blit( self.image, self.rect )

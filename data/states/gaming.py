@@ -1,12 +1,15 @@
 import pygame as pg
 from pygame.sprite import Group
 
+import copy
+
 from .. import tools, setup
 from .. import constants as c
 from .. components import brick
 from .. components import props
 from .. components import Darling
-from .. components import sword_guy
+from .. components import guan_gong
+from .. components import k
 
 
 class Gaming(tools._State):
@@ -71,18 +74,26 @@ class Gaming(tools._State):
 
 
     def setup_characters(self):
-        characters = {
-            c.DARING: Darling.Darling(),
-            c.GUAN: sword_guy.SwordGuy()
-        }
+        characters = [
+            {
+                c.DARLING: Darling.Darling(),
+                c.GUAN_GONG: guan_gong.Guan_gong(),
+                c.K: k.K(),
+            },
+            {
+                c.DARLING: Darling.Darling(),
+                c.GUAN_GONG: guan_gong.Guan_gong(),
+                c.K: k.K(),
+            },
+        ]
 
-        player_1 = characters[self.game_info[c.P1_CHARACTER]]
+        player_1 = characters[0][self.game_info[c.P1_CHARACTER]]
         player_1.player_num = 0
         player_1.rect.x = 0
         player_1.rect.y = 0
         player_1.state = c.FALLING
 
-        player_2 = characters[self.game_info[c.P2_CHARACTER]]
+        player_2 = characters[1][self.game_info[c.P2_CHARACTER]]
         player_2.player_num = 1
         player_2.rect.right = c.SCREEN_WIDTH
         player_2.rect.y = 0
@@ -96,12 +107,15 @@ class Gaming(tools._State):
         self.setup_swords()
 
         action_group = {
-            c.DARING: self.bullets_group,
-            c.GUAN: self.swords_group
+            c.DARLING: self.bullets_group,
+            c.GUAN_GONG: self.swords_group,
+            c.K: self.swords_group
         }
 
-        self.killing_items = [action_group[self.game_info[c.P1_CHARACTER]],
-                              action_group[self.game_info[c.P2_CHARACTER]]]
+        self.killing_items = [
+            action_group[self.game_info[c.P1_CHARACTER]],
+            action_group[self.game_info[c.P2_CHARACTER]],
+        ]
 
 
     def setup_bullets(self):
@@ -267,11 +281,11 @@ class Gaming(tools._State):
             for collider in coll_dict[sword][:]:
                 collider.HP -= sword.damage
                 if collider.HP <= 0:
-                    collider.kill()
+                    collider.HP = 0
+                    self.set_result()
 
 
     def blit_everything(self, surface):
-        # For test
         surface.fill(c.BG_COLOR)
         for character in self.characters_group.sprites():
             surface.blit(character.image, character.rect)
@@ -281,6 +295,9 @@ class Gaming(tools._State):
             surface.blit(bullet.image, bullet.rect)
         for prop_item in self.props_group.sprites():
             surface.blit(prop_item.image, prop_item.rect)
+        # For test
+        #for sw in self.swords_group.sprites():
+        #    pg.draw.rect(surface, sw.color, sw.rect)
 
 
     def set_result(self):

@@ -17,10 +17,10 @@ class SwordGuy(character.Character):
         self.allow_action = False
         cutting_sword = sword.Sword(self.player_num, self.sword_damage)
         if self.facing_right:
-            cutting_sword.rect.left = self.rect.right
+            cutting_sword.rect.left = self.rect.right + c.MAX_X_VEL
         else:
-            cutting_sword.rect.right = self.rect.left
+            cutting_sword.rect.right = self.rect.left - c.MAX_X_VEL
 
-        cutting_sword.rect.centery = self.rect.centery-23
+        cutting_sword.rect.centery = self.rect.centery
 
         action_group.add(cutting_sword)
