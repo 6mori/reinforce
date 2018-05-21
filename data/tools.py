@@ -42,8 +42,10 @@ kindOfGround={
 
 #道具种类
 kindOfProps={
-    'red_prop':{'name':'images/prop_red.png', 'dur': 25},
-    'blue_prop':{'name':'images/prop_blue.png', 'dur': 25}
+    'Prop_HP_potion':{'name':'images/Prop_HP_potion.png', 'dur': 25},
+    'Prop_MP_potion':{'name':'images/Prop_MP_potion.png', 'dur': 25},
+    'Prop_HP_Apple':{'name':'images/Prop_HP_Apple.png', 'dur': 25},
+    'Prop_HP_Ginseng':{'name':'images/Prop_HP_Ginseng.png', 'dur': 25},
 }
 
 class Control(object):

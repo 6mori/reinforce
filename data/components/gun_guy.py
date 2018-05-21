@@ -47,5 +47,3 @@ class GunGuy(character.Character):
         else:
             Mybullet.x_vel = -c.BULLET_VEL
             Mybullet.rect.right = self.rect.left
-
-

@@ -14,7 +14,11 @@ class Prop(Sprite):
         self.rect.top = y
         self.dur = c.BRICK_DUR
     def ActOnCharacters(self, character):
-        if self.kind == 'red_prop':
+        if self.kind == 'Prop_HP_potion':
             character.HP = character.HP+1
-        elif self.kind == 'blue_prop':
+        elif self.kind == 'Prop_HP_Apple.png':
+            character.HP = character.HP + 1
+        elif self.kind == 'Prop_HP_Ginseng.png':
+            character.HP = character.HP + 2
+        elif self.kind == 'Prop_MP_potion':
             character.MP = character.MP+1
