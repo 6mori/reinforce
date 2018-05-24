@@ -102,7 +102,8 @@ CHARACTER_MOVING_SPEED = 25
 CHARACTER_SIZE = {
     'Guan_gong' : (103 // 3, 250 // 3),
     'Darling' : (103 // 3, 131 // 3),
-    'k' : (75 // 3, 119 // 3)
+    'k' : (75 // 3, 119 // 3),
+    'Archer' : (103 // 3, 131 // 3)
 }
 
 
@@ -110,7 +111,8 @@ CHARACTER_SIZE = {
 SKILL_SPEED = {
     'Darling' : 10,
     'Guan_gong' : 20,
-    'k' : 20
+    'k' : 20,
+    'Archer': 20
 }
 
 
@@ -118,7 +120,8 @@ SKILL_SPEED = {
 STAND_ANIMATION_SPEED = {
     'Darling' : 100,
     'Guan_gong' : 30,
-    'k' : 50
+    'k' : 50,
+    'Archer': 100
 }
 
 # Sword property
@@ -131,6 +134,7 @@ SWORD_HEIGHT = 20
 DARLING = 'Darling'
 GUAN_GONG   = 'Guan_gong'
 K   = 'k'
+Archer =  'Archer'
 
 # Direction
 
@@ -158,9 +162,11 @@ QUIT = 'quit'
 P1_DARLING = (DARLING, (100, 100))
 P1_GUAN_GONG = (GUAN_GONG, (100, 150))
 P1_K = (K, (150, 100))
+P1_Archer = (Archer, (100, 100))
 P2_DARLING = (DARLING, (600, 100))
 P2_GUAN_GONG = (GUAN_GONG, (600, 150))
 P2_K = (K, (650, 100))
+P2_Archer = (Archer, (600, 100))
 
 # Choosing relative position
 
@@ -171,9 +177,15 @@ CHOOSING_POSITION = {
     },
     P1_GUAN_GONG: {
         UP: P1_DARLING,
+        RIGHT: P1_Archer
     },
     P1_K: {
         LEFT: P1_DARLING,
+        DOWN: P1_Archer
+    },
+    P1_Archer: {
+        LEFT: P1_GUAN_GONG,
+        UP: P1_Archer
     },
 
     P2_DARLING : {

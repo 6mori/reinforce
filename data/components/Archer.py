@@ -9,56 +9,61 @@ class Archer(gun_guy.GunGuy):
         self.HP = 25
         self.MP = 3
 
+    # 大招
     def skill(self, action_group):
-        self.skill_basic_operation_front('Darling',16,'png')
-        #发射子弹
+        self.skill_basic_operation_front('Archer', 1, 'png')
         self.wild_shot_bullets(action_group)
-        self.skill_basic_operation_back('Darling',16,'png')
+        self.skill_basic_operation_back('Archer', 1, 'png')
 
+    # 发射弓箭
     def action(self, action_group):
         self.allow_action = False
-        #子弹类型
+        #弓箭方向
         if self.facing_right:
-            firing_bullet = self.get_bullet_type(c.DARLING, c.RIGHT)
+            firing_arrow = self.get_bullet_type(c.Archer, c.RIGHT)
         else:
-            firing_bullet = self.get_bullet_type(c.DARLING, c.LEFT)
-        #子弹方向
-        self.handle_bullet_direction(firing_bullet)
-        #子弹发射位置
-        #firing_bullet.rect.centery = self.rect.centery-23
-        firing_bullet.rect.top = self.rect.top
-        #子弹组
-        action_group.add(firing_bullet)
+            firing_arrow = self.get_bullet_type(c.Archer, c.LEFT)
+        #弓箭方向
+        self.handle_bullet_direction(firing_arrow)
+        #弓箭发射位置
+        firing_arrow.rect.top = self.rect.top
+        #弓箭组
+        action_group.add(firing_arrow)
 
     def setup_character_image_initial(self, character_name, postfix):
-        super().setup_character_image_initial(c.DARLING,'png')
+        super().setup_character_image_initial(c.Archer, 'png')
 
     def setup_character_image_stand(self, character_name,max_frame_number,postfix):
-        super().setup_character_image_stand(c.DARLING,2,'png')
+        super().setup_character_image_stand(c.Archer, 1, 'png')
 
     def setup_character_image_walk(self, character_name,max_frame_number,postfix):
-        super().setup_character_image_walk(c.DARLING,4,'png')
+        super().setup_character_image_walk(c.Archer, 2, 'png')
 
-    def wild_shot_bullets(self,action_group):
-        if not self.skill_counter%(c.SKILL_SPEED['Darling']*2):
-            bullets = [self.get_bullet_type(c.DARLING, c.LEFT), self.get_bullet_type(c.DARLING, c.RIGHT),
-                       self.get_bullet_type(c.DARLING, c.UP), self.get_bullet_type(c.DARLING, c.RIGHT_UP),
-                       self.get_bullet_type(c.DARLING, c.LEFT_UP)]
-            bullets[0].x_vel = -c.BULLET_VEL
-            bullets[4].x_vel = -c.BULLET_VEL
-            bullets[1].x_vel = c.BULLET_VEL
-            bullets[3].x_vel = c.BULLET_VEL
-            bullets[2].y_vel = -c.BULLET_VEL
-            bullets[3].y_vel = -c.BULLET_VEL
-            bullets[4].y_vel = -c.BULLET_VEL
-
-            bullets[1].rect.left = self.rect.right
-            bullets[3].rect.left = self.rect.right
-            bullets[2].rect.centerx = self.rect.centerx
-            bullets[0].rect.right = self.rect.left
-            bullets[4].rect.right = self.rect.left
-            for i in range(len(bullets)):
-                bullets[i].rect.centery = self.rect.centery - 23
-                if i >= 2:
-                    bullets[i].rect.bottom = self.rect.top
-                action_group.add(bullets[i])
+    def wild_shot_bullets(self, action_group):
+        if not self.skill_counter % (c.SKILL_SPEED['Archer'] * 2):
+            if self.facing_right:
+                arrows = [self.get_bullet_type(c.Archer, c.RIGHT),
+                          self.get_bullet_type(c.Archer, c.RIGHT),
+                          self.get_bullet_type(c.Archer, c.RIGHT)]
+            else:
+                arrows = [self.get_bullet_type(c.Archer, c.LEFT),
+                          self.get_bullet_type(c.Archer, c.LEFT),
+                          self.get_bullet_type(c.Archer, c.LEFT)]
+            if self.facing_right:
+                arrows[0].rect.y = self.rect.y
+                arrows[1].rect.y = self.rect.y - 15
+                arrows[2].rect.y = self.rect.y + 15
+                for i in range(0, 3):
+                    arrows[i].rect.right = self.rect.right
+                    arrows[i].rect.x = self.rect.x
+                    arrows[i].x_vel = c.BULLET_VEL * 2
+            else:
+                arrows[0].rect.y = self.rect.y
+                arrows[1].rect.y = self.rect.y - 15
+                arrows[2].rect.y = self.rect.y + 15
+                for i in range(0, 3):
+                    arrows[i].rect.left = self.rect.left
+                    arrows[i].rect.x = self.rect.x
+                    arrows[i].x_vel = -c.BULLET_VEL * 2
+            for i in range(0, 3):
+                action_group.add(arrows[i])

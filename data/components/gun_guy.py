@@ -2,6 +2,7 @@
 from .. import constants as c
 from . import character
 from . import bullet
+from . import arrow
 import pygame as pg
 
 class GunGuy(character.Character):
@@ -38,6 +39,8 @@ class GunGuy(character.Character):
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'flamebow')
             else:
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'freezebow')
+        elif character_name == c.Archer:
+            return arrow.Arrow(self.player_num, self.bullet_damage, direction)
 
 
     def handle_bullet_direction(self,Mybullet):

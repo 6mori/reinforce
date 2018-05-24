@@ -10,6 +10,7 @@ from .. components import props
 from .. components import Darling
 from .. components import guan_gong
 from .. components import k
+from .. components import Archer
 
 
 class Gaming(tools._State):
@@ -81,11 +82,13 @@ class Gaming(tools._State):
                 c.DARLING: Darling.Darling(),
                 c.GUAN_GONG: guan_gong.Guan_gong(),
                 c.K: k.K(),
+                c.Archer: Archer.Archer()
             },
             {
                 c.DARLING: Darling.Darling(),
                 c.GUAN_GONG: guan_gong.Guan_gong(),
                 c.K: k.K(),
+                c.Archer: Archer.Archer()
             },
         ]
 
@@ -107,11 +110,13 @@ class Gaming(tools._State):
     def setup_killing_items(self):
         self.setup_bullets()
         self.setup_swords()
+        self.setup_arrows()
 
         action_group = {
             c.DARLING: self.bullets_group,
             c.GUAN_GONG: self.swords_group,
-            c.K: self.swords_group
+            c.K: self.swords_group,
+            c.Archer: self.arrows_group,
         }
 
         self.killing_items = [
@@ -123,10 +128,11 @@ class Gaming(tools._State):
     def setup_bullets(self):
         self.bullets_group = Group()
 
-
     def setup_swords(self):
         self.swords_group = Group()
 
+    def setup_arrows(self):
+        self.arrows_group = Group()
 
     def update(self, surface, keys, current_time):
         self.game_info[c.CURRENT_TIME] = self.current_time = current_time
@@ -134,26 +140,23 @@ class Gaming(tools._State):
         self.blit_everything(surface)
         self.check_if_finish()
 
-
     def handle_state(self, keys):
         self.update_all_sprites(keys)
-
 
     def update_all_sprites(self, keys):
         for character in self.characters_group.sprites():
             character.update(keys, tools.keybinding[character.player_num],
                              self.game_info, self.killing_items[character.player_num])
         self.bullets_group.update()
+        self.arrows_group.update()
         self.props_group.update()
         self.adjust_sprite_positions()
-
 
     def adjust_sprite_positions(self):
         self.adjust_characters_position()
         self.adjust_bullets_position()
         self.adjust_props_position()
         self.check_swords_collisions()
-
 
     def adjust_characters_position(self):
         for character in self.characters_group.sprites():
@@ -165,13 +168,11 @@ class Gaming(tools._State):
             self.check_character_y_collisions(character)
             self.check_collider_under_bottom(character)
 
-
     def check_character_x_edge(self, character):
         if character.rect.left < 0:
             character.rect.left = 0
         if character.rect.right > c.SCREEN_WIDTH:
             character.rect.right = c.SCREEN_WIDTH
-
 
     def check_character_x_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
@@ -184,7 +185,6 @@ class Gaming(tools._State):
             prop.ActOnCharacters(character)
             prop.kill()
 
-
     def adjust_character_for_x_collisions(self, character, collider):
         if character.rect.x < collider.rect.x:
             character.rect.right = collider.rect.left
@@ -192,7 +192,6 @@ class Gaming(tools._State):
             character.rect.left = collider.rect.right
 
         character.x_vel = 0
-
 
     def check_character_y_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
@@ -207,7 +206,6 @@ class Gaming(tools._State):
 
         self.check_if_collider_is_falling(character)
 
-
     def adjust_character_for_y_collisions(self, character, collider):
         if character.rect.y < collider.rect.y:
             character.rect.bottom = collider.rect.top
@@ -217,11 +215,9 @@ class Gaming(tools._State):
 
         character.y_vel = 0
 
-
     def check_collider_under_bottom(self, collider):
         if collider.rect.top >= c.SCREEN_HEIGHT:
             collider.kill()
-
 
     def check_if_collider_is_falling(self, collider):
         collider.rect.y += 1
@@ -233,7 +229,6 @@ class Gaming(tools._State):
 
         collider.rect.y -= 1
 
-
     def adjust_bullets_position(self):
         for bullet in self.bullets_group:
             if bullet.rect.right < 0:
@@ -244,6 +239,15 @@ class Gaming(tools._State):
                 bullet.kill()
             self.check_bullet_x_collisions(bullet)
 
+    def adjust_arrows_position(self):
+        for arrow in self.arrows_group:
+            if arrow.rect.right < 0:
+                arrow.kill()
+            if arrow.rect.left > c.SCREEN_WIDTH:
+                arrow.kill()
+            if arrow.rect.bottom < 0:
+                arrow.kill()
+            self.check_bullet_x_collisions(arrow)
 
     def check_bullet_x_collisions(self, bullet):
         character = pg.sprite.spritecollideany(bullet, self.characters_group)
@@ -262,20 +266,17 @@ class Gaming(tools._State):
                 brick.kill()
             bullet.kill()
 
-
     def adjust_props_position(self):
         for prop in self.props_group:
             self.check_and_adjust_prop_for_y_collisions(prop)
             self.check_collider_under_bottom(prop)
             self.check_if_collider_is_falling(prop)
 
-
     def check_and_adjust_prop_for_y_collisions(self, prop):
         brick = pg.sprite.spritecollideany(prop, self.bricks_group)
         if brick:
             prop.state = c.STANDING
             prop.rect.bottom = brick.rect.top
-
 
     def check_swords_collisions(self):
         bricks = pg.sprite.groupcollide(self.swords_group, self.bricks_group, False, False)
@@ -293,14 +294,12 @@ class Gaming(tools._State):
 
         self.swords_group.empty()
 
-
     def apply_swords_damage(self, coll_dict):
         for sword in coll_dict.keys():
             for collider in coll_dict[sword][:]:
                 collider.HP -= sword.damage
                 if collider.HP <= 0:
                     collider.kill()
-
 
     def blit_everything(self, surface):
         surface.fill(c.BG_COLOR)
@@ -310,12 +309,13 @@ class Gaming(tools._State):
             surface.blit(brick.image, brick.rect)
         for bullet in self.bullets_group.sprites():
             surface.blit(bullet.image, bullet.rect)
+        for arrow in self.arrows_group.sprites():
+            surface.blit(arrow.image, arrow.rect)
         for prop_item in self.props_group.sprites():
             surface.blit(prop_item.image, prop_item.rect)
         # For test
         #for sw in self.swords_group.sprites():
         #    pg.draw.rect(surface, sw.color, sw.rect)
-
 
     def check_if_finish(self):
         if len(self.characters_group) < 2:
