@@ -134,7 +134,7 @@ SWORD_HEIGHT = 20
 DARLING = 'Darling'
 GUAN_GONG   = 'Guan_gong'
 K   = 'k'
-Archer =  'Archer'
+ARCHER =  'Archer'
 
 # Direction
 
@@ -162,11 +162,11 @@ QUIT = 'quit'
 P1_DARLING = (DARLING, (100, 100))
 P1_GUAN_GONG = (GUAN_GONG, (100, 150))
 P1_K = (K, (150, 100))
-P1_Archer = (Archer, (100, 100))
+P1_ARCHER = (ARCHER, (150, 150))
 P2_DARLING = (DARLING, (600, 100))
 P2_GUAN_GONG = (GUAN_GONG, (600, 150))
 P2_K = (K, (650, 100))
-P2_Archer = (Archer, (600, 100))
+P2_ARCHER = (ARCHER, (650, 150))
 
 # Choosing relative position
 
@@ -177,15 +177,15 @@ CHOOSING_POSITION = {
     },
     P1_GUAN_GONG: {
         UP: P1_DARLING,
-        RIGHT: P1_Archer
+        RIGHT: P1_ARCHER,
     },
     P1_K: {
         LEFT: P1_DARLING,
-        DOWN: P1_Archer
+        DOWN: P1_ARCHER
     },
-    P1_Archer: {
+    P1_ARCHER: {
         LEFT: P1_GUAN_GONG,
-        UP: P1_Archer
+        UP: P1_K
     },
 
     P2_DARLING : {
@@ -194,10 +194,16 @@ CHOOSING_POSITION = {
     },
     P2_GUAN_GONG : {
         UP: P2_DARLING,
+        RIGHT: P2_ARCHER
     },
     P2_K : {
         LEFT: P2_DARLING,
-    }
+        DOWN: P2_ARCHER,
+    },
+    P2_ARCHER: {
+        LEFT: P2_GUAN_GONG,
+        UP: P2_K
+    },
 }
 
 TITLE_CURSOR_WIDTH = 100

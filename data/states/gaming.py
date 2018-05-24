@@ -82,13 +82,13 @@ class Gaming(tools._State):
                 c.DARLING: Darling.Darling(),
                 c.GUAN_GONG: guan_gong.Guan_gong(),
                 c.K: k.K(),
-                c.Archer: Archer.Archer()
+                c.ARCHER: Archer.Archer()
             },
             {
                 c.DARLING: Darling.Darling(),
                 c.GUAN_GONG: guan_gong.Guan_gong(),
                 c.K: k.K(),
-                c.Archer: Archer.Archer()
+                c.ARCHER: Archer.Archer()
             },
         ]
 
@@ -110,13 +110,13 @@ class Gaming(tools._State):
     def setup_killing_items(self):
         self.setup_bullets()
         self.setup_swords()
-        self.setup_arrows()
+        #self.setup_arrows()
 
         action_group = {
             c.DARLING: self.bullets_group,
             c.GUAN_GONG: self.swords_group,
             c.K: self.swords_group,
-            c.Archer: self.arrows_group,
+            c.ARCHER: self.bullets_group,
         }
 
         self.killing_items = [
@@ -131,8 +131,8 @@ class Gaming(tools._State):
     def setup_swords(self):
         self.swords_group = Group()
 
-    def setup_arrows(self):
-        self.arrows_group = Group()
+    #def setup_arrows(self):
+    #    self.arrows_group = Group()
 
     def update(self, surface, keys, current_time):
         self.game_info[c.CURRENT_TIME] = self.current_time = current_time
@@ -148,7 +148,6 @@ class Gaming(tools._State):
             character.update(keys, tools.keybinding[character.player_num],
                              self.game_info, self.killing_items[character.player_num])
         self.bullets_group.update()
-        self.arrows_group.update()
         self.props_group.update()
         self.adjust_sprite_positions()
 
@@ -309,8 +308,8 @@ class Gaming(tools._State):
             surface.blit(brick.image, brick.rect)
         for bullet in self.bullets_group.sprites():
             surface.blit(bullet.image, bullet.rect)
-        for arrow in self.arrows_group.sprites():
-            surface.blit(arrow.image, arrow.rect)
+        #for arrow in self.arrows_group.sprites():
+        #    surface.blit(arrow.image, arrow.rect)
         for prop_item in self.props_group.sprites():
             surface.blit(prop_item.image, prop_item.rect)
         # For test

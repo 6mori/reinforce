@@ -39,7 +39,7 @@ class GunGuy(character.Character):
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'flamebow')
             else:
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'freezebow')
-        elif character_name == c.Archer:
+        elif character_name == c.ARCHER:
             return arrow.Arrow(self.player_num, self.bullet_damage, direction)
 
 

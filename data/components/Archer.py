@@ -20,9 +20,9 @@ class Archer(gun_guy.GunGuy):
         self.allow_action = False
         #弓箭方向
         if self.facing_right:
-            firing_arrow = self.get_bullet_type(c.Archer, c.RIGHT)
+            firing_arrow = self.get_bullet_type(c.ARCHER, c.RIGHT)
         else:
-            firing_arrow = self.get_bullet_type(c.Archer, c.LEFT)
+            firing_arrow = self.get_bullet_type(c.ARCHER, c.LEFT)
         #弓箭方向
         self.handle_bullet_direction(firing_arrow)
         #弓箭发射位置
@@ -31,24 +31,24 @@ class Archer(gun_guy.GunGuy):
         action_group.add(firing_arrow)
 
     def setup_character_image_initial(self, character_name, postfix):
-        super().setup_character_image_initial(c.Archer, 'png')
+        super().setup_character_image_initial(c.ARCHER, 'png')
 
     def setup_character_image_stand(self, character_name,max_frame_number,postfix):
-        super().setup_character_image_stand(c.Archer, 1, 'png')
+        super().setup_character_image_stand(c.ARCHER, 1, 'png')
 
     def setup_character_image_walk(self, character_name,max_frame_number,postfix):
-        super().setup_character_image_walk(c.Archer, 2, 'png')
+        super().setup_character_image_walk(c.ARCHER, 2, 'png')
 
     def wild_shot_bullets(self, action_group):
         if not self.skill_counter % (c.SKILL_SPEED['Archer'] * 2):
             if self.facing_right:
-                arrows = [self.get_bullet_type(c.Archer, c.RIGHT),
-                          self.get_bullet_type(c.Archer, c.RIGHT),
-                          self.get_bullet_type(c.Archer, c.RIGHT)]
+                arrows = [self.get_bullet_type(c.ARCHER, c.RIGHT),
+                          self.get_bullet_type(c.ARCHER, c.RIGHT),
+                          self.get_bullet_type(c.ARCHER, c.RIGHT)]
             else:
-                arrows = [self.get_bullet_type(c.Archer, c.LEFT),
-                          self.get_bullet_type(c.Archer, c.LEFT),
-                          self.get_bullet_type(c.Archer, c.LEFT)]
+                arrows = [self.get_bullet_type(c.ARCHER, c.LEFT),
+                          self.get_bullet_type(c.ARCHER, c.LEFT),
+                          self.get_bullet_type(c.ARCHER, c.LEFT)]
             if self.facing_right:
                 arrows[0].rect.y = self.rect.y
                 arrows[1].rect.y = self.rect.y - 15
