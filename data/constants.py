@@ -157,55 +157,6 @@ CHOOSING_SCREEN = 'choosing_screen'
 PLAY = 'play'
 QUIT = 'quit'
 
-# Choosing absolute position
-
-P1_DARLING = (DARLING, (100, 100))
-P1_GUAN_GONG = (GUAN_GONG, (100, 150))
-P1_K = (K, (150, 100))
-P1_ARCHER = (ARCHER, (150, 150))
-P2_DARLING = (DARLING, (600, 100))
-P2_GUAN_GONG = (GUAN_GONG, (600, 150))
-P2_K = (K, (650, 100))
-P2_ARCHER = (ARCHER, (650, 150))
-
-# Choosing relative position
-
-CHOOSING_POSITION = {
-    P1_DARLING: {
-        DOWN: P1_GUAN_GONG,
-        RIGHT: P1_K,
-    },
-    P1_GUAN_GONG: {
-        UP: P1_DARLING,
-        RIGHT: P1_ARCHER,
-    },
-    P1_K: {
-        LEFT: P1_DARLING,
-        DOWN: P1_ARCHER
-    },
-    P1_ARCHER: {
-        LEFT: P1_GUAN_GONG,
-        UP: P1_K
-    },
-
-    P2_DARLING : {
-        DOWN: P2_GUAN_GONG,
-        RIGHT: P2_K,
-    },
-    P2_GUAN_GONG : {
-        UP: P2_DARLING,
-        RIGHT: P2_ARCHER
-    },
-    P2_K : {
-        LEFT: P2_DARLING,
-        DOWN: P2_ARCHER,
-    },
-    P2_ARCHER: {
-        LEFT: P2_GUAN_GONG,
-        UP: P2_K
-    },
-}
-
 TITLE_CURSOR_WIDTH = 100
 TITLE_CURSOR_HEIGHT = 50
 CHOOSING_CURSOR_WIDTH = 50
@@ -216,3 +167,7 @@ CONFIRM = 'confirm'
 # Item property
 
 PROP_MAX_Y_VEL = 10
+
+P1_CHOOSE_BASE = (100, 100)
+P2_CHOOSE_BASE = (600, 100)
+
