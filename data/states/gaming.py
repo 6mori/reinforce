@@ -11,6 +11,7 @@ from .. components import Darling
 from .. components import guan_gong
 from .. components import k
 from .. components import Archer
+from .. components import spider_prince
 
 
 class Gaming(tools._State):
@@ -82,13 +83,15 @@ class Gaming(tools._State):
                 c.DARLING: Darling.Darling(),
                 c.GUAN_GONG: guan_gong.Guan_gong(),
                 c.K: k.K(),
-                c.ARCHER: Archer.Archer()
+                c.ARCHER: Archer.Archer(),
+                c.SPIDER_PRINCE:spider_prince.Spider_prince()
             },
             {
                 c.DARLING: Darling.Darling(),
                 c.GUAN_GONG: guan_gong.Guan_gong(),
                 c.K: k.K(),
-                c.ARCHER: Archer.Archer()
+                c.ARCHER: Archer.Archer(),
+                c.SPIDER_PRINCE: spider_prince.Spider_prince()
             },
         ]
 
@@ -117,6 +120,7 @@ class Gaming(tools._State):
             c.GUAN_GONG: self.swords_group,
             c.K: self.swords_group,
             c.ARCHER: self.bullets_group,
+            c.SPIDER_PRINCE:self.bullets_group
         }
 
         self.killing_items = [
@@ -308,8 +312,6 @@ class Gaming(tools._State):
             surface.blit(brick.image, brick.rect)
         for bullet in self.bullets_group.sprites():
             surface.blit(bullet.image, bullet.rect)
-        #for arrow in self.arrows_group.sprites():
-        #    surface.blit(arrow.image, arrow.rect)
         for prop_item in self.props_group.sprites():
             surface.blit(prop_item.image, prop_item.rect)
         # For test

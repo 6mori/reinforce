@@ -103,7 +103,9 @@ CHARACTER_SIZE = {
     'Guan_gong' : (103 // 3, 250 // 3),
     'Darling' : (103 // 3, 131 // 3),
     'k' : (75 // 3, 119 // 3),
-    'Archer' : (103 // 3, 131 // 3)
+    'Archer' : (103 // 3, 131 // 3),
+    'Spider_prince' : (103 // 2, 131 // 2)
+
 }
 
 
@@ -112,7 +114,8 @@ SKILL_SPEED = {
     'Darling' : 10,
     'Guan_gong' : 20,
     'k' : 20,
-    'Archer': 20
+    'Archer': 20,
+    'Spider_prince':20
 }
 
 
@@ -121,7 +124,8 @@ STAND_ANIMATION_SPEED = {
     'Darling' : 100,
     'Guan_gong' : 30,
     'k' : 50,
-    'Archer': 100
+    'Archer': 100,
+    'Spider_prince':100
 }
 
 # Sword property
@@ -135,7 +139,7 @@ DARLING = 'Darling'
 GUAN_GONG   = 'Guan_gong'
 K   = 'k'
 ARCHER =  'Archer'
-
+SPIDER_PRINCE = 'Spider_prince'
 # Direction
 
 RIGHT      = 'right'

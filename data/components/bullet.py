@@ -25,11 +25,6 @@ class Bullet(Sprite):
         self.rect.x += round(self.x_vel)
         self.rect.y += round(self.y_vel)
 
-
-    def blitme(self,screen):
-        screen.blit(self.image, self.rect)
-
-
     def handle_bullet_direction(self):
         if self.direction == c.LEFT:
             self.image = pg.transform.rotate(self.image, 180)

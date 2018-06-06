@@ -7,14 +7,15 @@ pos2Chara = {
     (0, 0): c.DARLING,
     (50, 0): c.K,
     (0, 50): c.GUAN_GONG,
-    (50, 50): c.ARCHER
+    (50, 50): c.ARCHER,
+    (100, 0): c.SPIDER_PRINCE
 }
 
 direct2pos = {
     c.RIGHT: (50, 0),
     c.LEFT : (-50, 0),
-    c.UP   : (0, 50),
-    c.DOWN : (0, -50),
+    c.UP   : (0, -50),
+    c.DOWN : (0, 50),
 }
 
 keybinding = [
