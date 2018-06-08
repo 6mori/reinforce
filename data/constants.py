@@ -115,7 +115,7 @@ SKILL_SPEED = {
     'Guan_gong' : 20,
     'k' : 20,
     'Archer': 20,
-    'Spider_prince':20
+    'Spider_prince':5
 }
 
 
@@ -125,7 +125,7 @@ STAND_ANIMATION_SPEED = {
     'Guan_gong' : 30,
     'k' : 50,
     'Archer': 100,
-    'Spider_prince':100
+    'Spider_prince':35
 }
 
 # Sword property

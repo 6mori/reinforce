@@ -12,13 +12,19 @@ class Spider_prince(gun_guy.GunGuy):
 
     def skill(self, action_group):
         self.skill_basic_operation_front('Spider_prince',8,'gif')
-        #发射子弹
-        if self.skill_counter == 10:
-            attack = skill_attack.Skill_attack(self.player_num, self.bullet_damage, c.RIGHT,'skull',(30,100))
-            self.handle_bullet_direction(attack)
-            xxx=self.rect.bottom
-            attack.rect.bottom = self.rect.bottom-98
+        #发射地波
+        if self.skill_counter == 1  or self.skill_counter == 2 * c.SKILL_SPEED[c.SPIDER_PRINCE] or self.skill_counter == 4 * c.SKILL_SPEED[c.SPIDER_PRINCE] or self.skill_counter == 6 * c.SKILL_SPEED[c.SPIDER_PRINCE]:
+            attack = skill_attack.Skill_attack(self.player_num, self.bullet_damage * 2, c.RIGHT,'skull',c.SPIDER_PRINCE)
+            attack.x_vel = c.BULLET_VEL * 2
+            attack.rect.left = self.rect.right
+            attack.rect.bottom = self.rect.bottom
             action_group.add(attack)
+
+            attack2 = skill_attack.Skill_attack(self.player_num, self.bullet_damage * 2, c.LEFT, 'skull', c.SPIDER_PRINCE)
+            attack2.x_vel = -c.BULLET_VEL * 2
+            attack2.rect.right = self.rect.left
+            attack2.rect.bottom = self.rect.bottom
+            action_group.add(attack2)
 
         self.skill_basic_operation_back('Spider_prince',8,'gif')
 
@@ -32,8 +38,7 @@ class Spider_prince(gun_guy.GunGuy):
         #子弹方向
         self.handle_bullet_direction(firing_bullet)
         #子弹发射位置
-        #firing_bullet.rect.centery = self.rect.centery-23
-        firing_bullet.rect.top = self.rect.top
+        firing_bullet.rect.centery = self.rect.centery
         #子弹组
         action_group.add(firing_bullet)
 

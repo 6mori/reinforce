@@ -18,6 +18,9 @@ class Bullet(Sprite):
         self.y_vel = 0
 
         self.HP = 1
+        self.counter = 0
+
+        self.rect = self.image.get_rect()
 
 
 
