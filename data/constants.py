@@ -55,11 +55,11 @@ GO_DOWN  = 'go down'
 
 # Character property
 
-MAX_X_VEL    = 1
+MAX_X_VEL    = 6
 MAX_Y_VEL    = 11
-JUMP_VEL     = -2.51
-GRAVITY      = 0.05
-JUMP_GRAVITY = 0.02
+JUMP_VEL     = -10
+GRAVITY      = 1.01
+JUMP_GRAVITY = 0.2
 
 # Player1 property
 
@@ -83,7 +83,7 @@ BRICK_DUR    = 25
 
 # Bullet property
 
-BULLET_VEL    = 1
+BULLET_VEL    = 10
 BULLET_WIDTH  = 50
 BULLET_HEIGHT = 10
 BULLET_SIZE   = (50,10)
@@ -174,4 +174,6 @@ PROP_MAX_Y_VEL = 10
 
 P1_CHOOSE_BASE = (100, 100)
 P2_CHOOSE_BASE = (600, 100)
+
+FPS = 60
 
