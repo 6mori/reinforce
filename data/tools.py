@@ -75,7 +75,6 @@ class Control(object):
         self.state_dict = {}
         self.state_name = None
         self.state = None
-        self.fps_clock = pg.time.Clock()
 
     def setup_states(self, state_dict, start_state):
         self.state_dict = state_dict
@@ -116,7 +115,8 @@ class Control(object):
             self.event_loop()
             self.update()
             pg.display.update()
-            self.fps_clock.tick(c.FPS)
+            self.clock.tick(c.FPS)
+            print(self.clock.get_fps())
 
 
 class _State(object):
