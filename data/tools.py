@@ -115,6 +115,8 @@ class Control(object):
             self.event_loop()
             self.update()
             pg.display.update()
+            self.clock.tick(c.FPS)
+            print(self.clock.get_fps())
 
 
 class _State(object):

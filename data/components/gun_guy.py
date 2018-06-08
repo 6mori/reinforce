@@ -23,7 +23,7 @@ class GunGuy(character.Character):
         # 子弹方向
         self.handle_bullet_direction(firing_bullet)
         # 子弹发射位置
-        firing_bullet.rect.centery = self.rect.centery - 23
+        firing_bullet.rect.centery = self.rect.centery
         # 子弹组
         action_group.add(firing_bullet)
 
