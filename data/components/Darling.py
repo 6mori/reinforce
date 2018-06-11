@@ -14,7 +14,7 @@ class Darling(gun_guy.GunGuy):
         self.skill_basic_operation_front('Darling',16,'png')
         #发射子弹
         self.wild_shot_bullets(action_group)
-        self.skill_basic_operation_back('Darling',16,'png')
+        self.skill_basic_operation_back('Darling',16)
 
     def action(self, action_group):
         self.allow_action = False

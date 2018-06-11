@@ -11,10 +11,15 @@ class K(sword_guy.SwordGuy):
 
     def skill(self, action_group):
 
-        self.skill_basic_operation_front(c.K,21,'gif')
+        self.skill_basic_operation_front(c.K,21,'gif',(40, 65))
         #冲刺
+        if self.facing_right:
+            self.rect.x += 1
+        else:
+            self.rect.x -= 1
+        self.rect.y -= 1
 
-        self.skill_basic_operation_back(c.K,21,'gif')
+        self.skill_basic_operation_back(c.K,21)
 
 
     def setup_character_image_initial(self, character_name, postfix):

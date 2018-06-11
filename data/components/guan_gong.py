@@ -13,10 +13,10 @@ class Guan_gong(sword_guy.SwordGuy):
         self.skill_basic_operation_front(c.GUAN_GONG,10,'gif')
         #冲刺
         if self.facing_right:
-            self.rect.x+=2
+            self.rect.x += 6
         else:
-            self.rect.x-=2
-        self.skill_basic_operation_back(c.GUAN_GONG,10,'gif')
+            self.rect.x -= 6
+        self.skill_basic_operation_back(c.GUAN_GONG,10)
 
 
     def setup_character_image_initial(self, character_name, postfix):

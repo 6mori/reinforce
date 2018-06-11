@@ -26,7 +26,7 @@ class Spider_prince(gun_guy.GunGuy):
             attack2.rect.bottom = self.rect.bottom
             action_group.add(attack2)
 
-        self.skill_basic_operation_back('Spider_prince',8,'gif')
+        self.skill_basic_operation_back('Spider_prince',8)
 
     def action(self, action_group):
         self.allow_action = False

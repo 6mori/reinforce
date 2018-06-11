@@ -113,7 +113,7 @@ CHARACTER_SIZE = {
 SKILL_SPEED = {
     'Darling' : 10,
     'Guan_gong' : 20,
-    'k' : 20,
+    'k' : 5,
     'Archer': 20,
     'Spider_prince':5
 }

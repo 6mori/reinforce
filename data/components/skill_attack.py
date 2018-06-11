@@ -9,7 +9,7 @@ class Skill_attack(bullet.Bullet):
         if self.skill_style == 'skull' and self.owner_name == 'Spider_prince':
             self.passed_distance = 0
             self.animation_speed = 8
-            self.skill_size = (178//6,709//6)
+            self.skill_size = (178//3,709//3)
             self.image = pg.transform.scale(pg.image.load('images/bullet/' + skill_style + '/0.png'), self.skill_size)
             self.rect = self.image.get_rect()
             self.frame_numbers = 6

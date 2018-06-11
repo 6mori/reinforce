@@ -268,18 +268,27 @@ class Character(Sprite):
         if (not self.commands[c.SKILL]) and (self.MP>0):
             self.allow_skill = True
 
-    def skill_basic_operation_front(self,character_name,max_frame_number,postfix):
+    def skill_basic_operation_front(self,character_name,max_frame_number,postfix,size=None):
         self.allow_skill = False
 
         action_image_address = 'images/%s/skill/%d.%s' % (character_name,self.skill_counter // c.SKILL_SPEED[character_name],postfix)
 
         self.skill_counter += 1
         self.skill_counter %= max_frame_number * c.SKILL_SPEED[character_name]
-        self.image_right = pg.transform.scale(pg.image.load(action_image_address), c.CHARACTER_SIZE[character_name])
+        if size:
+            tmp_b = self.rect.bottom
+            tmp_centerx = self.rect.centerx
+            self.image_right = pg.transform.scale(pg.image.load(action_image_address), size)
+            self.rect = self.image_right.get_rect()
+            self.rect.bottom = tmp_b
+            self.rect.centerx = tmp_centerx
+        else:
+            self.image_right = pg.transform.scale(pg.image.load(action_image_address), c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
 
-    def skill_basic_operation_back(self, character_name, max_frame_number, postfix):
+    def skill_basic_operation_back(self, character_name, max_frame_number):
         if self.skill_counter == max_frame_number * c.SKILL_SPEED[character_name]-1:
+            self.rect.size = c.CHARACTER_SIZE[character_name]
             self.state = c.FALLING
             self.MP -= 1
 
