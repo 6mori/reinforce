@@ -16,6 +16,26 @@ class Choosing(tools._State):
 
         self.setup_background()
         self.setup_cursor()
+        self.setup_charactor_icon()
+
+    def setup_charactor_icon(self):
+        G1 = pg.transform.scale(pg.image.load('images/icons/darling.png'),(50,50))
+        G2 = pg.transform.scale(pg.image.load('images/icons/darling_unselect.png'), (50, 50))
+        G3 = pg.transform.scale(pg.image.load('images/icons/k.png'), (50, 50))
+        G4 = pg.transform.scale(pg.image.load('images/icons/k_unselect.png'), (50, 50))
+        G5 = pg.transform.scale(pg.image.load('images/icons/guanyu.png'), (50, 50))
+        G6 = pg.transform.scale(pg.image.load('images/icons/guanyu_unselect.png'), (50, 50))
+        G7 = pg.transform.scale(pg.image.load('images/icons/archor.png'), (50, 50))
+        G8 = pg.transform.scale(pg.image.load('images/icons/archor_unselect.png'), (50, 50))
+        G9 = pg.transform.scale(pg.image.load('images/icons/spider.png'), (50, 50))
+        G10 = pg.transform.scale(pg.image.load('images/icons/spider_unselect.png'), (50, 50))
+        self.chara_icon = {
+            c.DARLING: [G1, G2],
+            c.K: [G3, G4],
+            c.GUAN_GONG: [G5, G6],
+            c.ARCHER: [G7, G8],
+            c.SPIDER_PRINCE: [G9, G10]
+        }
 
 
     def setup_background(self):
@@ -100,8 +120,12 @@ class Choosing(tools._State):
 
     def blit_everything(self, surface):
         surface.blit(self.background, self.background_rect)
-        surface.blit(self.cursor_1.image, self.cursor_1.rect)
-        surface.blit(self.cursor_2.image, self.cursor_2.rect)
+        for pos, chara in tools.pos2Chara.items():
+            surface.blit(self.chara_icon[chara][1], (c.P1_CHOOSE_BASE[0]+pos[0],c.P1_CHOOSE_BASE[1]+pos[1]))
+            surface.blit(self.chara_icon[chara][1], (c.P2_CHOOSE_BASE[0] + pos[0], c.P2_CHOOSE_BASE[1] + pos[1]))
+
+        surface.blit(self.chara_icon[tools.pos2Chara[self.cursor_1.offset]][0], self.cursor_1.rect)
+        surface.blit(self.chara_icon[tools.pos2Chara[self.cursor_2.offset]][0], self.cursor_2.rect)
 
 
     def check_if_all_confirmed(self):
