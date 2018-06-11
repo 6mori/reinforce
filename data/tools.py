@@ -43,8 +43,8 @@ kindOfBrick={
     'grass_middle':{'name':'images/grass_middle.png','dur':25 },
     'grass_right': {'name': 'images/grass_right.png', 'dur': 25},
     'grass_inside': {'name': 'images/grass_inside.png', 'dur': 25},
-    'long_wood':{'name':'images/long_wood.png', 'dur': 25},
-    'long_stone':{'name':'images/long_stone.png', 'dur': 25},
+    'long_wood':{'name':'images/long_wood.png', 'dur': 50},
+    'long_stone':{'name':'images/long_stone.png', 'dur': 10000},
 }
 
 #背景种类

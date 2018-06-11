@@ -48,16 +48,13 @@ class Gaming(tools._State):
 
 
     def setup_bricks(self):
+        map = "images/map.txt"
         self.bricks_group = Group()
-        self.create_bricks(self.bricks_group, 0, 10, 40, 1,'grass_surface')
-        self.create_bricks(self.bricks_group, 18, 14, 2, 1,'grass_surface')
-        self.create_bricks(self.bricks_group, 17, 0, 1, 7,'long_wood')
-        self.create_bricks(self.bricks_group, 17, 11, 1, 4,'grass_soil')
-        self.create_bricks(self.bricks_group, 10, 0, 3, 7,'long_wood')
-        self.create_bricks(self.bricks_group, 0, 7, 7, 1,'grass_surface')
-        self.create_bricks(self.bricks_group, 0, 8, 7, 1, 'grass_soil')
-        self.create_bricks(self.bricks_group, 0, 9, 7, 1, 'grass_soil')
-        self.create_bricks(self.bricks_group, 0, 10, 7, 1, 'grass_soil')
+        with open(map) as file_object:
+            lines=file_object.readlines()
+            for line in lines:
+                line=line.strip().split(',')
+                self.create_bricks(self.bricks_group,int(line[0]),int(line[1]),int(line[2]),int(line[3]),eval(line[4]))
 
 
     def create_bricks(self, bricks, x, y, width, height, ground_kind):#ground_kind为表示什么砖块条的字符串
