@@ -117,7 +117,7 @@ class Gaming(tools._State):
             c.K: self.swords_group,
             c.ARCHER: self.bullets_group,
             c.SPIDER_PRINCE:self.bullets_group,
-            c.POENA:self.swords_group
+            c.POENA:self.bullets_group
         }
 
         self.killing_items = [

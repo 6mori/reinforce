@@ -43,4 +43,3 @@ class Bullet(Sprite):
             self.image = pg.transform.rotate(self.image, 315)
         elif self.direction == c.LEFT_DOWN:
             self.image = pg.transform.rotate(self.image, 225)
-        self.rect = self.image.get_rect()

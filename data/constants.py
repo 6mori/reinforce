@@ -134,6 +134,11 @@ P2_CHOOSE_BASE = (600, 100)
 
 FPS = 60
 
+
+
+
+
+
 # Character name
 
 DARLING = 'Darling'
@@ -170,7 +175,7 @@ CHARACTER_MOVING_SPEED = {
     'k' : 6,
     'Archer' : 10,
     'Spider_prince' : 10,
-    'Poena':10
+    'Poena':8
 }
 #Character size
 
@@ -180,7 +185,7 @@ CHARACTER_SIZE = {
     'k' : (75 // 3, 119 // 3),
     'Archer' : (103 // 3, 131 // 3),
     'Spider_prince' : (103 // 2, 131 // 2),
-    'Poena':(103 // 2, 131 // 2)
+    'Poena':(69 // 3, 154 // 3)
 }
 #Character skill
 SKILL_SPEED = {
