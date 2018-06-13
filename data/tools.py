@@ -3,8 +3,6 @@ import pygame as pg
 
 from . import constants as c
 
-pos2Chara = c.POS2CHARACTER
-
 direct2pos = {
     c.RIGHT: (50, 0),
     c.LEFT : (-50, 0),

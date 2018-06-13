@@ -157,16 +157,6 @@ CHARACTERS = [
     POENA
 ]
 
-#Character for choosing
-POS2CHARACTER = {
-    (0, 0): DARLING,
-    (50, 0): K,
-    (0, 50): GUAN_GONG,
-    (50, 50): ARCHER,
-    (100, 0): SPIDER_PRINCE,
-    (100,50):POENA
-}
-
 #Character speeds(higher = slower)
 
 CHARACTER_MOVING_SPEED = {
