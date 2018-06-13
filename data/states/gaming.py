@@ -12,6 +12,7 @@ from .. components import guan_gong
 from .. components import k
 from .. components import Archer
 from .. components import spider_prince
+from .. components import poena
 
 
 class Gaming(tools._State):
@@ -81,14 +82,16 @@ class Gaming(tools._State):
                 c.GUAN_GONG: guan_gong.Guan_gong(),
                 c.K: k.K(),
                 c.ARCHER: Archer.Archer(),
-                c.SPIDER_PRINCE:spider_prince.Spider_prince()
+                c.SPIDER_PRINCE:spider_prince.Spider_prince(),
+                c.POENA:poena.Poena()
             },
             {
                 c.DARLING: Darling.Darling(),
                 c.GUAN_GONG: guan_gong.Guan_gong(),
                 c.K: k.K(),
                 c.ARCHER: Archer.Archer(),
-                c.SPIDER_PRINCE: spider_prince.Spider_prince()
+                c.SPIDER_PRINCE: spider_prince.Spider_prince(),
+                c.POENA: poena.Poena()
             },
         ]
 
@@ -117,7 +120,8 @@ class Gaming(tools._State):
             c.GUAN_GONG: self.swords_group,
             c.K: self.swords_group,
             c.ARCHER: self.bullets_group,
-            c.SPIDER_PRINCE:self.bullets_group
+            c.SPIDER_PRINCE:self.bullets_group,
+            c.POENA:self.swords_group
         }
 
         self.killing_items = [

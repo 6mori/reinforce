@@ -28,7 +28,7 @@ class MainMenu(tools._State):
 
 
     def setup_background(self):
-        self.background = pg.transform.scale(pg.image.load('images/%s.png' % c.TITLE_SCREEN), c.SCREEN_SIZE)
+        self.background = pg.transform.scale(pg.image.load('images/%s' % c.TITLE_SCREEN), c.SCREEN_SIZE)
         self.background_rect = self.background.get_rect()
 
 

@@ -19,7 +19,7 @@ class Choosing(tools._State):
 
 
     def setup_background(self):
-        self.background = pg.transform.scale(pg.image.load('images/%s.png' % c.CHOOSING_SCREEN), c.SCREEN_SIZE)
+        self.background = pg.transform.scale(pg.image.load('images/%s' % c.CHOOSING_SCREEN), c.SCREEN_SIZE)
         self.background_rect = self.background.get_rect()
 
 

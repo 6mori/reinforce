@@ -92,54 +92,11 @@ BULLET_SIZE   = (50,10)
 
 BG_COLOR = GRAY
 
-#Character speeds(higher = slower)
-
-CHARACTER_MOVING_SPEED = 25
-
-
-#Character size
-
-CHARACTER_SIZE = {
-    'Guan_gong' : (103 // 3, 250 // 3),
-    'Darling' : (103 // 3, 131 // 3),
-    'k' : (75 // 3, 119 // 3),
-    'Archer' : (103 // 3, 131 // 3),
-    'Spider_prince' : (103 // 2, 131 // 2)
-
-}
-
-
-#Character skill
-SKILL_SPEED = {
-    'Darling' : 10,
-    'Guan_gong' : 20,
-    'k' : 5,
-    'Archer': 20,
-    'Spider_prince':5
-}
-
-
-#Stand animation
-STAND_ANIMATION_SPEED = {
-    'Darling' : 100,
-    'Guan_gong' : 30,
-    'k' : 50,
-    'Archer': 100,
-    'Spider_prince':35
-}
-
 # Sword property
 
 SWORD_WIDTH  = 50
 SWORD_HEIGHT = 20
 
-# Character name
-
-DARLING = 'Darling'
-GUAN_GONG   = 'Guan_gong'
-K   = 'k'
-ARCHER =  'Archer'
-SPIDER_PRINCE = 'Spider_prince'
 # Direction
 
 RIGHT      = 'right'
@@ -151,10 +108,10 @@ RIGHT_DOWN = 'right_down'
 LEFT_UP    = 'left_up'
 LEFT_DOWN  = 'left_down'
 
-#
 
-TITLE_SCREEN = 'title_screen'
-CHOOSING_SCREEN = 'choosing_screen'
+
+TITLE_SCREEN = 'title_screen.jpg'
+CHOOSING_SCREEN = 'choosing_screen.jpg'
 
 # Main menu options
 
@@ -177,3 +134,56 @@ P2_CHOOSE_BASE = (600, 100)
 
 FPS = 60
 
+
+
+
+
+# Character name
+
+DARLING = 'Darling'
+GUAN_GONG   = 'Guan_gong'
+K   = 'k'
+ARCHER =  'Archer'
+SPIDER_PRINCE = 'Spider_prince'
+POENA = 'Poena'
+
+#Character speeds(higher = slower)
+
+CHARACTER_MOVING_SPEED = {
+    'Guan_gong' : 6,
+    'Darling' : 8,
+    'k' : 6,
+    'Archer' : 10,
+    'Spider_prince' : 10,
+    'Poena':10
+}
+#Character size
+
+CHARACTER_SIZE = {
+    'Guan_gong' : (103 // 3, 250 // 3),
+    'Darling' : (103 // 3, 131 // 3),
+    'k' : (75 // 3, 119 // 3),
+    'Archer' : (103 // 3, 131 // 3),
+    'Spider_prince' : (103 // 2, 131 // 2),
+    'Poena':(103 // 2, 131 // 2)
+}
+#Character skill
+SKILL_SPEED = {
+    'Darling' : 10,
+    'Guan_gong' : 20,
+    'k' : 5,
+    'Archer': 20,
+    'Spider_prince':5,
+    'Poena': 10,
+}
+
+
+#Stand animation
+STAND_ANIMATION_SPEED = {
+    'Darling' : 100,
+    'Guan_gong' : 8,
+    'k' : 6,
+    'Archer': 100,
+    'Spider_prince':35,
+    'Poena': 10
+}

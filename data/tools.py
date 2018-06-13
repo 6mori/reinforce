@@ -8,7 +8,8 @@ pos2Chara = {
     (50, 0): c.K,
     (0, 50): c.GUAN_GONG,
     (50, 50): c.ARCHER,
-    (100, 0): c.SPIDER_PRINCE
+    (100, 0): c.SPIDER_PRINCE,
+    (100,50):c.POENA
 }
 
 direct2pos = {
