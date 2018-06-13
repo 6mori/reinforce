@@ -15,6 +15,7 @@ class Choosing(tools._State):
 
         self.setup_background()
         self.setup_cursor()
+        self.setup_position()
         self.setup_icon()
 
 
@@ -31,6 +32,17 @@ class Choosing(tools._State):
         self.cursor_2 = self.creat_cursor(c.P2_CHOOSE_BASE, 50, 50)
         self.cursor_2.offset = (0, 0)
         self.cursor_2.confirm = False
+
+
+    def setup_position(self):
+        self.pos2Chara = {}
+        x = y = 0
+        for character_name in c.CHARACTERS:
+            self.pos2Chara[(x, y)] = character_name
+            x += 50
+            if x > 100:
+                x = 0
+                y += 50
 
 
     def setup_icon(self):
@@ -84,7 +96,7 @@ class Choosing(tools._State):
                     else:
                         next_pos = tuple(
                             [cur + off for cur, off in zip(self.cursor_1.offset, tools.direct2pos[command])])
-                        if next_pos in tools.pos2Chara.keys():
+                        if next_pos in self.pos2Chara.keys():
                             self.cursor_1.offset = next_pos
 
             if self.cursor_2.confirm == False:
@@ -95,7 +107,7 @@ class Choosing(tools._State):
                     else:
                         next_pos = tuple(
                             [cur + off for cur, off in zip(self.cursor_2.offset, tools.direct2pos[command])])
-                        if next_pos in tools.pos2Chara.keys():
+                        if next_pos in self.pos2Chara.keys():
                             self.cursor_2.offset = next_pos
 
 
@@ -108,16 +120,16 @@ class Choosing(tools._State):
 
     def blit_everything(self, surface):
         surface.blit(self.background, self.background_rect)
-        for pos, chara in tools.pos2Chara.items():
+        for pos, chara in self.pos2Chara.items():
             surface.blit(self.chara_icon[chara][1], (c.P1_CHOOSE_BASE[0]+pos[0], c.P1_CHOOSE_BASE[1]+pos[1]))
             surface.blit(self.chara_icon[chara][1], (c.P2_CHOOSE_BASE[0]+pos[0], c.P2_CHOOSE_BASE[1]+pos[1]))
 
-        surface.blit(self.chara_icon[tools.pos2Chara[self.cursor_1.offset]][0], self.cursor_1.rect)
-        surface.blit(self.chara_icon[tools.pos2Chara[self.cursor_2.offset]][0], self.cursor_2.rect)
+        surface.blit(self.chara_icon[self.pos2Chara[self.cursor_1.offset]][0], self.cursor_1.rect)
+        surface.blit(self.chara_icon[self.pos2Chara[self.cursor_2.offset]][0], self.cursor_2.rect)
 
 
     def check_if_all_confirmed(self):
         if self.cursor_1.confirm and self.cursor_2.confirm:
-            self.game_info[c.P1_CHARACTER] = tools.pos2Chara[self.cursor_1.offset]
-            self.game_info[c.P2_CHARACTER] = tools.pos2Chara[self.cursor_2.offset]
+            self.game_info[c.P1_CHARACTER] = self.pos2Chara[self.cursor_1.offset]
+            self.game_info[c.P2_CHARACTER] = self.pos2Chara[self.cursor_2.offset]
             self.done = True
