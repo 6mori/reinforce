@@ -3,14 +3,7 @@ import pygame as pg
 
 from . import constants as c
 
-pos2Chara = {
-    (0, 0): c.DARLING,
-    (50, 0): c.K,
-    (0, 50): c.GUAN_GONG,
-    (50, 50): c.ARCHER,
-    (100, 0): c.SPIDER_PRINCE,
-    (100,50):c.POENA
-}
+pos2Chara = c.POS2CHARACTER
 
 direct2pos = {
     c.RIGHT: (50, 0),

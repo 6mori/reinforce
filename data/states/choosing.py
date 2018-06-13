@@ -11,31 +11,11 @@ class Choosing(tools._State):
     def startup(self, current_time, persist):
         self.game_info = persist
         self.persist = self.game_info
-
+        self.chara_icon = c.CHARACTER_ICON
         self.next = c.GAMING
 
         self.setup_background()
         self.setup_cursor()
-        self.setup_charactor_icon()
-
-    def setup_charactor_icon(self):
-        G1 = pg.transform.scale(pg.image.load('images/icons/darling.png'),(50,50))
-        G2 = pg.transform.scale(pg.image.load('images/icons/darling_unselect.png'), (50, 50))
-        G3 = pg.transform.scale(pg.image.load('images/icons/k.png'), (50, 50))
-        G4 = pg.transform.scale(pg.image.load('images/icons/k_unselect.png'), (50, 50))
-        G5 = pg.transform.scale(pg.image.load('images/icons/guanyu.png'), (50, 50))
-        G6 = pg.transform.scale(pg.image.load('images/icons/guanyu_unselect.png'), (50, 50))
-        G7 = pg.transform.scale(pg.image.load('images/icons/archor.png'), (50, 50))
-        G8 = pg.transform.scale(pg.image.load('images/icons/archor_unselect.png'), (50, 50))
-        G9 = pg.transform.scale(pg.image.load('images/icons/spider.png'), (50, 50))
-        G10 = pg.transform.scale(pg.image.load('images/icons/spider_unselect.png'), (50, 50))
-        self.chara_icon = {
-            c.DARLING: [G1, G2],
-            c.K: [G3, G4],
-            c.GUAN_GONG: [G5, G6],
-            c.ARCHER: [G7, G8],
-            c.SPIDER_PRINCE: [G9, G10]
-        }
 
 
     def setup_background(self):

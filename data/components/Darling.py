@@ -41,7 +41,7 @@ class Darling(gun_guy.GunGuy):
         super().setup_character_image_walk(c.DARLING,4,'png')
 
     def wild_shot_bullets(self,action_group):
-        if not self.skill_counter%(c.SKILL_SPEED['Darling']*2):
+        if not self.skill_counter%(c.SKILL_SPEED['Darling']):
             bullets = [self.get_bullet_type(c.DARLING, c.LEFT), self.get_bullet_type(c.DARLING, c.RIGHT),
                        self.get_bullet_type(c.DARLING, c.UP), self.get_bullet_type(c.DARLING, c.RIGHT_UP),
                        self.get_bullet_type(c.DARLING, c.LEFT_UP)]

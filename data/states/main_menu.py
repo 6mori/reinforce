@@ -1,6 +1,6 @@
 import pygame as pg
 
-from .. import tools, setup
+from .. import tools
 from .. import constants as c
 
 class MainMenu(tools._State):

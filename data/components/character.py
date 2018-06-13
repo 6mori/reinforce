@@ -1,7 +1,8 @@
 import pygame as pg
 from pygame.sprite import Sprite
 
-from .. import tools
+
+
 from .. import constants as c
 
 class Character(Sprite):

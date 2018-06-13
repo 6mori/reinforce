@@ -1,9 +1,8 @@
 import pygame as pg
 from pygame.sprite import Group
 
-import copy
 
-from .. import tools, setup
+from .. import tools
 from .. import constants as c
 from .. components import brick
 from .. components import props
@@ -14,12 +13,10 @@ from .. components import Archer
 from .. components import spider_prince
 from .. components import poena
 
-
 class Gaming(tools._State):
     def __init__(self):
         super(Gaming, self).__init__()
 
-    #def get_event(self, event):
 
     def startup(self, current_time, persist):
         self.game_info = persist
@@ -76,6 +73,7 @@ class Gaming(tools._State):
 
 
     def setup_characters(self):
+
         characters = [
             {
                 c.DARLING: Darling.Darling(),
@@ -113,7 +111,6 @@ class Gaming(tools._State):
     def setup_killing_items(self):
         self.setup_bullets()
         self.setup_swords()
-        #self.setup_arrows()
 
         action_group = {
             c.DARLING: self.bullets_group,
@@ -135,9 +132,6 @@ class Gaming(tools._State):
 
     def setup_swords(self):
         self.swords_group = Group()
-
-    #def setup_arrows(self):
-    #    self.arrows_group = Group()
 
     def update(self, surface, keys, current_time):
         self.game_info[c.CURRENT_TIME] = self.current_time = current_time
