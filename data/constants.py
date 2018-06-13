@@ -1,8 +1,3 @@
-import pygame as pg
-
-
-
-
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
@@ -139,10 +134,6 @@ P2_CHOOSE_BASE = (600, 100)
 
 FPS = 60
 
-
-
-
-
 # Character name
 
 DARLING = 'Darling'
@@ -151,6 +142,15 @@ K   = 'k'
 ARCHER =  'Archer'
 SPIDER_PRINCE = 'Spider_prince'
 POENA = 'Poena'
+
+CHARACTERS = [
+    DARLING,
+    GUAN_GONG,
+    K,
+    ARCHER,
+    SPIDER_PRINCE,
+    POENA
+]
 
 #Character for choosing
 POS2CHARACTER = {
@@ -161,18 +161,6 @@ POS2CHARACTER = {
     (100, 0): SPIDER_PRINCE,
     (100,50):POENA
 }
-
-#Charecter icon
-CHARACTER_ICON={
-    DARLING:[],
-    GUAN_GONG:[],
-    K:[],
-    ARCHER:[],
-    SPIDER_PRINCE:[],
-    POENA:[]
-}
-for character_name in CHARACTER_ICON:
-    CHARACTER_ICON[character_name] = [pg.transform.scale(pg.image.load('images/icons/%s.png'%(character_name)),(50,50)),pg.transform.scale(pg.image.load('images/icons/%s_unselect.png'%(character_name)),(50,50))]
 
 #Character speeds(higher = slower)
 

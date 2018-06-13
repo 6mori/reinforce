@@ -73,7 +73,6 @@ class Gaming(tools._State):
 
 
     def setup_characters(self):
-
         characters = [
             {
                 c.DARLING: Darling.Darling(),

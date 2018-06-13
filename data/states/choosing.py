@@ -11,11 +11,11 @@ class Choosing(tools._State):
     def startup(self, current_time, persist):
         self.game_info = persist
         self.persist = self.game_info
-        self.chara_icon = c.CHARACTER_ICON
         self.next = c.GAMING
 
         self.setup_background()
         self.setup_cursor()
+        self.setup_icon()
 
 
     def setup_background(self):
@@ -31,6 +31,14 @@ class Choosing(tools._State):
         self.cursor_2 = self.creat_cursor(c.P2_CHOOSE_BASE, 50, 50)
         self.cursor_2.offset = (0, 0)
         self.cursor_2.confirm = False
+
+
+    def setup_icon(self):
+        self.chara_icon = {}
+        for character_name in c.CHARACTERS:
+            self.chara_icon[character_name] = [
+                pg.transform.scale(pg.image.load('images/icons/%s.png' % (character_name)), (50, 50)),
+                pg.transform.scale(pg.image.load('images/icons/%s_unselect.png' % (character_name)), (50, 50))]
 
 
     def creat_cursor(self, pos, height, width):
@@ -101,8 +109,8 @@ class Choosing(tools._State):
     def blit_everything(self, surface):
         surface.blit(self.background, self.background_rect)
         for pos, chara in tools.pos2Chara.items():
-            surface.blit(self.chara_icon[chara][1], (c.P1_CHOOSE_BASE[0]+pos[0],c.P1_CHOOSE_BASE[1]+pos[1]))
-            surface.blit(self.chara_icon[chara][1], (c.P2_CHOOSE_BASE[0] + pos[0], c.P2_CHOOSE_BASE[1] + pos[1]))
+            surface.blit(self.chara_icon[chara][1], (c.P1_CHOOSE_BASE[0]+pos[0], c.P1_CHOOSE_BASE[1]+pos[1]))
+            surface.blit(self.chara_icon[chara][1], (c.P2_CHOOSE_BASE[0]+pos[0], c.P2_CHOOSE_BASE[1]+pos[1]))
 
         surface.blit(self.chara_icon[tools.pos2Chara[self.cursor_1.offset]][0], self.cursor_1.rect)
         surface.blit(self.chara_icon[tools.pos2Chara[self.cursor_2.offset]][0], self.cursor_2.rect)
