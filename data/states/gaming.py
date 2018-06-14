@@ -328,7 +328,10 @@ class Gaming(tools._State):
             self.PlayerHP.append(character.HP)
         i = 0
         for spline_item in self.HPSplines.sprites():
-            spline_item.scale_change(self.PlayerHP[i])
+            try:
+                spline_item.scale_change(self.PlayerHP[i])
+            except:
+                pass
             surface.blit(spline_item.image, spline_item.rect)
             i = (i+1)%2
         # For test
