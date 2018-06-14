@@ -198,3 +198,6 @@ STAND_ANIMATION_SPEED = {
     'Poena': 10
 }
 
+# MP
+P1MPPOS = (0, 20)
+P2MPPOS = (650, 20)

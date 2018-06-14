@@ -31,6 +31,17 @@ class Gaming(tools._State):
 
         self.setup_props()
         self.setup_splines()
+        self.setup_MPsphere()
+
+    def setup_MPsphere(self):
+        self.MPgroup1MAX = Group()
+        self.MPgroup2MAX = Group()
+        for i in range(0, 6):
+            c.P1MPPOS = (c.P1MPPOS[0] + 20, c.P1MPPOS[1])
+            self.MPgroup1MAX.add(props.MPsphere(c.P1MPPOS[0], c.P1MPPOS[1]))
+        for i in range(0, 6):
+            c.P2MPPOS = (c.P2MPPOS[0] + 20, c.P2MPPOS[1])
+            self.MPgroup2MAX.add(props.MPsphere(c.P2MPPOS[0], c.P2MPPOS[1]))
 
     def setup_splines(self):
         self.MaxHP = []
@@ -320,7 +331,25 @@ class Gaming(tools._State):
             surface.blit(bullet.image, bullet.rect)
         for prop_item in self.props_group.sprites():
             surface.blit(prop_item.image, prop_item.rect)
-
+        # MP
+        self.PlayerMP = []
+        for character in self.characters_group.sprites():
+            self.PlayerMP.append(character.MP)
+        i = 0
+        for mpsphere in self.MPgroup1MAX.sprites():
+            if i == self.PlayerMP[0]:
+                break
+            else:
+                surface.blit(mpsphere.image, mpsphere.rect)
+                i = i + 1
+        i = 0
+        for mpsphere in self.MPgroup2MAX.sprites():
+            if i == self.PlayerMP[1]:
+                break
+            else:
+                surface.blit(mpsphere.image, mpsphere.rect)
+                i = i + 1
+        # HP
         for spline_space_item in self.HPSplinesSpace.sprites():
             surface.blit(spline_space_item.image, spline_space_item.rect)
         self.PlayerHP = []
@@ -330,13 +359,10 @@ class Gaming(tools._State):
         for spline_item in self.HPSplines.sprites():
             try:
                 spline_item.scale_change(self.PlayerHP[i])
+                i = (i + 1) % 2
+                surface.blit(spline_item.image, spline_item.rect)
             except:
                 pass
-            surface.blit(spline_item.image, spline_item.rect)
-            i = (i+1)%2
-        # For test
-        #for sw in self.swords_group.sprites():
-        #    pg.draw.rect(surface, sw.color, sw.rect)
 
     def check_if_finish(self):
         if len(self.characters_group) < 2:

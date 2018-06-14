@@ -61,3 +61,11 @@ class Spline_Space(Sprite):
         self.rect = self.image.get_rect()
         self.rect.left = x
         self.rect.top = y
+
+class MPsphere(Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = pg.transform.scale(pg.image.load('images/MPsphere.png'), (c.BRICK_WIDTH, c.BRICK_HEIGHT))
+        self.rect = self.image.get_rect()
+        self.rect.left = x
+        self.rect.top = y
