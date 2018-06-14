@@ -36,6 +36,9 @@ class Gaming(tools._State):
         self.MaxHP = []
         for character in self.characters_group.sprites():
             self.MaxHP.append(character.HP)
+        self.HPSplinesSpace = Group()
+        self.HPSplinesSpace.add(props.Spline_Space(0, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
         self.HPSplines = Group()
         self.HPSplines.add(props.Spline(0, 0, self.MaxHP[0], 6))
         self.HPSplines.add(props.Spline(650, 0, self.MaxHP[1], 6))
@@ -318,17 +321,16 @@ class Gaming(tools._State):
         for prop_item in self.props_group.sprites():
             surface.blit(prop_item.image, prop_item.rect)
 
-
+        for spline_space_item in self.HPSplinesSpace.sprites():
+            surface.blit(spline_space_item.image, spline_space_item.rect)
         self.PlayerHP = []
         for character in self.characters_group.sprites():
             self.PlayerHP.append(character.HP)
         i = 0
         for spline_item in self.HPSplines.sprites():
             spline_item.scale_change(self.PlayerHP[i])
-            i = i+1
-            if i==2:
-                i =0
             surface.blit(spline_item.image, spline_item.rect)
+            i = (i+1)%2
         # For test
         #for sw in self.swords_group.sprites():
         #    pg.draw.rect(surface, sw.color, sw.rect)
