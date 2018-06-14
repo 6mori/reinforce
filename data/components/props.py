@@ -35,3 +35,22 @@ class Prop(Sprite):
                 self.y_vel += c.GRAVITY
 
             self.rect.y += round(self.y_vel)
+
+class Spline(Sprite):
+    def __init__(self, x, y, HP, width=1, height=1):
+        super().__init__()
+        self.x = x
+        self.y = y
+        self.HP = HP
+        self.width = width
+        self.image = pg.transform.scale(pg.image.load('images/spline.png'), (c.BRICK_WIDTH*width, c.BRICK_HEIGHT*height//2))
+        self.rect = self.image.get_rect()
+        self.rect.left = x
+        self.rect.top = y
+    def scale_change(self, current_HP):
+        rate = current_HP / self.HP
+        self.image = pg.transform.scale(pg.image.load('images/spline.png'),
+                                        ((int)(c.BRICK_WIDTH * self.width * rate), c.BRICK_HEIGHT // 2))
+        self.rect = self.image.get_rect()
+        self.rect.left = self.x
+        self.rect.top = self.y
