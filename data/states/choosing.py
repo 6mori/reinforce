@@ -17,6 +17,7 @@ class Choosing(tools._State):
         self.setup_cursor()
         self.setup_position()
         self.setup_icon()
+        self.setup_poster()
 
 
     def setup_background(self):
@@ -51,6 +52,13 @@ class Choosing(tools._State):
             self.chara_icon[character_name] = [
                 pg.transform.scale(pg.image.load('images/icons/%s.png' % (character_name)), (50, 50)),
                 pg.transform.scale(pg.image.load('images/icons/%s_unselect.png' % (character_name)), (50, 50))]
+
+
+    def setup_poster(self):
+        self.chara_poster = {}
+        for character_name in c.CHARACTERS:
+            self.chara_poster[character_name] = \
+                pg.transform.scale(pg.image.load('images/posters/%s.png' % (character_name)), c.HALF_SCREEN_SIZE)
 
 
     def creat_cursor(self, pos, height, width):
@@ -123,6 +131,10 @@ class Choosing(tools._State):
         for pos, chara in self.pos2Chara.items():
             surface.blit(self.chara_icon[chara][1], (c.P1_CHOOSE_BASE[0]+pos[0], c.P1_CHOOSE_BASE[1]+pos[1]))
             surface.blit(self.chara_icon[chara][1], (c.P2_CHOOSE_BASE[0]+pos[0], c.P2_CHOOSE_BASE[1]+pos[1]))
+
+            surface.blit(self.chara_poster[self.pos2Chara[self.cursor_1.offset]], pg.Rect((0, 0), c.HALF_SCREEN_SIZE))
+            surface.blit(self.chara_poster[self.pos2Chara[self.cursor_2.offset]],
+                         pg.Rect((c.SCREEN_WIDTH/2, 0), c.HALF_SCREEN_SIZE))
 
         surface.blit(self.chara_icon[self.pos2Chara[self.cursor_1.offset]][0], self.cursor_1.rect)
         surface.blit(self.chara_icon[self.pos2Chara[self.cursor_2.offset]][0], self.cursor_2.rect)

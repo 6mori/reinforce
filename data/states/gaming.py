@@ -34,6 +34,7 @@ class Gaming(tools._State):
         self.setup_splines()
         self.setup_MPsphere()
 
+
     def setup_MPsphere(self):
         self.MPgroup1MAX = Group()
         self.MPgroup2MAX = Group()
@@ -43,6 +44,7 @@ class Gaming(tools._State):
         for i in range(0, 6):
             c.P2MPPOS = (c.P2MPPOS[0] + 20, c.P2MPPOS[1])
             self.MPgroup2MAX.add(props.MPsphere(c.P2MPPOS[0], c.P2MPPOS[1]))
+
 
     def setup_splines(self):
         self.MaxHP = []
@@ -54,6 +56,7 @@ class Gaming(tools._State):
         self.HPSplines = Group()
         self.HPSplines.add(props.Spline(0, 0, self.MaxHP[0], 6))
         self.HPSplines.add(props.Spline(650, 0, self.MaxHP[1], 6))
+
 
     def setup_props(self):
         self.props_group = Group()
@@ -134,7 +137,7 @@ class Gaming(tools._State):
     def setup_action_group(self):
         self.action_group = Group()
 
-
+    '''
     def setup_killing_items(self):
         self.setup_bullets()
         self.setup_swords()
@@ -159,6 +162,7 @@ class Gaming(tools._State):
 
     def setup_swords(self):
         self.swords_group = Group()
+    '''
 
     def update(self, surface, keys, current_time):
         self.game_info[c.CURRENT_TIME] = self.current_time = current_time
@@ -166,8 +170,10 @@ class Gaming(tools._State):
         self.handle_state(keys)
         self.check_if_finish()
 
+
     def handle_state(self, keys):
         self.update_all_sprites(keys)
+
 
     def update_all_sprites(self, keys):
         for character in self.characters_group.sprites():
@@ -177,12 +183,14 @@ class Gaming(tools._State):
         self.action_group.update()
         self.props_group.update()
 
+
     def adjust_sprite_positions(self):
         self.adjust_characters_position()
         #self.adjust_bullets_position()
         self.adjust_action_item_position()
         self.adjust_props_position()
         #self.check_swords_collisions()
+
 
     def adjust_characters_position(self):
         for character in self.characters_group.sprites():
@@ -194,11 +202,13 @@ class Gaming(tools._State):
             self.check_character_y_collisions(character)
             self.check_collider_under_bottom(character)
 
+
     def check_character_x_edge(self, character):
         if character.rect.left < 0:
             character.rect.left = 0
         if character.rect.right > c.SCREEN_WIDTH:
             character.rect.right = c.SCREEN_WIDTH
+
 
     def check_character_x_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
@@ -219,6 +229,7 @@ class Gaming(tools._State):
 
         character.x_vel = 0
 
+
     def check_character_y_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
         prop = pg.sprite.spritecollideany(character, self.props_group)
@@ -232,6 +243,7 @@ class Gaming(tools._State):
 
         self.check_if_collider_is_falling(character)
 
+
     def adjust_character_for_y_collisions(self, character, collider):
         if character.rect.y < collider.rect.y:
             character.rect.bottom = collider.rect.top
@@ -241,9 +253,11 @@ class Gaming(tools._State):
 
         character.y_vel = 0
 
+
     def check_collider_under_bottom(self, collider):
         if collider.rect.top >= c.SCREEN_HEIGHT:
             collider.kill()
+
 
     def check_if_collider_is_falling(self, collider):
         collider.rect.y += 1

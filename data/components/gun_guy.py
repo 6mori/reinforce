@@ -2,7 +2,6 @@
 from .. import constants as c
 from . import character
 from . import bullet
-from . import arrow
 import pygame as pg
 
 class GunGuy(character.Character):
