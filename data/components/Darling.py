@@ -12,26 +12,25 @@ class Darling(gun_guy.GunGuy):
 
 
     def skill(self, action_group):
-        self.skill_basic_operation_front('Darling',16,'png')
-        #发射子弹
+        super().skill('Darling',16,'png')
         self.wild_shot_bullets(action_group)
-        self.skill_basic_operation_back('Darling',16)
 
 
     def action(self, action_group):
         self.allow_action = False
-        #子弹类型
+        # 子弹类型
         if self.facing_right:
-            firing_bullet = self.get_bullet_type(c.DARLING, c.RIGHT)
+            firing_bullet = self.get_bullet_type('Darling', c.RIGHT)
         else:
-            firing_bullet = self.get_bullet_type(c.DARLING, c.LEFT)
-        #子弹方向
+            firing_bullet = self.get_bullet_type('Darling', c.LEFT)
+        # 子弹方向
         self.handle_bullet_direction(firing_bullet)
-        #子弹发射位置
-        #firing_bullet.rect.centery = self.rect.centery-23
-        firing_bullet.rect.top = self.rect.top
-        #子弹组
+        # 子弹发射位置
+        firing_bullet.rect.centery = self.rect.centery
+        # 子弹组
         action_group.add(firing_bullet)
+        self.state = c.FALLING
+
 
     def setup_character_image_initial(self, character_name, postfix):
         super().setup_character_image_initial(c.DARLING,'png')

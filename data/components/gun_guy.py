@@ -11,26 +11,6 @@ class GunGuy(character.Character):
         self.bullet_damage = c.BULLET_DAMAGE
         self.HP = 10
 
-
-    def action(self, action_group):
-        self.allow_action = False
-        # 子弹类型
-        if self.facing_right:
-            firing_bullet = self.get_bullet_type(c.DARING, c.RIGHT)
-        else:
-            firing_bullet = self.get_bullet_type(c.DARING, c.LEFT)
-        # 子弹方向
-        self.handle_bullet_direction(firing_bullet)
-        # 子弹发射位置
-        firing_bullet.rect.centery = self.rect.centery
-        # 子弹组
-        action_group.add(firing_bullet)
-
-
-    def skill(self, action_group):
-        pass
-
-
     def get_bullet_type(self,character_name,direction):
         #默认为Darling
         if character_name == c.DARLING:
@@ -38,8 +18,6 @@ class GunGuy(character.Character):
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'flamebow')
             else:
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'freezebow')
-        elif character_name == c.ARCHER:
-            return arrow.Arrow(self.player_num, self.bullet_damage, direction)
         elif character_name == c.SPIDER_PRINCE:
             if self.player_num == 0:
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'flamebow')

@@ -292,7 +292,7 @@ class Gaming(tools._State):
         test_collide_group = pg.sprite.Group(self.bricks_group)
 
         if pg.sprite.spritecollideany(collider, test_collide_group) is None:
-            if collider.state != c.JUMPING and collider.state != c.SKILLING:        #飞起来
+            if collider.state != c.JUMPING and collider.state != c.SKILLING and collider.state != c.ACTIONING:        #飞起来
                 collider.state = c.FALLING
 
         collider.rect.y -= 1

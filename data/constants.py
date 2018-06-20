@@ -44,6 +44,7 @@ JUMPING  = 'jumping'
 FALLING  = 'falling'
 CLIMBING = 'climbing'
 SKILLING = 'skilling'
+ACTIONING = 'actioning'
 
 # Character command
 
@@ -83,7 +84,7 @@ BRICK_DUR    = 25
 BULLET_DAMAGE = 25
 BULLET_VEL    = 10
 BULLET_WIDTH  = 50
-BULLET_HEIGHT = 100
+BULLET_HEIGHT = 15
 BULLET_SIZE   = (BULLET_WIDTH, BULLET_HEIGHT)
 
 # For test
@@ -173,7 +174,7 @@ CHARACTER_SIZE = {
 #Character skill
 SKILL_SPEED = {
     'Darling' : 10,
-    'Guan_gong' : 20,
+    'Guan_gong' : 10,
     'k' : 5,
     'Archer': 20,
     'Spider_prince':5,
@@ -191,6 +192,16 @@ STAND_ANIMATION_SPEED = {
     'Poena': 10
 }
 
+#Character action_aninamation_speed
+ACTION_SPEED = {
+    'Darling' : 10,
+    'Guan_gong' : 10,
+    'k' : 5,
+    'Archer': 20,
+    'Spider_prince':10,
+    'Poena': 10,
+}
+
 # MP
 P1MPPOS = (0, 20)
 P2MPPOS = (650, 20)
@@ -200,5 +211,5 @@ BULLET = 'bullet'
 SWORD  = 'sword'
 
 #SCROLL_BRICK = 10
-SCROLL_TIME = 6000
+SCROLL_TIME = 600000
 SCROLL_LEN = BRICK_HEIGHT

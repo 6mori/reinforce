@@ -5,19 +5,19 @@ class Guan_gong(sword_guy.SwordGuy):
         super().__init__()
 
         self.sword_damage = 5
-        self.HP = 10
+        self.HP = 500
 
 
     def skill(self, action_group):
-
-        self.skill_basic_operation_front(c.GUAN_GONG,10,'gif')
-        #冲刺
+        super().skill(c.GUAN_GONG,10,'gif')
+        # 冲刺
         if self.facing_right:
             self.rect.x += 6
         else:
             self.rect.x -= 6
-        self.skill_basic_operation_back(c.GUAN_GONG,10)
 
+    def action(self,action_group):
+        super().action(action_group,c.GUAN_GONG,6,'gif',(374//3,157//3))
 
     def setup_character_image_initial(self, character_name, postfix):
         super().setup_character_image_initial(c.GUAN_GONG,'gif')

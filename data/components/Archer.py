@@ -11,9 +11,9 @@ class Archer(gun_guy.GunGuy):
 
     # 大招
     def skill(self, action_group):
-        self.skill_basic_operation_front('Archer', 1, 'png')
+        super().skill('Archer', 1, 'png')
         self.wild_shot_bullets(action_group)
-        self.skill_basic_operation_back('Archer', 1)
+
 
     # 发射弓箭
     def action(self, action_group):
