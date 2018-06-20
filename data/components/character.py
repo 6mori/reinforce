@@ -257,7 +257,10 @@ class Character(Sprite):
     def action(self,character_name=None,max_frame_number=None,postfix=None,size=None):
         self.allow_action = False
 
-        if size and self.skill_counter == 0:
+        # self.x_vel = 0
+        self.y_vel = 0
+
+        if size and self.action_counter == 0:
             self.origin_rect_action = self.rect
         action_image_address = 'images/%s/action/%d.%s' % (
         character_name, self.action_counter // c.ACTION_SPEED[character_name], postfix)
@@ -265,7 +268,6 @@ class Character(Sprite):
         self.action_counter += 1
 
         if size:
-
             self.image_right = pg.transform.scale(pg.image.load(action_image_address), size)
             self.rect = self.image_right.get_rect()
             self.rect.centerx = self.origin_rect_action.centerx
@@ -281,6 +283,9 @@ class Character(Sprite):
 
     def skill(self,character_name=None,max_frame_number=None,postfix=None,size=None):
         self.allow_skill = False
+
+        self.x_vel = 0
+        self.y_vel = 0
 
         action_image_address = 'images/%s/skill/%d.%s' % (
         character_name, self.skill_counter // c.SKILL_SPEED[character_name], postfix)

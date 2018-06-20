@@ -164,7 +164,7 @@ CHARACTER_MOVING_SPEED = {
 #Character size
 
 CHARACTER_SIZE = {
-    'Guan_gong' : (103 // 3, 250 // 3),
+    'Guan_gong' : (103 // 3, 200 // 3),
     'Darling' : (103 // 3, 131 // 3),
     'k' : (75 // 3, 119 // 3),
     'Archer' : (103 // 3, 131 // 3),

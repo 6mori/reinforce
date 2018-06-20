@@ -17,7 +17,7 @@ class Guan_gong(sword_guy.SwordGuy):
             self.rect.x -= 6
 
     def action(self,action_group):
-        super().action(action_group,c.GUAN_GONG,6,'gif',(374//3,157//3))
+        super().action(action_group,c.GUAN_GONG,6,'gif',(374//3,157//2))
 
     def setup_character_image_initial(self, character_name, postfix):
         super().setup_character_image_initial(c.GUAN_GONG,'gif')
