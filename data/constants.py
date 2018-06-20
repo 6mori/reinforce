@@ -141,6 +141,7 @@ K   = 'k'
 ARCHER =  'Archer'
 SPIDER_PRINCE = 'Spider_prince'
 POENA = 'Poena'
+GHOST = 'Ghost'
 
 CHARACTERS = [
     DARLING,
@@ -148,7 +149,8 @@ CHARACTERS = [
     K,
     ARCHER,
     SPIDER_PRINCE,
-    POENA
+    POENA,
+    GHOST
 ]
 
 #Character speeds(higher = slower)
@@ -159,7 +161,8 @@ CHARACTER_MOVING_SPEED = {
     'k' : 6,
     'Archer' : 10,
     'Spider_prince' : 10,
-    'Poena':8
+    'Poena':8,
+    'Ghost':8
 }
 #Character size
 
@@ -169,7 +172,8 @@ CHARACTER_SIZE = {
     'k' : (75 // 3, 119 // 3),
     'Archer' : (103 // 3, 131 // 3),
     'Spider_prince' : (103 // 2, 131 // 2),
-    'Poena':(69 // 3, 154 // 3)
+    'Poena':(69 // 3, 154 // 3),
+    'Ghost':(239//3,213//3)
 }
 #Character skill
 SKILL_SPEED = {
@@ -179,6 +183,7 @@ SKILL_SPEED = {
     'Archer': 20,
     'Spider_prince':5,
     'Poena': 10,
+    'Ghost':10
 }
 
 
@@ -189,7 +194,8 @@ STAND_ANIMATION_SPEED = {
     'k' : 6,
     'Archer': 100,
     'Spider_prince':35,
-    'Poena': 10
+    'Poena': 10,
+    'Ghost':100
 }
 
 #Character action_aninamation_speed
@@ -200,6 +206,7 @@ ACTION_SPEED = {
     'Archer': 20,
     'Spider_prince':10,
     'Poena': 10,
+    'Ghost':10
 }
 
 # MP

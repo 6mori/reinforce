@@ -12,6 +12,7 @@ from .. components import k
 from .. components import Archer
 from .. components import spider_prince
 from .. components import poena
+from .. components import ghost
 
 class Gaming(tools._State):
     def __init__(self):
@@ -120,7 +121,8 @@ class Gaming(tools._State):
                 c.K: k.K(),
                 c.ARCHER: Archer.Archer(),
                 c.SPIDER_PRINCE:spider_prince.Spider_prince(),
-                c.POENA:poena.Poena()
+                c.POENA:poena.Poena(),
+                c.GHOST:ghost.Ghost()
             },
             {
                 c.DARLING: Darling.Darling(),
@@ -128,7 +130,8 @@ class Gaming(tools._State):
                 c.K: k.K(),
                 c.ARCHER: Archer.Archer(),
                 c.SPIDER_PRINCE: spider_prince.Spider_prince(),
-                c.POENA: poena.Poena()
+                c.POENA: poena.Poena(),
+                c.GHOST: ghost.Ghost()
             },
         ]
 
