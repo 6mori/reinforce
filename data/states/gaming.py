@@ -42,6 +42,7 @@ class Gaming(tools._State):
         self.viewport = self.screen_rect
         self.background = pg.transform.scale(pg.image.load('images/game_background.jpg'), c.SCREEN_SIZE)
         self.map = pg.Surface(c.SCREEN_SIZE).convert()
+        self.last_scroll_time = self.current_time
         self.scrolling_up = False
         self.scroll_count = 0
 
@@ -91,7 +92,7 @@ class Gaming(tools._State):
             for line in lines:
                 line=line.strip().split(',')
                 self.create_bricks(self.bricks_group,int(line[0]),int(line[1]),int(line[2]),int(line[3]),eval(line[4]))
-        self.break_bricks = 0
+        #self.break_bricks = 0
 
 
     def create_bricks(self, bricks, x, y, width, height, ground_kind):#ground_kind为表示什么砖块条的字符串
@@ -198,10 +199,11 @@ class Gaming(tools._State):
 
 
     def update_viewport(self):
-        if self.break_bricks >= c.SCROLL_BRICK:
+        if self.current_time-self.last_scroll_time >= c.SCROLL_TIME:
             self.scrolling_up = True
             self.scroll_count = 0
-            self.break_bricks = 0
+            self.last_scroll_time = self.current_time
+
         if self.scrolling_up:
             self.viewport.y += 1
             self.scroll_count += 1
@@ -329,7 +331,7 @@ class Gaming(tools._State):
             brick.HP -= bullet.damage
             if brick.HP <= 0:
                 brick.kill()
-                self.break_bricks += 1
+                #self.break_bricks += 1
             bullet.kill()
 
 
@@ -353,8 +355,9 @@ class Gaming(tools._State):
         characters = pg.sprite.spritecollide(sword, self.characters_group, False)
 
         if bricks:
-            if self.apply_swords_damage(sword, bricks):
-                self.break_bricks += 1
+            self.apply_swords_damage(sword, bricks)
+            #if self.apply_swords_damage(sword, bricks):
+            #    self.break_bricks += 1
 
         #if bullets:
         #    self.apply_swords_damage(bullets)
@@ -368,8 +371,8 @@ class Gaming(tools._State):
             collider.HP -= sword.damage
             if collider.HP <= 0:
                 collider.kill()
-                return True
-        return False
+                #return True
+        #return False
 
 
     def blit_everything(self, surface):
