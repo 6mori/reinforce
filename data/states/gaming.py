@@ -24,6 +24,10 @@ class Gaming(tools._State):
         self.game_info[c.CURRENT_TIME] = current_time
         self.next = c.GAME_OVER
 
+        self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
+        self.map = pg.Surface(c.SCREEN_SIZE).convert()
+
+        self.setup_background()
         self.setup_bricks()
         self.setup_characters()
         #self.setup_killing_items()
@@ -33,6 +37,11 @@ class Gaming(tools._State):
         self.setup_props()
         self.setup_splines()
         self.setup_MPsphere()
+
+
+    def setup_background(self):
+        self.viewport = self.screen_rect
+        self.background = pg.transform.scale(pg.image.load('images/game_background.jpg'), c.SCREEN_SIZE)
 
 
     def setup_MPsphere(self):
@@ -173,6 +182,7 @@ class Gaming(tools._State):
 
     def handle_state(self, keys):
         self.update_all_sprites(keys)
+        self.update_viewport()
 
 
     def update_all_sprites(self, keys):
@@ -182,6 +192,10 @@ class Gaming(tools._State):
         self.adjust_sprite_positions()
         self.action_group.update()
         self.props_group.update()
+
+
+    def update_viewport(self):
+        self.viewport.y += 1
 
 
     def adjust_sprite_positions(self):
@@ -255,7 +269,7 @@ class Gaming(tools._State):
 
 
     def check_collider_under_bottom(self, collider):
-        if collider.rect.top >= c.SCREEN_HEIGHT:
+        if collider.rect.top >= self.viewport.bottom:
             collider.kill()
 
 
@@ -340,16 +354,15 @@ class Gaming(tools._State):
 
 
     def blit_everything(self, surface):
-        surface.fill(c.BG_COLOR)
-        for character in self.characters_group.sprites():
-            surface.blit(character.image, character.rect)
-        for brick in self.bricks_group.sprites():
-            surface.blit(brick.image, brick.rect)
+        self.map.blit(self.background, self.viewport, self.viewport)
+        self.characters_group.draw(self.map)
+        self.bricks_group.draw(self.map)
+        self.props_group.draw(self.map)
         for action_item in self.action_group.sprites():
             if action_item.type == c.BULLET:
-                surface.blit(action_item.image, action_item.rect)
-        for prop_item in self.props_group.sprites():
-            surface.blit(prop_item.image, prop_item.rect)
+                self.map.blit(action_item.image, action_item.rect)
+
+        surface.blit(self.map, (0, 0), self.viewport)
         # MP
         self.PlayerMP = []
         for character in self.characters_group.sprites():
@@ -366,11 +379,11 @@ class Gaming(tools._State):
             if i == self.PlayerMP[1]:
                 break
             else:
-                surface.blit(mpsphere.image, mpsphere.rect)
+                self.map.blit(mpsphere.image, mpsphere.rect)
                 i = i + 1
         # HP
         for spline_space_item in self.HPSplinesSpace.sprites():
-            surface.blit(spline_space_item.image, spline_space_item.rect)
+            self.map.blit(spline_space_item.image, spline_space_item.rect)
         self.PlayerHP = []
         for character in self.characters_group.sprites():
             self.PlayerHP.append(character.HP)
@@ -382,6 +395,7 @@ class Gaming(tools._State):
                 surface.blit(spline_item.image, spline_item.rect)
             except:
                 pass
+
 
     def check_if_finish(self):
         if len(self.characters_group) < 2:
