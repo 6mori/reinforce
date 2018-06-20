@@ -8,7 +8,7 @@ class GunGuy(character.Character):
     def __init__(self):
         super().__init__()
 
-        self.bullet_damage = c.P1_DAMAGE
+        self.bullet_damage = c.BULLET_DAMAGE
         self.HP = 10
 
 

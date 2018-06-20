@@ -25,7 +25,6 @@ class Gaming(tools._State):
         self.next = c.GAME_OVER
 
         self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
-        self.map = pg.Surface(c.SCREEN_SIZE).convert()
 
         self.setup_background()
         self.setup_bricks()
@@ -42,6 +41,9 @@ class Gaming(tools._State):
     def setup_background(self):
         self.viewport = self.screen_rect
         self.background = pg.transform.scale(pg.image.load('images/game_background.jpg'), c.SCREEN_SIZE)
+        self.map = pg.Surface(c.SCREEN_SIZE).convert()
+        self.scrolling_up = False
+        self.scroll_count = 0
 
 
     def setup_MPsphere(self):
@@ -89,6 +91,7 @@ class Gaming(tools._State):
             for line in lines:
                 line=line.strip().split(',')
                 self.create_bricks(self.bricks_group,int(line[0]),int(line[1]),int(line[2]),int(line[3]),eval(line[4]))
+        self.break_bricks = 0
 
 
     def create_bricks(self, bricks, x, y, width, height, ground_kind):#ground_kind为表示什么砖块条的字符串
@@ -195,7 +198,15 @@ class Gaming(tools._State):
 
 
     def update_viewport(self):
-        self.viewport.y += 1
+        if self.break_bricks >= c.SCROLL_BRICK:
+            self.scrolling_up = True
+            self.scroll_count = 0
+            self.break_bricks = 0
+        if self.scrolling_up:
+            self.viewport.y += 1
+            self.scroll_count += 1
+            if self.scroll_count == c.SCROLL_LEN:
+                self.scrolling_up = False
 
 
     def adjust_sprite_positions(self):
@@ -234,6 +245,7 @@ class Gaming(tools._State):
         if prop:
             prop.ActOnCharacters(character)
             prop.kill()
+
 
     def adjust_character_for_x_collisions(self, character, collider):
         if character.rect.x < collider.rect.x:
@@ -317,7 +329,9 @@ class Gaming(tools._State):
             brick.HP -= bullet.damage
             if brick.HP <= 0:
                 brick.kill()
+                self.break_bricks += 1
             bullet.kill()
+
 
     def adjust_props_position(self):
         for prop in self.props_group:
@@ -325,11 +339,13 @@ class Gaming(tools._State):
             self.check_collider_under_bottom(prop)
             self.check_if_collider_is_falling(prop)
 
+
     def check_and_adjust_prop_for_y_collisions(self, prop):
         brick = pg.sprite.spritecollideany(prop, self.bricks_group)
         if brick:
             prop.state = c.STANDING
             prop.rect.bottom = brick.rect.top
+
 
     def check_sword_collisions(self, sword):
         bricks = pg.sprite.spritecollide(sword, self.bricks_group, False)
@@ -337,7 +353,8 @@ class Gaming(tools._State):
         characters = pg.sprite.spritecollide(sword, self.characters_group, False)
 
         if bricks:
-            self.apply_swords_damage(sword, bricks)
+            if self.apply_swords_damage(sword, bricks):
+                self.break_bricks += 1
 
         #if bullets:
         #    self.apply_swords_damage(bullets)
@@ -351,6 +368,8 @@ class Gaming(tools._State):
             collider.HP -= sword.damage
             if collider.HP <= 0:
                 collider.kill()
+                return True
+        return False
 
 
     def blit_everything(self, surface):
@@ -379,7 +398,7 @@ class Gaming(tools._State):
             if i == self.PlayerMP[1]:
                 break
             else:
-                self.map.blit(mpsphere.image, mpsphere.rect)
+                surface.blit(mpsphere.image, mpsphere.rect)
                 i = i + 1
         # HP
         for spline_space_item in self.HPSplinesSpace.sprites():

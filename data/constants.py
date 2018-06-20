@@ -62,10 +62,6 @@ JUMP_VEL     = -10
 GRAVITY      = 1.01
 JUMP_GRAVITY = 0.2
 
-# Player1 property
-
-P1_DAMAGE = 2
-
 # Game info
 
 P1_CHARACTER = 'p1 character'
@@ -84,10 +80,11 @@ BRICK_DUR    = 25
 
 # Bullet property
 
+BULLET_DAMAGE = 25
 BULLET_VEL    = 10
 BULLET_WIDTH  = 50
-BULLET_HEIGHT = 10
-BULLET_SIZE   = (50,10)
+BULLET_HEIGHT = 100
+BULLET_SIZE   = (BULLET_WIDTH, BULLET_HEIGHT)
 
 # For test
 
@@ -95,6 +92,7 @@ BG_COLOR = GRAY
 
 # Sword property
 
+SWORD_DAMAGE = 25
 SWORD_WIDTH  = 50
 SWORD_HEIGHT = 20
 
@@ -108,7 +106,6 @@ RIGHT_UP   = 'right_up'
 RIGHT_DOWN = 'right_down'
 LEFT_UP    = 'left_up'
 LEFT_DOWN  = 'left_down'
-
 
 
 TITLE_SCREEN = 'title_screen.jpg'
@@ -134,11 +131,6 @@ P1_CHOOSE_BASE = (100, 100)
 P2_CHOOSE_BASE = (600, 100)
 
 FPS = 60
-
-
-
-
-
 
 # Character name
 
@@ -206,3 +198,6 @@ P2MPPOS = (650, 20)
 # Action item type
 BULLET = 'bullet'
 SWORD  = 'sword'
+
+SCROLL_BRICK = 10
+SCROLL_LEN = BRICK_HEIGHT

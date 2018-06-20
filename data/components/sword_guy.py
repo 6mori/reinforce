@@ -9,7 +9,7 @@ class SwordGuy(character.Character):
     def __init__(self):
         super(SwordGuy, self).__init__()
 
-        self.sword_damage = c.P1_DAMAGE
+        self.sword_damage = c.SWORD_DAMAGE
         self.HP = 10
 
 
