@@ -42,7 +42,7 @@ class Gaming(tools._State):
     def setup_background(self):
         self.viewport = self.screen_rect
         self.background = pg.transform.scale(pg.image.load('images/game_background.jpg'), c.SCREEN_SIZE)
-        self.map = pg.Surface(c.SCREEN_SIZE).convert()
+        self.map = pg.Surface(c.MAP_SIZE).convert()
         self.last_scroll_time = self.current_time
         self.scrolling_up = False
         self.scroll_count = 0
@@ -379,7 +379,7 @@ class Gaming(tools._State):
 
 
     def blit_everything(self, surface):
-        self.map.blit(self.background, self.viewport, self.viewport)
+        self.map.blit(self.background, self.viewport)
         self.characters_group.draw(self.map)
         self.bricks_group.draw(self.map)
         self.props_group.draw(self.map)

@@ -8,3 +8,4 @@
 0, 9, 7, 1, 'grass_soil'
 0, 10, 7, 1, 'grass_soil'
 19, 0, 1, 100, 'long_wood'
+0, 30, 100, 1, 'long_wood'
