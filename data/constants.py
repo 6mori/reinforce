@@ -205,7 +205,7 @@ STAND_ANIMATION_SPEED = {
 #Character action_aninamation_speed
 ACTION_SPEED = {
     'Darling' : 10,
-    'Guan_gong' : 10,
+    'Guan_gong' : 2,
     'k' : 5,
     'Archer': 20,
     'Spider_prince':10,
@@ -222,5 +222,5 @@ BULLET = 'bullet'
 SWORD  = 'sword'
 
 #SCROLL_BRICK = 10
-SCROLL_TIME = 60
+SCROLL_TIME = 6000
 SCROLL_LEN = BRICK_HEIGHT

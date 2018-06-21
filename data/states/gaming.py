@@ -380,7 +380,9 @@ class Gaming(tools._State):
 
     def blit_everything(self, surface):
         self.map.blit(self.background, self.viewport)
-        self.characters_group.draw(self.map)
+        #self.characters_group.draw(self.map)
+        for character in self.characters_group.sprites():
+            self.map.blit(character.image, character.show_xy)
         self.bricks_group.draw(self.map)
         self.props_group.draw(self.map)
         for action_item in self.action_group.sprites():

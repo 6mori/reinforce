@@ -6,6 +6,7 @@ class Darling(gun_guy.GunGuy):
     def __init__(self):
         super().__init__()
 
+        self.name = c.DARLING
         self.bullet_damage = c.BULLET_DAMAGE
         self.HP = 500
         self.MP = 3

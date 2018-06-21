@@ -4,6 +4,7 @@ class Guan_gong(sword_guy.SwordGuy):
     def __init__(self):
         super().__init__()
 
+        self.name = c.GUAN_GONG
         self.sword_damage = 5
         self.HP = 500
 

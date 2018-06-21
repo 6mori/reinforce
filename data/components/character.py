@@ -44,6 +44,7 @@ class Character(Sprite):
         self.image_right = self.image
         self.image_left = pg.transform.flip(self.image_right, True, False)
         self.rect = self.image.get_rect()
+        self.show_xy = (self.rect.topleft)
 
 
     def setup_character_image_stand(self, character_name='Darling',max_frame_number='2',postfix='png'):
@@ -80,6 +81,7 @@ class Character(Sprite):
 
 
     def update(self, keys, keybinding, game_info, action_group):
+        self.show_xy = (self.rect.topleft)
         self.bind_keys(keys, keybinding)
         self.current_time = game_info[c.CURRENT_TIME]
         self.handle_state(action_group)
@@ -254,6 +256,7 @@ class Character(Sprite):
             self.facing_right = True
             self.x_vel = self.max_x_vel
 
+
     def action(self,character_name=None,max_frame_number=None,postfix=None,size=None):
         self.allow_action = False
 
@@ -269,17 +272,17 @@ class Character(Sprite):
 
         if size:
             self.image_right = pg.transform.scale(pg.image.load(action_image_address), size)
-            self.rect = self.image_right.get_rect()
-            self.rect.centerx = self.origin_rect_action.centerx
-            self.rect.bottom = self.origin_rect_action.bottom
         else:
             self.image_right = pg.transform.scale(pg.image.load(action_image_address), c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
+        image_rect = self.image_right.get_rect()
+        self.show_xy = (self.rect.centerx-(image_rect.right-image_rect.left)//2, self.rect.y)
 
         if self.action_counter == max_frame_number * c.ACTION_SPEED[character_name] - 1:
-            self.rect.size = c.CHARACTER_SIZE[character_name]
+            #self.rect.size = c.CHARACTER_SIZE[character_name]
             self.action_counter = 0
             self.state = c.FALLING
+
 
     def skill(self,character_name=None,max_frame_number=None,postfix=None,size=None):
         self.allow_skill = False
@@ -296,24 +299,27 @@ class Character(Sprite):
             tmp_b = self.rect.bottom
             tmp_centerx = self.rect.centerx
             self.image_right = pg.transform.scale(pg.image.load(action_image_address), size)
-            self.rect = self.image_right.get_rect()
-            self.rect.bottom = tmp_b
-            self.rect.centerx = tmp_centerx
         else:
             self.image_right = pg.transform.scale(pg.image.load(action_image_address), c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
+        image_rect = self.image_right.get_rect()
+        self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y)
+
         if self.skill_counter == max_frame_number * c.SKILL_SPEED[character_name]-1:
-            self.rect.size = c.CHARACTER_SIZE[character_name]
+            #self.rect.size = c.CHARACTER_SIZE[character_name]
             self.state = c.FALLING
             self.MP -= 1
+
 
     def check_to_allow_jump(self):
         if not self.commands[c.JUMP]:
             self.allow_jump = True
 
+
     def check_to_allow_action(self):
         if not self.commands[c.ACTION]:
             self.allow_action = True
+
 
     def check_to_allow_skill(self):
         if (not self.commands[c.SKILL]) and (self.MP>0):

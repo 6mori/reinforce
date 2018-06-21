@@ -128,13 +128,13 @@ class Choosing(tools._State):
 
     def blit_everything(self, surface):
         surface.blit(self.background, self.background_rect)
+        surface.blit(self.chara_poster[self.pos2Chara[self.cursor_1.offset]], pg.Rect((0, 0), c.HALF_SCREEN_SIZE))
+        surface.blit(self.chara_poster[self.pos2Chara[self.cursor_2.offset]],
+                     pg.Rect((c.SCREEN_WIDTH / 2, 0), c.HALF_SCREEN_SIZE))
+
         for pos, chara in self.pos2Chara.items():
             surface.blit(self.chara_icon[chara][1], (c.P1_CHOOSE_BASE[0]+pos[0], c.P1_CHOOSE_BASE[1]+pos[1]))
             surface.blit(self.chara_icon[chara][1], (c.P2_CHOOSE_BASE[0]+pos[0], c.P2_CHOOSE_BASE[1]+pos[1]))
-
-            surface.blit(self.chara_poster[self.pos2Chara[self.cursor_1.offset]], pg.Rect((0, 0), c.HALF_SCREEN_SIZE))
-            surface.blit(self.chara_poster[self.pos2Chara[self.cursor_2.offset]],
-                         pg.Rect((c.SCREEN_WIDTH/2, 0), c.HALF_SCREEN_SIZE))
 
         surface.blit(self.chara_icon[self.pos2Chara[self.cursor_1.offset]][0], self.cursor_1.rect)
         surface.blit(self.chara_icon[self.pos2Chara[self.cursor_2.offset]][0], self.cursor_2.rect)
