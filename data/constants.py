@@ -224,3 +224,9 @@ SWORD  = 'sword'
 #SCROLL_BRICK = 10
 SCROLL_TIME = 6000
 SCROLL_LEN = BRICK_HEIGHT
+
+# BGM
+TITLE_BGM = 'title.bgm.mp3'
+CHOOSING_BGM = 'choosing_bgm.mp3'
+GAMING_BGM = 'main_theme.ogg'
+

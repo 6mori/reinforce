@@ -3,6 +3,7 @@ from pygame.sprite import Group
 
 
 from .. import tools
+from .. import setup
 from .. import constants as c
 from .. components import brick
 from .. components import props
@@ -28,12 +29,13 @@ class Gaming(tools._State):
         self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
 
         self.setup_background()
+        self.setup_BGM()
+
         self.setup_bricks()
         self.setup_characters()
         #self.setup_killing_items()
         self.setup_action_group()
         #self.setup_spritegroups()
-
         self.setup_props()
         self.setup_splines()
         self.setup_MPsphere()
@@ -46,6 +48,11 @@ class Gaming(tools._State):
         self.last_scroll_time = self.current_time
         self.scrolling_up = False
         self.scroll_count = 0
+
+
+    def setup_BGM(self):
+        pg.mixer.music.load('music/{}'.format(c.GAMING_BGM))
+        pg.mixer.music.play()
 
 
     def setup_MPsphere(self):

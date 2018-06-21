@@ -1,4 +1,4 @@
-
+import os
 import pygame as pg
 
 from . import constants as c
@@ -134,3 +134,13 @@ class _State(object):
 
     def update(self, surface, keys, current_time):
         pass
+
+
+def load_all_music(directory, accept=('.wav', '.mp3', '.ogg', '.mdi', '.flac')):
+    songs = {}
+    for song in os.listdir(directory):
+        name,ext = os.path.splitext(song)
+        if ext.lower() in accept:
+            songs[name] = os.path.join(directory, song)
+    print(songs.values())
+    return songs
