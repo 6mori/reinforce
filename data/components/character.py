@@ -37,6 +37,8 @@ class Character(Sprite):
         self.skill_counter=0
         self.action_counter=0
 
+        self.vincible=True
+
 
     def setup_character_image_initial(self,character_name='Darling',postfix='png'):
         #print('images/%s/stand/0.%s'%(character_name,postfix))

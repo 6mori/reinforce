@@ -1,7 +1,9 @@
 from . import bullet
 import pygame as pg
+from .. import constants as c
+import time
 class Skill_attack(bullet.Bullet):
-    def __init__(self, owner, damage, direction, skill_style,owner_name):
+    def __init__(self, owner, damage, direction, skill_style,owner_name,):
         super().__init__(owner,damage,direction,skill_style)
 
         self.skill_style = skill_style
@@ -21,6 +23,14 @@ class Skill_attack(bullet.Bullet):
             self.image = pg.transform.scale(pg.image.load('images/bullet/' + skill_style + '/0.png'), self.skill_size)
             self.rect = self.image.get_rect()
             self.frame_numbers = 11
+        elif self.skill_style == 'servent' and self.owner_name == 'Ghost':
+            self.born_time = time.time()
+            self.animation_speed = 4
+            self.skill_size = (80 // 3, 146 // 3)
+            self.image = pg.transform.scale(pg.image.load('images/bullet/' + skill_style + '/0.png'), self.skill_size)
+            self.frame_numbers = 8
+            self.rect = self.image.get_rect()
+
 
 
     def update(self):
@@ -66,4 +76,21 @@ class Skill_attack(bullet.Bullet):
             self.rect.centery = tmp
             if self.direction == 'left':
                 self.image=pg.transform.flip(self.image, True, False)
+        elif self.skill_style == 'servent' and self.owner_name == 'Ghost':
+            if time.time() - self.born_time >= 1 / 100 and self.counter >= self.frame_numbers * self.animation_speed -1:
+                self.kill()
+                return
+            if self.counter < self.frame_numbers * self.animation_speed -1 :
+                self.counter += 1
+                self.image = pg.transform.scale(
+                    pg.image.load('images/bullet/%s/%s.png' % (self.skill_style, self.counter // self.animation_speed)),
+                    self.skill_size)
+                if self.direction == c.LEFT:
+                    self.image = pg.transform.flip(self.image, True, False)
+        else:
+            self.counter += 1
+            self.counter %= self.frame_numbers * self.animation_speed
+            self.image = pg.transform.scale(
+                pg.image.load('images/bullet/%s/%s.png' % (self.skill_style, self.counter // self.animation_speed)),
+                self.skill_size)
         super().update()

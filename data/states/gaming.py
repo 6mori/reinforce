@@ -341,7 +341,8 @@ class Gaming(tools._State):
 
         if character:
             if bullet.owner != character.player_num:
-                character.HP -= bullet.damage
+                if(character.vincible):
+                    character.HP -= bullet.damage
                 if character.HP <= 0:
                     character.kill()
                 bullet.kill()
@@ -387,7 +388,8 @@ class Gaming(tools._State):
 
     def apply_swords_damage(self, sword, coll_dict):
         for collider in coll_dict:
-            collider.HP -= sword.damage
+            if (collider.vincible):
+                collider.HP -= sword.damage
             if collider.HP <= 0:
                 collider.kill()
                 #return True

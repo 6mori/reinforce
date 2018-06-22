@@ -187,7 +187,7 @@ SKILL_SPEED = {
     'Archer': 20,
     'Spider_prince':5,
     'Poena': 10,
-    'Ghost':10
+    'Ghost':5
 }
 
 
