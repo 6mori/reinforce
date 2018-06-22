@@ -14,6 +14,7 @@ from .. components import Archer
 from .. components import spider_prince
 from .. components import poena
 from .. components import ghost
+import random
 
 class Gaming(tools._State):
     def __init__(self):
@@ -36,9 +37,12 @@ class Gaming(tools._State):
         #self.setup_killing_items()
         self.setup_action_group()
         #self.setup_spritegroups()
+        self.prop_count = 0
+        self.props_group = Group()
         self.setup_props()
         self.setup_splines()
         self.setup_MPsphere()
+
 
 
     def setup_background(self):
@@ -79,11 +83,16 @@ class Gaming(tools._State):
 
 
     def setup_props(self):
-        self.props_group = Group()
-        self.create_prop(self.props_group, 2, 1, 'Prop_MP_potion')
-        self.create_prop(self.props_group, 3, 1, 'Prop_HP_potion')
-        # self.create_prop(self.props_group, 4, 1, 'Prop_HP_Apple')
-        # self.create_prop(self.props_group, 2, 2, 'Prop_HP_Ginseng')
+        self.prop_count += 1
+        if self.prop_count < 400:
+            return
+        else:
+            self.prop_count = 0
+            self.props_group = Group()
+            self.create_prop(self.props_group, random.randint(1,30), 1, 'Prop_MP_potion')
+            self.create_prop(self.props_group, random.randint(1,30), 1, 'Prop_HP_potion')
+            # self.create_prop(self.props_group, 4, 1, 'Prop_HP_Apple')
+            # self.create_prop(self.props_group, 2, 2, 'Prop_HP_Ginseng')
 
 
     def create_prop(self, props_group, row, col,prop_kind):
@@ -429,6 +438,7 @@ class Gaming(tools._State):
                 surface.blit(spline_item.image, spline_item.rect)
             except:
                 pass
+        self.setup_props()
 
 
     def check_if_finish(self):

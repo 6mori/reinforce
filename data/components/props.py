@@ -20,13 +20,10 @@ class Prop(Sprite):
 
     def ActOnCharacters(self, character):
         if self.kind == 'Prop_HP_potion':
-            character.HP = character.HP+1
-        elif self.kind == 'Prop_HP_Apple.png':
-            character.HP = character.HP + 1
-        elif self.kind == 'Prop_HP_Ginseng.png':
-            character.HP = character.HP + 2
+            character.HP = character.HP+80
         elif self.kind == 'Prop_MP_potion':
-            character.MP = character.MP+1
+            if character.MP < 6:
+                character.MP = character.MP+1
 
 
     def update(self):
