@@ -17,7 +17,7 @@ class Brick(Sprite):
         self.rect.top = y
 
         self.HP = t.kindOfBrick[kind]['dur']
-
+        self.vincible = True
         # for test
         self.color = c.ORANGE
 

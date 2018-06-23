@@ -210,7 +210,7 @@ ACTION_SPEED = {
     'Archer': 20,
     'Spider_prince':10,
     'Poena': 10,
-    'Ghost':10
+    'Ghost':2
 }
 
 # MP
