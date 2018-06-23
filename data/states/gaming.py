@@ -91,6 +91,7 @@ class Gaming(tools._State):
             self.props_group = Group()
             self.create_prop(self.props_group, random.randint(1,30), 1, 'Prop_MP_potion')
             self.create_prop(self.props_group, random.randint(1,30), 1, 'Prop_HP_potion')
+            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_Shoe')
             # self.create_prop(self.props_group, 4, 1, 'Prop_HP_Apple')
             # self.create_prop(self.props_group, 2, 2, 'Prop_HP_Ginseng')
 
@@ -400,6 +401,11 @@ class Gaming(tools._State):
         self.map.blit(self.background, self.viewport)
         #self.characters_group.draw(self.map)
         for character in self.characters_group.sprites():
+            if character.acctime:
+                character.acctime -= 1
+                character.max_x_vel = c.MAX_X_VEL * 2
+            else:
+                character.max_x_vel = c.MAX_X_VEL
             self.map.blit(character.image, character.show_xy)
         self.bricks_group.draw(self.map)
         self.props_group.draw(self.map)

@@ -53,6 +53,8 @@ kindOfProps={
     'Prop_MP_potion':{'name':'images/Prop_MP_potion.png', 'dur': 25},
     'Prop_HP_Apple':{'name':'images/Prop_HP_Apple.png', 'dur': 25},
     'Prop_HP_Ginseng':{'name':'images/Prop_HP_Ginseng.png', 'dur': 25},
+    'Prop_Shoe':{'name':'images/shoe.png', 'dur': 25},
+    'Prop_Corselet':{'name':'images/Prop_Corselet.png', 'dur': 25},
 }
 
 class Control(object):

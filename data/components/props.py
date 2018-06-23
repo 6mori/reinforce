@@ -24,6 +24,10 @@ class Prop(Sprite):
         elif self.kind == 'Prop_MP_potion':
             if character.MP < 6:
                 character.MP = character.MP+1
+        elif self.kind == 'Prop_Shoe':
+            character.acctime = 120
+        elif self.kind == 'Prop_Corselet':
+            character.invtime = 120
 
 
     def update(self):

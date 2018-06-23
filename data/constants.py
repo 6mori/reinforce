@@ -229,4 +229,3 @@ SCROLL_LEN = BRICK_HEIGHT
 TITLE_BGM = 'title.bgm.mp3'
 CHOOSING_BGM = 'choosing_bgm.mp3'
 GAMING_BGM = 'main_theme.ogg'
-

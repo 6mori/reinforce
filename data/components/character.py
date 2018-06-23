@@ -39,6 +39,10 @@ class Character(Sprite):
 
         self.vincible=True
 
+        # for props
+        self.acctime = 0
+        self.invtime = 0
+
 
     def setup_character_image_initial(self,character_name='Darling',postfix='png'):
         #print('images/%s/stand/0.%s'%(character_name,postfix))
