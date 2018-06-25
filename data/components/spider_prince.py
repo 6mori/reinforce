@@ -10,6 +10,7 @@ class Spider_prince(gun_guy.GunGuy):
         self.bullet_damage = 5
         self.HP = 25
         self.MP = 3
+        self.name = c.SPIDER_PRINCE
 
     def skill(self, action_group):
         super().skill('Spider_prince', 8, 'gif')

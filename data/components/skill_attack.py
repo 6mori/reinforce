@@ -60,9 +60,10 @@ class Skill_attack(bullet.Bullet):
             else:
                 self.counter += 1
                 self.counter %= self.frame_numbers * self.animation_speed
-                self.image = pg.transform.scale(
-                    pg.image.load('images/bullet/%s/%s.png' % (self.skill_style, self.counter // self.animation_speed)),
-                    self.skill_size)
+                if self.counter // self.animation_speed != (self.counter - 1) // self.animation_speed:
+                    self.image = pg.transform.scale(
+                        pg.image.load('images/bullet/%s/%s.png' % (self.skill_style, self.counter // self.animation_speed)),
+                        self.skill_size)
         elif self.skill_style == 'cross' and self.owner_name == 'Poena':
             if self.counter != self.frame_numbers * self.animation_speed - 1:
                 self.counter += 1

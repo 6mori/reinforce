@@ -4,6 +4,7 @@ from pygame.sprite import Group
 from .. import tools
 from .. import setup
 from .. import constants as c
+from ..components import character as ch
 from ..components import brick
 from ..components import props
 from ..components import Darling
@@ -158,33 +159,6 @@ class Gaming(tools._State):
     def setup_action_group(self):
         self.action_group = Group()
 
-    '''
-    def setup_killing_items(self):
-        self.setup_bullets()
-        self.setup_swords()
-
-        action_group = {
-            c.DARLING: self.bullets_group,
-            c.GUAN_GONG: self.swords_group,
-            c.K: self.swords_group,
-            c.ARCHER: self.bullets_group,
-            c.SPIDER_PRINCE:self.bullets_group,
-            c.POENA:self.bullets_group
-        }
-
-        self.killing_items = [
-            action_group[self.game_info[c.P1_CHARACTER]],
-            action_group[self.game_info[c.P2_CHARACTER]],
-        ]
-
-
-    def setup_bullets(self):
-        self.bullets_group = Group()
-
-    def setup_swords(self):
-        self.swords_group = Group()
-    '''
-
     def update(self, surface, keys, current_time):
         self.game_info[c.CURRENT_TIME] = self.current_time = current_time
         self.blit_everything(surface)
@@ -202,7 +176,6 @@ class Gaming(tools._State):
         self.adjust_sprite_positions()
         self.action_group.update()
         self.props_group.update()
-
 
     def update_viewport(self):
         if self.current_time - self.last_scroll_time >= c.SCROLL_TIME:
@@ -224,7 +197,6 @@ class Gaming(tools._State):
         # self.check_swords_collisions()
         self.adjust_bricks_position()
 
-
     def adjust_characters_position(self):
         for character in self.characters_group.sprites():
             character.rect.x += round(character.x_vel)
@@ -234,7 +206,6 @@ class Gaming(tools._State):
             character.rect.y += round(character.y_vel)
             self.check_character_y_collisions(character)
             self.check_collider_under_bottom(character)
-
 
     def check_character_x_edge(self, character):
         if character.rect.left < 0:
@@ -248,18 +219,20 @@ class Gaming(tools._State):
 
         if brick:
             self.adjust_character_for_x_collisions(character, brick)
-
         if prop:
             prop.ActOnCharacters(character)
             prop.kill()
 
     def adjust_character_for_x_collisions(self, character, collider):
-        if character.rect.x < collider.rect.x:
-            character.rect.right = collider.rect.left
+        if character.name == c.GUAN_GONG and character.state == c.SKILLING:
+            collider.kill()
         else:
-            character.rect.left = collider.rect.right
+            if character.rect.x < collider.rect.x:
+                character.rect.right = collider.rect.left
+            else:
+                character.rect.left = collider.rect.right
 
-        character.x_vel = 0
+            character.x_vel = 0
 
     def check_character_y_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
@@ -275,13 +248,16 @@ class Gaming(tools._State):
         self.check_if_collider_is_falling(character)
 
     def adjust_character_for_y_collisions(self, character, collider):
-        if character.rect.y < collider.rect.y:
-            character.rect.bottom = collider.rect.top
-            character.state = c.WALKING
+        if character.name == c.GUAN_GONG and character.state == c.SKILLING:
+            pass
         else:
-            character.rect.top = collider.rect.bottom
+            if character.rect.y < collider.rect.y:
+                character.rect.bottom = collider.rect.top
+                character.state = c.WALKING
+            else:
+                character.rect.top = collider.rect.bottom
 
-        character.y_vel = 0
+            character.y_vel = 0
 
     def check_collider_under_bottom(self, collider):
         if collider.rect.top >= self.viewport.bottom:
@@ -297,14 +273,12 @@ class Gaming(tools._State):
 
         collider.rect.y -= 1
 
-
     def adjust_action_item_position(self):
         for action_item in self.action_group.sprites():
             if action_item.type == c.BULLET:
                 self.adjust_bullet_position(action_item)
             elif action_item.type == c.SWORD:
                 self.check_sword_collisions(action_item)
-
 
     def adjust_bullet_position(self, bullet):
         if bullet.rect.right < 0:
@@ -314,7 +288,6 @@ class Gaming(tools._State):
         if bullet.rect.bottom < 0:
             bullet.kill()
         self.check_bullet_x_collisions(bullet)
-
 
     def check_bullet_x_collisions(self, bullet):
         character = pg.sprite.spritecollideany(bullet, self.characters_group)
@@ -383,12 +356,10 @@ class Gaming(tools._State):
                 # return True
         # return False
 
-
     def adjust_bricks_position(self):
         for brick in self.bricks_group.sprites():
             if brick.rect.bottom < self.viewport.top:
                 brick.kill()
-
 
     def blit_everything(self, surface):
         self.map.blit(self.background, self.viewport)

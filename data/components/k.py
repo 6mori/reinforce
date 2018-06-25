@@ -1,5 +1,6 @@
 from . import sword_guy
 from .. import constants as c
+from . import sword
 
 
 class K(sword_guy.SwordGuy):
@@ -8,6 +9,7 @@ class K(sword_guy.SwordGuy):
 
         self.sword_damage = 5
         self.HP = 10
+        self.name = c.K
 
     def skill(self, action_group):
         super().skill(c.K, 21, 'gif', (40, 65))
@@ -17,6 +19,14 @@ class K(sword_guy.SwordGuy):
         else:
             self.rect.x -= 1
         self.rect.y -= 1
+        cutting_sword = sword.Sword(self.player_num, self.sword_damage)
+        if self.facing_right:
+            cutting_sword.rect.left = self.rect.right + c.MAX_X_VEL
+        else:
+            cutting_sword.rect.right = self.rect.left - c.MAX_X_VEL
+
+        cutting_sword.rect.centery = self.rect.centery
+        action_group.add(cutting_sword)
 
     def action(self, action_group):
         super().action(action_group, c.K, 7, 'gif', (139 // 3, 119 // 3))
