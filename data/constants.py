@@ -134,7 +134,7 @@ PROP_MAX_Y_VEL = 10
 P1_CHOOSE_BASE = (100, 100)
 P2_CHOOSE_BASE = (600, 100)
 
-FPS = 120
+FPS = 60
 
 # Character name
 

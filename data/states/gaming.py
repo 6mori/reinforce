@@ -29,7 +29,7 @@ class Gaming(tools._State):
         self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
 
         self.setup_background()
-        self.setup_BGM()
+        #self.setup_BGM()
 
         self.setup_bricks()
         self.setup_characters()
@@ -203,6 +203,7 @@ class Gaming(tools._State):
         self.action_group.update()
         self.props_group.update()
 
+
     def update_viewport(self):
         if self.current_time - self.last_scroll_time >= c.SCROLL_TIME:
             self.scrolling_up = True
@@ -221,6 +222,8 @@ class Gaming(tools._State):
         self.adjust_action_item_position()
         self.adjust_props_position()
         # self.check_swords_collisions()
+        self.adjust_bricks_position()
+
 
     def adjust_characters_position(self):
         for character in self.characters_group.sprites():
@@ -231,6 +234,7 @@ class Gaming(tools._State):
             character.rect.y += round(character.y_vel)
             self.check_character_y_collisions(character)
             self.check_collider_under_bottom(character)
+
 
     def check_character_x_edge(self, character):
         if character.rect.left < 0:
@@ -293,12 +297,14 @@ class Gaming(tools._State):
 
         collider.rect.y -= 1
 
+
     def adjust_action_item_position(self):
         for action_item in self.action_group.sprites():
             if action_item.type == c.BULLET:
                 self.adjust_bullet_position(action_item)
             elif action_item.type == c.SWORD:
                 self.check_sword_collisions(action_item)
+
 
     def adjust_bullet_position(self, bullet):
         if bullet.rect.right < 0:
@@ -308,6 +314,7 @@ class Gaming(tools._State):
         if bullet.rect.bottom < 0:
             bullet.kill()
         self.check_bullet_x_collisions(bullet)
+
 
     def check_bullet_x_collisions(self, bullet):
         character = pg.sprite.spritecollideany(bullet, self.characters_group)
@@ -375,6 +382,13 @@ class Gaming(tools._State):
                 collider.kill()
                 # return True
         # return False
+
+
+    def adjust_bricks_position(self):
+        for brick in self.bricks_group.sprites():
+            if brick.rect.bottom < self.viewport.top:
+                brick.kill()
+
 
     def blit_everything(self, surface):
         self.map.blit(self.background, self.viewport)
