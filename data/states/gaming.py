@@ -26,6 +26,8 @@ class Gaming(tools._State):
         self.game_info[c.CURRENT_TIME] = current_time
         self.next = c.GAME_OVER
 
+        #self.done = True
+
         self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
 
         self.setup_background()
@@ -216,6 +218,7 @@ class Gaming(tools._State):
             if self.scroll_count == c.SCROLL_LEN:
                 self.scrolling_up = False
 
+
     def adjust_sprite_positions(self):
         self.adjust_characters_position()
         # self.adjust_bullets_position()
@@ -242,6 +245,7 @@ class Gaming(tools._State):
         if character.rect.right > c.SCREEN_WIDTH:
             character.rect.right = c.SCREEN_WIDTH
 
+
     def check_character_x_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
         prop = pg.sprite.spritecollideany(character, self.props_group)
@@ -253,6 +257,7 @@ class Gaming(tools._State):
             prop.ActOnCharacters(character)
             prop.kill()
 
+
     def adjust_character_for_x_collisions(self, character, collider):
         if character.rect.x < collider.rect.x:
             character.rect.right = collider.rect.left
@@ -260,6 +265,7 @@ class Gaming(tools._State):
             character.rect.left = collider.rect.right
 
         character.x_vel = 0
+
 
     def check_character_y_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
@@ -274,6 +280,7 @@ class Gaming(tools._State):
 
         self.check_if_collider_is_falling(character)
 
+
     def adjust_character_for_y_collisions(self, character, collider):
         if character.rect.y < collider.rect.y:
             character.rect.bottom = collider.rect.top
@@ -283,9 +290,11 @@ class Gaming(tools._State):
 
         character.y_vel = 0
 
+
     def check_collider_under_bottom(self, collider):
         if collider.rect.top >= self.viewport.bottom:
             collider.kill()
+
 
     def check_if_collider_is_falling(self, collider):
         collider.rect.y += 1
@@ -346,17 +355,20 @@ class Gaming(tools._State):
                 if bullet.damage <= 0:
                     bullet.kill()
 
+
     def adjust_props_position(self):
         for prop in self.props_group:
             self.check_and_adjust_prop_for_y_collisions(prop)
             self.check_collider_under_bottom(prop)
             self.check_if_collider_is_falling(prop)
 
+
     def check_and_adjust_prop_for_y_collisions(self, prop):
         brick = pg.sprite.spritecollideany(prop, self.bricks_group)
         if brick:
             prop.state = c.STANDING
             prop.rect.bottom = brick.rect.top
+
 
     def check_sword_collisions(self, sword):
         bricks = pg.sprite.spritecollide(sword, self.bricks_group, False)
@@ -373,6 +385,7 @@ class Gaming(tools._State):
 
         if characters:
             self.apply_swords_damage(sword, characters)
+
 
     def apply_swords_damage(self, sword, coll_dict):
         for collider in coll_dict:
@@ -439,6 +452,7 @@ class Gaming(tools._State):
             except:
                 pass
         self.setup_props()
+
 
     def check_if_finish(self):
         if len(self.characters_group) < 2:

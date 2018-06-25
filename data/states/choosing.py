@@ -8,6 +8,7 @@ class Choosing(tools._State):
     def __init__(self):
         super(Choosing, self).__init__()
 
+
     def startup(self, current_time, persist):
         self.game_info = persist
         self.persist = self.game_info
@@ -19,9 +20,11 @@ class Choosing(tools._State):
         self.setup_icon()
         self.setup_poster()
 
+
     def setup_background(self):
         self.background = pg.transform.scale(pg.image.load('images/%s' % c.CHOOSING_SCREEN), c.SCREEN_SIZE)
         self.background_rect = self.background.get_rect()
+
 
     def setup_cursor(self):
         self.cursor_1 = self.creat_cursor(c.P1_CHOOSE_BASE, 50, 50)
@@ -31,6 +34,7 @@ class Choosing(tools._State):
         self.cursor_2 = self.creat_cursor(c.P2_CHOOSE_BASE, 50, 50)
         self.cursor_2.offset = (0, 0)
         self.cursor_2.confirm = False
+
 
     def setup_position(self):
         self.pos2Chara = {}
@@ -42,6 +46,7 @@ class Choosing(tools._State):
                 x = 0
                 y += 50
 
+
     def setup_icon(self):
         self.chara_icon = {}
         for character_name in c.CHARACTERS:
@@ -49,11 +54,13 @@ class Choosing(tools._State):
                 pg.transform.scale(pg.image.load('images/icons/%s.png' % (character_name)), (50, 50)),
                 pg.transform.scale(pg.image.load('images/icons/%s_unselect.png' % (character_name)), (50, 50))]
 
+
     def setup_poster(self):
         self.chara_poster = {}
         for character_name in c.CHARACTERS:
             self.chara_poster[character_name] = \
                 pg.transform.scale(pg.image.load('images/posters/%s.png' % (character_name)), c.HALF_SCREEN_SIZE)
+
 
     def creat_cursor(self, pos, height, width):
         cursor = pg.sprite.Sprite()
@@ -64,12 +71,14 @@ class Choosing(tools._State):
         cursor.rect.y = pos[1]
         return cursor
 
+
     def update(self, surface, keys, current_time):
         self.current_time = current_time
         self.game_info[c.CURRENT_TIME] = self.current_time
         self.update_cursor()
         self.blit_everything(surface)
         self.check_if_all_confirmed()
+
 
     def get_event(self, event):
         P1_input_list = {
@@ -110,11 +119,13 @@ class Choosing(tools._State):
                         if next_pos in self.pos2Chara.keys():
                             self.cursor_2.offset = next_pos
 
+
     def update_cursor(self):
         self.cursor_1.rect.x, self.cursor_1.rect.y = [base + off for base, off in
                                                       zip(c.P1_CHOOSE_BASE, self.cursor_1.offset)]
         self.cursor_2.rect.x, self.cursor_2.rect.y = [base + off for base, off in
                                                       zip(c.P2_CHOOSE_BASE, self.cursor_2.offset)]
+
 
     def blit_everything(self, surface):
         surface.blit(self.background, self.background_rect)
@@ -128,6 +139,7 @@ class Choosing(tools._State):
 
         surface.blit(self.chara_icon[self.pos2Chara[self.cursor_1.offset]][0], self.cursor_1.rect)
         surface.blit(self.chara_icon[self.pos2Chara[self.cursor_2.offset]][0], self.cursor_2.rect)
+
 
     def check_if_all_confirmed(self):
         if self.cursor_1.confirm and self.cursor_2.confirm:
