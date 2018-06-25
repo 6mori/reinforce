@@ -13,6 +13,8 @@ from .. components import Archer
 from .. components import spider_prince
 from .. components import poena
 from .. components import ghost
+import random
+
 
 class Gaming(tools._State):
     def __init__(self):
@@ -84,7 +86,6 @@ class Gaming(tools._State):
         y = col * c.BRICK_HEIGHT
         props_group.add(props.Prop(x, y, prop_kind))
 
-
     def setup_bricks(self):
         map = "images/map.txt"
         self.bricks_group = Group()
@@ -93,7 +94,36 @@ class Gaming(tools._State):
             for line in lines:
                 line=line.strip().split(',')
                 self.create_bricks(self.bricks_group,int(line[0]),int(line[1]),int(line[2]),int(line[3]),eval(line[4]))
-        #self.break_bricks = 0
+        # for i in range(70):
+        #     R=random.randint(0,100)
+        #     if R>30:
+        #         x=random.randint(0,40)
+        #         length=random.randint(0,14)
+        #         self.create_bricks(self.bricks_group,x,i+30,length,1,'grass_surface')
+        #         if length>=7:
+        #             self.create_bricks(self.bricks_group, x, i + 29, 1,1 , 'long_wood')
+        #             self.create_bricks(self.bricks_group, x+length-1, i + 29, 1, 1, 'long_wood')
+        # for i in range(100):
+        #     R=random.randint(0,100)
+        #     if R>0:
+        #         x=random.randint(0,40)
+        #         length=random.randint(0,14)
+        #         self.create_bricks(self.bricks_group,x,i+30,length,1,'grass_surface')
+        #         if length>=7:
+        #             self.create_bricks(self.bricks_group, x, i + 28, 1, 2, 'long_wood')
+        #             self.create_bricks(self.bricks_group, x+length-1, i + 28, 1, 2, 'long_wood')
+
+        # self.create_bricks(self.bricks_group, 0, 10, 40, 1,'grass_surface')
+        # self.create_bricks(self.bricks_group, 18, 14, 2, 1,'grass_surface')
+        # self.create_bricks(self.bricks_group, 17, 0, 1, 7,'long_wood')
+        # self.create_bricks(self.bricks_group, 17, 11, 1, 4,'grass_soil')
+        # self.create_bricks(self.bricks_group, 10, 0, 3, 7,'long_wood')
+        # self.create_bricks(self.bricks_group, 0, 7, 7, 1,'grass_surface')
+        # self.create_bricks(self.bricks_group, 0, 8, 7, 1, 'long_stone')
+        # self.create_bricks(self.bricks_group, 0, 9, 7, 1, 'grass_soil')
+        # self.create_bricks(self.bricks_group, 0, 10, 7, 1, 'grass_soil')
+#>>>>>>> Stashed changes
+#>>>>>>> Stashed changes
 
 
     def create_bricks(self, bricks, x, y, width, height, ground_kind):#ground_kind为表示什么砖块条的字符串
@@ -212,7 +242,6 @@ class Gaming(tools._State):
             self.scroll_count += 1
             if self.scroll_count == c.SCROLL_LEN:
                 self.scrolling_up = False
-
 
     def adjust_sprite_positions(self):
         self.adjust_characters_position()
