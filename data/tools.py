@@ -72,6 +72,7 @@ class Control(object):
         self.state_name = None
         self.state = None
 
+
     def setup_states(self, state_dict, start_state):
         self.state_dict = state_dict
         self.state_name = start_state
@@ -81,6 +82,7 @@ class Control(object):
         persist = self.state.cleanup()
         self.state.startup(self.current_time, persist)
 
+
     def update(self):
         self.current_time = pg.time.get_ticks()
         if self.state.quit:
@@ -89,12 +91,14 @@ class Control(object):
             self.flip_state()
         self.state.update(self.screen, self.keys, self.current_time)
 
+
     def flip_state(self):
         previous, self.state_name = self.state_name, self.state.next
         persist = self.state.cleanup()
         self.state = self.state_dict[self.state_name]
         self.state.startup(self.current_time, persist)
         self.state.previous = previous
+
 
     def event_loop(self):
         for event in pg.event.get():
@@ -105,6 +109,7 @@ class Control(object):
             elif event.type == pg.KEYUP:
                 self.keys = pg.key.get_pressed()
             self.state.get_event(event)
+
 
     def main(self):
         while not self.done:

@@ -114,6 +114,7 @@ LEFT_DOWN = 'left_down'
 
 TITLE_SCREEN = 'title_screen.jpg'
 CHOOSING_SCREEN = 'choosing_screen.jpg'
+RESULT_SCREEN = 'result_screen.png'
 
 # Main menu options
 

@@ -13,7 +13,7 @@ class Darling(gun_guy.GunGuy):
         self.MP = 3
 
     def skill(self, action_group):
-        super().skill('Darling', 16, 'png')
+        super().skill('Darling', 16, 'gif')
         self.wild_shot_bullets(action_group)
 
     def action(self, action_group):
@@ -32,13 +32,13 @@ class Darling(gun_guy.GunGuy):
         self.state = c.FALLING
 
     def setup_character_image_initial(self, character_name, postfix):
-        super().setup_character_image_initial(c.DARLING, 'png')
+        super().setup_character_image_initial(c.DARLING, 'gif')
 
     def setup_character_image_stand(self, character_name, max_frame_number, postfix):
-        super().setup_character_image_stand(c.DARLING, 2, 'png')
+        super().setup_character_image_stand(c.DARLING, 2, 'gif')
 
     def setup_character_image_walk(self, character_name, max_frame_number, postfix):
-        super().setup_character_image_walk(c.DARLING, 4, 'png')
+        super().setup_character_image_walk(c.DARLING, 4, 'gif')
 
     def wild_shot_bullets(self, action_group):
         if not self.skill_counter % (c.SKILL_SPEED['Darling']):

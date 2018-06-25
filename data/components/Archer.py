@@ -10,10 +10,11 @@ class Archer(gun_guy.GunGuy):
         self.bullet_damage = 5
         self.HP = 25
         self.MP = 3
+        self.name = c.ARCHER
 
     # 大招
     def skill(self, action_group):
-        super().skill('Archer', 1, 'png')
+        super().skill('Archer', 1, 'gif')
         if self.skill_counter == 1:
             if self.facing_right:
                 attack = skill_attack.Skill_attack(self.player_num, 100, c.RIGHT, 'dodge',
@@ -45,10 +46,10 @@ class Archer(gun_guy.GunGuy):
         action_group.add(firing_arrow)
 
     def setup_character_image_initial(self, character_name, postfix):
-        super().setup_character_image_initial(c.ARCHER, 'png')
+        super().setup_character_image_initial(c.ARCHER, 'gif')
 
     def setup_character_image_stand(self, character_name, max_frame_number, postfix):
-        super().setup_character_image_stand(c.ARCHER, 1, 'png')
+        super().setup_character_image_stand(c.ARCHER, 1, 'gif')
 
     def setup_character_image_walk(self, character_name, max_frame_number, postfix):
-        super().setup_character_image_walk(c.ARCHER, 2, 'png')
+        super().setup_character_image_walk(c.ARCHER, 2, 'gif')

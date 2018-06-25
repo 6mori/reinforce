@@ -43,7 +43,7 @@ class Character(Sprite):
         self.invtime = 0
 
     def setup_character_image_initial(self, character_name='Darling', postfix='png'):
-        self.image = pg.transform.scale(pg.image.load('images/%s/stand/0.%s' % (character_name, postfix)),
+        self.image = pg.transform.scale(pg.image.load('images/%s/stand/0.%s' % (character_name, postfix)).convert(),
                                         c.CHARACTER_SIZE[character_name])
         self.image_right = self.image
         self.image_left = pg.transform.flip(self.image_right, True, False)
@@ -57,7 +57,7 @@ class Character(Sprite):
             self.stand_counter // c.STAND_ANIMATION_SPEED[character_name], postfix)
         self.stand_counter += 1
         self.stand_counter %= max_frame_number * c.STAND_ANIMATION_SPEED[character_name]
-        self.image_right = pg.transform.scale(pg.image.load(self.image_address_stand), c.CHARACTER_SIZE[character_name])
+        self.image_right = pg.transform.scale(pg.image.load(self.image_address_stand).convert(), c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
 
     def setup_character_image_walk(self, character_name='Darling', max_frame_number='4', postfix='png'):
@@ -67,7 +67,7 @@ class Character(Sprite):
             (self.walk_counter // c.CHARACTER_MOVING_SPEED[character_name]), postfix)
         self.walk_counter += 1
         self.walk_counter %= max_frame_number * c.CHARACTER_MOVING_SPEED[character_name]
-        self.image_right = pg.transform.scale(pg.image.load(self.image_address_walk), c.CHARACTER_SIZE[character_name])
+        self.image_right = pg.transform.scale(pg.image.load(self.image_address_walk).convert(), c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
 
     def setup_state_booleans(self):
@@ -268,9 +268,9 @@ class Character(Sprite):
         self.action_counter += 1
 
         if size:
-            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address), size)
+            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address).convert(), size)
         else:
-            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address),
+            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address).convert(),
                                                   c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
         image_rect = self.image_right.get_rect()
@@ -292,9 +292,9 @@ class Character(Sprite):
         self.skill_counter += 1
         self.skill_counter %= max_frame_number * c.SKILL_SPEED[character_name]
         if size:
-            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address), size)
+            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address).convert(), size)
         else:
-            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address),
+            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address).convert(),
                                                   c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
         image_rect = self.image_right.get_rect()
