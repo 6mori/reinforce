@@ -213,7 +213,7 @@ ACTION_SPEED = {
 
 # MP
 P1MPPOS = (40, 20)
-P2MPPOS = (650, 20)
+P2MPPOS = (630, 20)
 
 # Action item type
 BULLET = 'bullet'

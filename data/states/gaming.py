@@ -47,7 +47,7 @@ class Gaming(tools._State):
     def setup_icons(self):
         self.icons = Group()
         self.icons.add(props.Icon(0, 1, self.game_info[c.P1_CHARACTER]))
-        self.icons.add(props.Icon(610, 1, self.game_info[c.P2_CHARACTER]))
+        self.icons.add(props.Icon(760, 1, self.game_info[c.P2_CHARACTER]))
 
     def setup_splines(self):
         self.MaxHP = []
@@ -58,7 +58,7 @@ class Gaming(tools._State):
         self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
         self.HPSplines = Group()
         self.HPSplines.add(props.Spline(40, 0, self.MaxHP[0], 6))
-        self.HPSplines.add(props.Spline(650, 0, self.MaxHP[1], 6))
+        self.HPSplines.add(props.Spline(630, 0, self.MaxHP[1], 6))
 
     def setup_background(self):
         self.viewport = self.screen_rect
