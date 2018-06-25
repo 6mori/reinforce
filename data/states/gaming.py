@@ -41,6 +41,24 @@ class Gaming(tools._State):
         self.setup_props()
         self.setup_splines()
         self.setup_MPsphere()
+        self.setup_icons()
+
+
+    def setup_icons(self):
+        self.icons = Group()
+        self.icons.add(props.Icon(0, 1, self.game_info[c.P1_CHARACTER]))
+        self.icons.add(props.Icon(610, 1, self.game_info[c.P2_CHARACTER]))
+
+    def setup_splines(self):
+        self.MaxHP = []
+        for character in self.characters_group.sprites():
+            self.MaxHP.append(character.HP)
+        self.HPSplinesSpace = Group()
+        self.HPSplinesSpace.add(props.Spline_Space(0, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
+        self.HPSplines = Group()
+        self.HPSplines.add(props.Spline(40, 0, self.MaxHP[0], 6))
+        self.HPSplines.add(props.Spline(650, 0, self.MaxHP[1], 6))
 
     def setup_background(self):
         self.viewport = self.screen_rect
@@ -63,17 +81,6 @@ class Gaming(tools._State):
         for i in range(0, 6):
             c.P2MPPOS = (c.P2MPPOS[0] + 20, c.P2MPPOS[1])
             self.MPgroup2MAX.add(props.MPsphere(c.P2MPPOS[0], c.P2MPPOS[1]))
-
-    def setup_splines(self):
-        self.MaxHP = []
-        for character in self.characters_group.sprites():
-            self.MaxHP.append(character.HP)
-        self.HPSplinesSpace = Group()
-        self.HPSplinesSpace.add(props.Spline_Space(0, 0, 6))
-        self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
-        self.HPSplines = Group()
-        self.HPSplines.add(props.Spline(0, 0, self.MaxHP[0], 6))
-        self.HPSplines.add(props.Spline(650, 0, self.MaxHP[1], 6))
 
     def setup_props(self):
         self.prop_count += 1
@@ -406,6 +413,10 @@ class Gaming(tools._State):
                 self.map.blit(action_item.image, action_item.rect)
 
         surface.blit(self.map, (0, 0), self.viewport)
+        # Icons
+        for icon in self.icons.sprites():
+            surface.blit(icon.image, icon.rect)
+
         # MP
         self.PlayerMP = []
         for character in self.characters_group.sprites():

@@ -212,7 +212,7 @@ ACTION_SPEED = {
 }
 
 # MP
-P1MPPOS = (0, 20)
+P1MPPOS = (40, 20)
 P2MPPOS = (650, 20)
 
 # Action item type
