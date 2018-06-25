@@ -8,7 +8,7 @@ class Ghost(gun_guy.GunGuy):
     def __init__(self):
         super().__init__()
 
-        self.bullet_damage = 5
+        self.bullet_damage = 50
         self.HP = 100
         self.MP = 3
         self.invincible_time_counter = time.time()
@@ -29,8 +29,6 @@ class Ghost(gun_guy.GunGuy):
                 attack.rect.left = self.rect.right
             attack.rect.centery = self.rect.top
             action_group.add(attack)
-
-
 
     def action(self, action_group):
         super().action(c.GHOST,6,'png')

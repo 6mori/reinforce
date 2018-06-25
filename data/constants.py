@@ -135,7 +135,7 @@ PROP_MAX_Y_VEL = 10
 P1_CHOOSE_BASE = (100, 100)
 P2_CHOOSE_BASE = (600, 100)
 
-FPS = 60
+FPS = 120
 
 # Character name
 
@@ -177,7 +177,7 @@ CHARACTER_SIZE = {
     'Archer' : (103 // 3, 131 // 3),
     'Spider_prince' : (103 // 2, 131 // 2),
     'Poena':(69 // 3, 154 // 3),
-    'Ghost':(239//3,213//3)
+    'Ghost':(239//4,213//4)
 }
 #Character skill
 SKILL_SPEED = {

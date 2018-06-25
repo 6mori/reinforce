@@ -399,7 +399,6 @@ class Gaming(tools._State):
 
     def blit_everything(self, surface):
         self.map.blit(self.background, self.viewport)
-        #self.characters_group.draw(self.map)
         for character in self.characters_group.sprites():
             if character.acctime:
                 character.acctime -= 1
