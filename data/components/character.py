@@ -1,30 +1,29 @@
 import pygame as pg
 from pygame.sprite import Sprite
 
-
-
 from .. import constants as c
+
 
 class Character(Sprite):
 
     def __init__(self):
         super().__init__()
-        #大招次数  默认为3
+        # 大招次数  默认为3
         self.MP = 3
 
-        #默认贴图为Darling
-        self.setup_character_image_initial(c.DARLING,'png')
+        # 默认贴图为Darling
+        self.setup_character_image_initial(c.DARLING, 'png')
         self.player_num = 0
 
         self.state = c.STANDING
 
         self.commands = {
-            c.ACTION  : False,
-            c.SKILL   : False,
-            c.JUMP    : False,
-            c.GO_LEFT : False,
+            c.ACTION: False,
+            c.SKILL: False,
+            c.JUMP: False,
+            c.GO_LEFT: False,
             c.GO_RIGHT: False,
-            c.GO_DOWN : False
+            c.GO_DOWN: False
         }
 
         self.setup_forces()
@@ -32,43 +31,44 @@ class Character(Sprite):
 
         self.HP = 0
 
-        self.stand_counter=0
-        self.walk_counter=0
-        self.skill_counter=0
-        self.action_counter=0
+        self.stand_counter = 0
+        self.walk_counter = 0
+        self.skill_counter = 0
+        self.action_counter = 0
 
-        self.vincible=True
+        self.vincible = True
 
         # for props
         self.acctime = 0
         self.invtime = 0
 
-
-    def setup_character_image_initial(self,character_name='Darling',postfix='png'):
-        self.image = pg.transform.scale(pg.image.load('images/%s/stand/0.%s'%(character_name,postfix)), c.CHARACTER_SIZE[character_name])
+    def setup_character_image_initial(self, character_name='Darling', postfix='png'):
+        self.image = pg.transform.scale(pg.image.load('images/%s/stand/0.%s' % (character_name, postfix)),
+                                        c.CHARACTER_SIZE[character_name])
         self.image_right = self.image
         self.image_left = pg.transform.flip(self.image_right, True, False)
         self.rect = self.image.get_rect()
         self.show_xy = (self.rect.topleft)
 
-
-    def setup_character_image_stand(self, character_name='Darling',max_frame_number='2',postfix='png'):
-        if self.stand_counter // c.STAND_ANIMATION_SPEED[character_name] != (self.stand_counter-1) // c.STAND_ANIMATION_SPEED[character_name]:
-            self.image_address_stand = 'images/' + character_name + '/stand/%d.%s' % (self.stand_counter // c.STAND_ANIMATION_SPEED[character_name],postfix)
+    def setup_character_image_stand(self, character_name='Darling', max_frame_number='2', postfix='png'):
+        if self.stand_counter // c.STAND_ANIMATION_SPEED[character_name] != (self.stand_counter - 1) // \
+                c.STAND_ANIMATION_SPEED[character_name]:
+            self.image_address_stand = 'images/' + character_name + '/stand/%d.%s' % (
+            self.stand_counter // c.STAND_ANIMATION_SPEED[character_name], postfix)
         self.stand_counter += 1
         self.stand_counter %= max_frame_number * c.STAND_ANIMATION_SPEED[character_name]
         self.image_right = pg.transform.scale(pg.image.load(self.image_address_stand), c.CHARACTER_SIZE[character_name])
-        self.image_left = pg.transform.flip(self.image_right, True,  False)
+        self.image_left = pg.transform.flip(self.image_right, True, False)
 
-
-    def setup_character_image_walk(self, character_name='Darling',max_frame_number='4',postfix='png'):
-        if self.walk_counter // c.CHARACTER_MOVING_SPEED[character_name] != (self.walk_counter-1) // c.CHARACTER_MOVING_SPEED[character_name]:
-            self.image_address_walk = 'images/'+character_name+'/walk/%d.%s' % ((self.walk_counter // c.CHARACTER_MOVING_SPEED[character_name]), postfix)
+    def setup_character_image_walk(self, character_name='Darling', max_frame_number='4', postfix='png'):
+        if self.walk_counter // c.CHARACTER_MOVING_SPEED[character_name] != (self.walk_counter - 1) // \
+                c.CHARACTER_MOVING_SPEED[character_name]:
+            self.image_address_walk = 'images/' + character_name + '/walk/%d.%s' % (
+            (self.walk_counter // c.CHARACTER_MOVING_SPEED[character_name]), postfix)
         self.walk_counter += 1
         self.walk_counter %= max_frame_number * c.CHARACTER_MOVING_SPEED[character_name]
         self.image_right = pg.transform.scale(pg.image.load(self.image_address_walk), c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
-
 
     def setup_state_booleans(self):
         self.facing_right = True
@@ -76,7 +76,6 @@ class Character(Sprite):
         self.allow_action = True
         self.allow_skill = True
         self.dead = False
-
 
     def setup_forces(self):
         self.x_vel = 0
@@ -86,7 +85,6 @@ class Character(Sprite):
         self.jump_vel = c.JUMP_VEL
         self.gravity = c.GRAVITY
 
-
     def update(self, keys, keybinding, game_info, action_group):
         self.show_xy = (self.rect.topleft)
         self.bind_keys(keys, keybinding)
@@ -94,13 +92,11 @@ class Character(Sprite):
         self.handle_state(action_group)
         self.character_direction()
 
-
     def character_direction(self):
         if self.facing_right:
             self.image = self.image_right
         else:
             self.image = self.image_left
-
 
     def bind_keys(self, keys, keybinding):
         for command in self.commands.keys():
@@ -108,7 +104,6 @@ class Character(Sprite):
                 self.commands[command] = True
             else:
                 self.commands[command] = False
-
 
     def handle_state(self, action_group):
         if self.state == c.STANDING:
@@ -124,13 +119,12 @@ class Character(Sprite):
         if self.state == c.ACTIONING:
             self.action(action_group)
 
-
     def stand(self, action_group):
         self.check_to_allow_jump()
         self.check_to_allow_action()
         self.check_to_allow_skill()
 
-        self.setup_character_image_stand(c.DARLING,2,'png')
+        self.setup_character_image_stand(c.DARLING, 2, 'png')
 
         self.x_vel = 0
         self.y_vel = 0
@@ -160,14 +154,13 @@ class Character(Sprite):
         else:
             self.state = c.STANDING
 
-
     def walk(self, action_group):
         self.check_to_allow_jump()
         self.check_to_allow_action()
         self.check_to_allow_skill()
 
-        #加载贴图
-        self.setup_character_image_walk(c.DARLING,2,'png')
+        # 加载贴图
+        self.setup_character_image_walk(c.DARLING, 2, 'png')
 
         if self.commands[c.ACTION]:
             if self.allow_action:
@@ -203,7 +196,6 @@ class Character(Sprite):
                 self.state = c.STANDING
             self.x_vel = 0
 
-
     def jump(self, action_group):
         self.check_to_allow_action()
         self.check_to_allow_skill()
@@ -221,7 +213,6 @@ class Character(Sprite):
                 self.state = c.ACTIONING
                 return
 
-
         if self.commands[c.SKILL]:
             if self.allow_skill:
                 self.state = c.SKILLING
@@ -237,7 +228,6 @@ class Character(Sprite):
         if not self.commands[c.JUMP]:
             self.gravity = c.GRAVITY
             self.state = c.FALLING
-
 
     def fall(self, action_group):
         self.check_to_allow_action()
@@ -263,71 +253,65 @@ class Character(Sprite):
             self.facing_right = True
             self.x_vel = self.max_x_vel
 
-
-    def action(self,character_name=None,max_frame_number=None,postfix=None,size=None):
+    def action(self, character_name=None, max_frame_number=None, postfix=None, size=None):
         self.allow_action = False
 
         self.y_vel = 0
 
         if size and self.action_counter == 0:
             self.origin_rect_action = self.rect
-        if self.action_counter // c.ACTION_SPEED[character_name] != (self.action_counter-1) // c.ACTION_SPEED[character_name]:
+        if self.action_counter // c.ACTION_SPEED[character_name] != (self.action_counter - 1) // c.ACTION_SPEED[
+            character_name]:
             self.action_image_address = 'images/%s/action/%d.%s' % (
-            character_name, self.action_counter // c.ACTION_SPEED[character_name], postfix)
+                character_name, self.action_counter // c.ACTION_SPEED[character_name], postfix)
 
         self.action_counter += 1
 
         if size:
             self.image_right = pg.transform.scale(pg.image.load(self.action_image_address), size)
         else:
-            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address), c.CHARACTER_SIZE[character_name])
+            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address),
+                                                  c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
         image_rect = self.image_right.get_rect()
-        self.show_xy = (self.rect.centerx-(image_rect.right-image_rect.left)//2, self.rect.y)
+        self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y)
 
         if self.action_counter == max_frame_number * c.ACTION_SPEED[character_name] - 1:
             self.action_counter = 0
             self.state = c.FALLING
 
-
-    def skill(self,character_name=None,max_frame_number=None,postfix=None,size=None):
+    def skill(self, character_name=None, max_frame_number=None, postfix=None, size=None):
         self.allow_skill = False
 
         self.x_vel = 0
         self.y_vel = 0
 
         self.action_image_address = 'images/%s/skill/%d.%s' % (
-        character_name, self.skill_counter // c.SKILL_SPEED[character_name], postfix)
+            character_name, self.skill_counter // c.SKILL_SPEED[character_name], postfix)
 
         self.skill_counter += 1
         self.skill_counter %= max_frame_number * c.SKILL_SPEED[character_name]
         if size:
             self.image_right = pg.transform.scale(pg.image.load(self.action_image_address), size)
         else:
-            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address), c.CHARACTER_SIZE[character_name])
+            self.image_right = pg.transform.scale(pg.image.load(self.action_image_address),
+                                                  c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
         image_rect = self.image_right.get_rect()
         self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y)
 
-        if self.skill_counter == max_frame_number * c.SKILL_SPEED[character_name]-1:
+        if self.skill_counter == max_frame_number * c.SKILL_SPEED[character_name] - 1:
             self.state = c.FALLING
             self.MP -= 1
-
 
     def check_to_allow_jump(self):
         if not self.commands[c.JUMP]:
             self.allow_jump = True
 
-
     def check_to_allow_action(self):
         if not self.commands[c.ACTION]:
             self.allow_action = True
 
-
     def check_to_allow_skill(self):
-        if (not self.commands[c.SKILL]) and (self.MP>0):
+        if (not self.commands[c.SKILL]) and (self.MP > 0):
             self.allow_skill = True
-
-
-
-

@@ -12,9 +12,8 @@ class SwordGuy(character.Character):
         self.sword_damage = c.SWORD_DAMAGE
         self.HP = 10
 
-
-    def action(self, action_group,character_name,frame_nums,postfix,size=None):
-        super().action(character_name,frame_nums,postfix,size)
+    def action(self, action_group, character_name, frame_nums, postfix, size=None):
+        super().action(character_name, frame_nums, postfix, size)
         if self.action_counter == 1:
             cutting_sword = sword.Sword(self.player_num, self.sword_damage)
             if self.facing_right:
@@ -25,4 +24,3 @@ class SwordGuy(character.Character):
             cutting_sword.damage = 100
             cutting_sword.rect.centery = self.rect.centery
             action_group.add(cutting_sword)
-

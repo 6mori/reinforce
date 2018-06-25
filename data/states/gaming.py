@@ -1,25 +1,24 @@
 import pygame as pg
 from pygame.sprite import Group
 
-
 from .. import tools
 from .. import setup
 from .. import constants as c
-from .. components import brick
-from .. components import props
-from .. components import Darling
-from .. components import guan_gong
-from .. components import k
-from .. components import Archer
-from .. components import spider_prince
-from .. components import poena
-from .. components import ghost
+from ..components import brick
+from ..components import props
+from ..components import Darling
+from ..components import guan_gong
+from ..components import k
+from ..components import Archer
+from ..components import spider_prince
+from ..components import poena
+from ..components import ghost
 import random
+
 
 class Gaming(tools._State):
     def __init__(self):
         super(Gaming, self).__init__()
-
 
     def startup(self, current_time, persist):
         self.game_info = persist
@@ -34,16 +33,14 @@ class Gaming(tools._State):
 
         self.setup_bricks()
         self.setup_characters()
-        #self.setup_killing_items()
+        # self.setup_killing_items()
         self.setup_action_group()
-        #self.setup_spritegroups()
+        # self.setup_spritegroups()
         self.prop_count = 0
         self.props_group = Group()
         self.setup_props()
         self.setup_splines()
         self.setup_MPsphere()
-
-
 
     def setup_background(self):
         self.viewport = self.screen_rect
@@ -53,11 +50,9 @@ class Gaming(tools._State):
         self.scrolling_up = False
         self.scroll_count = 0
 
-
     def setup_BGM(self):
         pg.mixer.music.load('music/{}'.format(c.GAMING_BGM))
         pg.mixer.music.play()
-
 
     def setup_MPsphere(self):
         self.MPgroup1MAX = Group()
@@ -68,7 +63,6 @@ class Gaming(tools._State):
         for i in range(0, 6):
             c.P2MPPOS = (c.P2MPPOS[0] + 20, c.P2MPPOS[1])
             self.MPgroup2MAX.add(props.MPsphere(c.P2MPPOS[0], c.P2MPPOS[1]))
-
 
     def setup_splines(self):
         self.MaxHP = []
@@ -81,7 +75,6 @@ class Gaming(tools._State):
         self.HPSplines.add(props.Spline(0, 0, self.MaxHP[0], 6))
         self.HPSplines.add(props.Spline(650, 0, self.MaxHP[1], 6))
 
-
     def setup_props(self):
         self.prop_count += 1
         if self.prop_count < 400:
@@ -89,46 +82,42 @@ class Gaming(tools._State):
         else:
             self.prop_count = 0
             self.props_group = Group()
-            self.create_prop(self.props_group, random.randint(1,30), 1, 'Prop_MP_potion')
-            self.create_prop(self.props_group, random.randint(1,30), 1, 'Prop_HP_potion')
+            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_MP_potion')
+            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_HP_potion')
             self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_Shoe')
             # self.create_prop(self.props_group, 4, 1, 'Prop_HP_Apple')
             # self.create_prop(self.props_group, 2, 2, 'Prop_HP_Ginseng')
 
-
-    def create_prop(self, props_group, row, col,prop_kind):
+    def create_prop(self, props_group, row, col, prop_kind):
         x = row * c.BRICK_WIDTH
         y = col * c.BRICK_HEIGHT
         props_group.add(props.Prop(x, y, prop_kind))
-
 
     def setup_bricks(self):
         map = "images/map.txt"
         self.bricks_group = Group()
         with open(map) as file_object:
-            lines=file_object.readlines()
+            lines = file_object.readlines()
             for line in lines:
-                line=line.strip().split(',')
-                self.create_bricks(self.bricks_group,int(line[0]),int(line[1]),int(line[2]),int(line[3]),eval(line[4]))
-        #self.break_bricks = 0
+                line = line.strip().split(',')
+                self.create_bricks(self.bricks_group, int(line[0]), int(line[1]), int(line[2]), int(line[3]),
+                                   eval(line[4]))
+        # self.break_bricks = 0
 
-
-    def create_bricks(self, bricks, x, y, width, height, ground_kind):#ground_kind为表示什么砖块条的字符串
-        for row in list(range(x, x+width)):
-            for col in list(range(y, y+height)):
-                if(row==x):
-                    self.create_brick(bricks,row,col,tools.kindOfGround[ground_kind][0])
-                elif(row==x+width-1):
+    def create_bricks(self, bricks, x, y, width, height, ground_kind):  # ground_kind为表示什么砖块条的字符串
+        for row in list(range(x, x + width)):
+            for col in list(range(y, y + height)):
+                if (row == x):
+                    self.create_brick(bricks, row, col, tools.kindOfGround[ground_kind][0])
+                elif (row == x + width - 1):
                     self.create_brick(bricks, row, col, tools.kindOfGround[ground_kind][2])
                 else:
                     self.create_brick(bricks, row, col, tools.kindOfGround[ground_kind][1])
 
-
-    def create_brick(self, bricks, row, col,brick_kind):
+    def create_brick(self, bricks, row, col, brick_kind):
         x = row * c.BRICK_WIDTH
         y = col * c.BRICK_HEIGHT
         bricks.add(brick.Brick(x, y, brick_kind))
-
 
     def setup_characters(self):
         characters = [
@@ -137,9 +126,9 @@ class Gaming(tools._State):
                 c.GUAN_GONG: guan_gong.Guan_gong(),
                 c.K: k.K(),
                 c.ARCHER: Archer.Archer(),
-                c.SPIDER_PRINCE:spider_prince.Spider_prince(),
-                c.POENA:poena.Poena(),
-                c.GHOST:ghost.Ghost()
+                c.SPIDER_PRINCE: spider_prince.Spider_prince(),
+                c.POENA: poena.Poena(),
+                c.GHOST: ghost.Ghost()
             },
             {
                 c.DARLING: Darling.Darling(),
@@ -165,7 +154,6 @@ class Gaming(tools._State):
         player_2.state = c.FALLING
 
         self.characters_group = Group(player_1, player_2)
-
 
     def setup_action_group(self):
         self.action_group = Group()
@@ -203,11 +191,9 @@ class Gaming(tools._State):
         self.handle_state(keys)
         self.check_if_finish()
 
-
     def handle_state(self, keys):
         self.update_all_sprites(keys)
         self.update_viewport()
-
 
     def update_all_sprites(self, keys):
         for character in self.characters_group.sprites():
@@ -217,9 +203,8 @@ class Gaming(tools._State):
         self.action_group.update()
         self.props_group.update()
 
-
     def update_viewport(self):
-        if self.current_time-self.last_scroll_time >= c.SCROLL_TIME:
+        if self.current_time - self.last_scroll_time >= c.SCROLL_TIME:
             self.scrolling_up = True
             self.scroll_count = 0
             self.last_scroll_time = self.current_time
@@ -230,14 +215,12 @@ class Gaming(tools._State):
             if self.scroll_count == c.SCROLL_LEN:
                 self.scrolling_up = False
 
-
     def adjust_sprite_positions(self):
         self.adjust_characters_position()
-        #self.adjust_bullets_position()
+        # self.adjust_bullets_position()
         self.adjust_action_item_position()
         self.adjust_props_position()
-        #self.check_swords_collisions()
-
+        # self.check_swords_collisions()
 
     def adjust_characters_position(self):
         for character in self.characters_group.sprites():
@@ -249,13 +232,11 @@ class Gaming(tools._State):
             self.check_character_y_collisions(character)
             self.check_collider_under_bottom(character)
 
-
     def check_character_x_edge(self, character):
         if character.rect.left < 0:
             character.rect.left = 0
         if character.rect.right > c.SCREEN_WIDTH:
             character.rect.right = c.SCREEN_WIDTH
-
 
     def check_character_x_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
@@ -268,7 +249,6 @@ class Gaming(tools._State):
             prop.ActOnCharacters(character)
             prop.kill()
 
-
     def adjust_character_for_x_collisions(self, character, collider):
         if character.rect.x < collider.rect.x:
             character.rect.right = collider.rect.left
@@ -276,7 +256,6 @@ class Gaming(tools._State):
             character.rect.left = collider.rect.right
 
         character.x_vel = 0
-
 
     def check_character_y_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
@@ -291,7 +270,6 @@ class Gaming(tools._State):
 
         self.check_if_collider_is_falling(character)
 
-
     def adjust_character_for_y_collisions(self, character, collider):
         if character.rect.y < collider.rect.y:
             character.rect.bottom = collider.rect.top
@@ -301,22 +279,19 @@ class Gaming(tools._State):
 
         character.y_vel = 0
 
-
     def check_collider_under_bottom(self, collider):
         if collider.rect.top >= self.viewport.bottom:
             collider.kill()
-
 
     def check_if_collider_is_falling(self, collider):
         collider.rect.y += 1
         test_collide_group = pg.sprite.Group(self.bricks_group)
 
         if pg.sprite.spritecollideany(collider, test_collide_group) is None:
-            if collider.state != c.JUMPING and collider.state != c.SKILLING and collider.state != c.ACTIONING:        #飞起来
+            if collider.state != c.JUMPING and collider.state != c.SKILLING and collider.state != c.ACTIONING:  # 飞起来
                 collider.state = c.FALLING
 
         collider.rect.y -= 1
-
 
     def adjust_action_item_position(self):
         for action_item in self.action_group.sprites():
@@ -324,7 +299,6 @@ class Gaming(tools._State):
                 self.adjust_bullet_position(action_item)
             elif action_item.type == c.SWORD:
                 self.check_sword_collisions(action_item)
-
 
     def adjust_bullet_position(self, bullet):
         if bullet.rect.right < 0:
@@ -335,26 +309,35 @@ class Gaming(tools._State):
             bullet.kill()
         self.check_bullet_x_collisions(bullet)
 
-
     def check_bullet_x_collisions(self, bullet):
         character = pg.sprite.spritecollideany(bullet, self.characters_group)
         brick = pg.sprite.spritecollideany(bullet, self.bricks_group)
 
         if character:
             if bullet.owner != character.player_num:
-                if(character.vincible):
+                tmp = character.HP
+                if (character.vincible):
                     character.HP -= bullet.damage
                 if character.HP <= 0:
                     character.kill()
-                bullet.kill()
+                if bullet.penetration_mode == 1:
+                    bullet.kill()
+                elif bullet.penetration_mode == 2:
+                    bullet.damage -= tmp
+                    if bullet.damage <= 0:
+                        bullet.kill()
 
         if brick:
+            tmp = brick.HP
             brick.HP -= bullet.damage
             if brick.HP <= 0:
                 brick.kill()
-                #self.break_bricks += 1
-            bullet.kill()
-
+            if bullet.penetration_mode == 1:
+                bullet.kill()
+            elif bullet.penetration_mode == 2:
+                bullet.damage -= tmp
+                if bullet.damage <= 0:
+                    bullet.kill()
 
     def adjust_props_position(self):
         for prop in self.props_group:
@@ -362,13 +345,11 @@ class Gaming(tools._State):
             self.check_collider_under_bottom(prop)
             self.check_if_collider_is_falling(prop)
 
-
     def check_and_adjust_prop_for_y_collisions(self, prop):
         brick = pg.sprite.spritecollideany(prop, self.bricks_group)
         if brick:
             prop.state = c.STANDING
             prop.rect.bottom = brick.rect.top
-
 
     def check_sword_collisions(self, sword):
         bricks = pg.sprite.spritecollide(sword, self.bricks_group, False)
@@ -377,15 +358,14 @@ class Gaming(tools._State):
 
         if bricks:
             self.apply_swords_damage(sword, bricks)
-            #if self.apply_swords_damage(sword, bricks):
+            # if self.apply_swords_damage(sword, bricks):
             #    self.break_bricks += 1
 
-        #if bullets:
+        # if bullets:
         #    self.apply_swords_damage(bullets)
 
         if characters:
             self.apply_swords_damage(sword, characters)
-
 
     def apply_swords_damage(self, sword, coll_dict):
         for collider in coll_dict:
@@ -393,9 +373,8 @@ class Gaming(tools._State):
                 collider.HP -= sword.damage
             if collider.HP <= 0:
                 collider.kill()
-                #return True
-        #return False
-
+                # return True
+        # return False
 
     def blit_everything(self, surface):
         self.map.blit(self.background, self.viewport)
@@ -446,7 +425,6 @@ class Gaming(tools._State):
             except:
                 pass
         self.setup_props()
-
 
     def check_if_finish(self):
         if len(self.characters_group) < 2:
