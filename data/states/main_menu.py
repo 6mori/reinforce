@@ -8,18 +8,12 @@ class MainMenu(tools._State):
     def __init__(self):
         super(MainMenu, self).__init__()
 
-        persist = {
-            c.P1_CHARACTER: '',
-            c.P2_CHARACTER: '',
-            c.CURRENT_TIME: 0.0,
-            c.P1_HP: 0,
-            c.P2_HP: 0,
-        }
-        self.startup(0.0, persist)
+        self.reset_game_info()
+        self.startup(0.0, self.persist)
 
     def startup(self, current_time, persist):
-        self.game_info = persist
-        self.persist = self.game_info
+        #self.game_info = persist
+        #self.persist = self.game_info
 
         self.next = c.CHOOSING
 
@@ -64,11 +58,11 @@ class MainMenu(tools._State):
         surface.blit(self.background, self.background_rect)
         surface.blit(self.cursor.image, self.cursor.rect)
 
-    '''
+
     def get_event(self, event):
         if event.type == pg.KEYUP:
             self.done = True
-    '''
+
 
     def reset_game_info(self):
         self.game_info = {
