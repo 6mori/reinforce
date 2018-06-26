@@ -98,17 +98,8 @@ class Gaming(tools._State):
 
 
     def setup_props(self):
-        self.prop_count += 1
-        if self.prop_count < 400:
-            return
-        else:
-            self.prop_count = 0
-            self.props_group = Group()
-            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_MP_potion')
-            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_HP_potion')
-            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_Shoe')
-            # self.create_prop(self.props_group, 4, 1, 'Prop_HP_Apple')
-            # self.create_prop(self.props_group, 2, 2, 'Prop_HP_Ginseng')
+        self.prop_count = 0
+        self.props_group = Group()
 
 
     def create_prop(self, props_group, row, col, prop_kind):
@@ -196,6 +187,17 @@ class Gaming(tools._State):
     def handle_state(self, keys):
         self.update_all_sprites(keys)
         self.update_viewport()
+        self.update_props()
+
+    def update_props(self):
+        self.prop_count += 1
+        if self.prop_count >= 400:
+            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_MP_potion')
+            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_HP_potion')
+            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_Shoe')
+            self.prop_count = 0
+            # self.create_prop(self.props_group, 4, 1, 'Prop_HP_Apple')
+            # self.create_prop(self.props_group, 2, 2, 'Prop_HP_Ginseng')
 
 
     def update_all_sprites(self, keys):
@@ -455,7 +457,6 @@ class Gaming(tools._State):
             if character.HP > 0:
                 spline_item.scale_change(character.HP)
                 surface.blit(spline_item.image, spline_item.rect)
-        #self.setup_props()
 
 
     def reset_character(self, character):
