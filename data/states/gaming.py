@@ -451,17 +451,10 @@ class Gaming(tools._State):
         # HP
         for spline_space_item in self.HPSplinesSpace.sprites():
             self.map.blit(spline_space_item.image, spline_space_item.rect)
-        self.PlayerHP = []
-        for character in self.characters_group.sprites():
-            self.PlayerHP.append(character.HP)
-        i = 0
-        for spline_item in self.HPSplines.sprites():
-            try:
-                spline_item.scale_change(self.PlayerHP[i])
-                i = (i + 1) % 2
+        for character, spline_item in zip(self.characters_group.sprites(), self.HPSplines.sprites()):
+            if character.HP > 0:
+                spline_item.scale_change(character.HP)
                 surface.blit(spline_item.image, spline_item.rect)
-            except:
-                pass
         #self.setup_props()
 
 
