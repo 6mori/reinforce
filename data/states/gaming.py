@@ -4,16 +4,16 @@ from pygame.sprite import Group
 from .. import tools
 from .. import setup
 from .. import constants as c
-from ..components import character as ch
-from ..components import brick
-from ..components import props
-from ..components import Darling
-from ..components import guan_gong
-from ..components import k
-from ..components import Archer
-from ..components import spider_prince
-from ..components import poena
-from ..components import ghost
+
+from .. components import brick
+from .. components import props
+from .. components import Darling
+from .. components import guan_gong
+from .. components import k
+from .. components import Archer
+from .. components import spider_prince
+from .. components import poena
+from .. components import ghost
 import random
 
 
@@ -120,7 +120,6 @@ class Gaming(tools._State):
         y = col * c.BRICK_HEIGHT
         props_group.add(props.Prop(x, y, prop_kind))
 
-
     def setup_bricks(self):
         map = "images/map.txt"
         self.bricks_group = Group()
@@ -223,7 +222,6 @@ class Gaming(tools._State):
             self.scroll_count += 1
             if self.scroll_count == c.SCROLL_LEN:
                 self.scrolling_up = False
-
 
     def adjust_sprite_positions(self):
         self.adjust_characters_position()

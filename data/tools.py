@@ -35,17 +35,39 @@ kindOfBrick = {
     'grass_middle': {'name': 'images/grass_middle.png', 'dur': 25},
     'grass_right': {'name': 'images/grass_right.png', 'dur': 25},
     'grass_inside': {'name': 'images/grass_inside.png', 'dur': 25},
-    'long_wood': {'name': 'images/long_wood.png', 'dur': 50},
-    'long_stone': {'name': 'images/long_stone.png', 'dur': 10000},
+    'long_wood':{'name':'images/long_wood.png', 'dur': 50},
+    'long_stone':{'name':'images/long_stone.png', 'dur': 10000},
+    'cool_grass_left':{'name':'images/cool_grass_left.png','dur':25},
+    'cool_grass_mid':{'name':'images/cool_grass_mid.png','dur':25},
+    'cool_grass_right':{'name':'images/cool_grass_right.png','dur':25},
+    'cool_grass_inside_left':{'name':'images/cool_grass_inside_left.png','dur':25},
+    'cool_grass_inside_mid':{'name':'images/cool_grass_inside_mid.png','dur':25},
+    'cool_grass_inside_right':{'name':'images/cool_grass_inside_right.png','dur':25},
+    'left_grass': {'name':'images/left_grass.png','dur':25},
+    'right_grass':{'name':'images/right_grass.png','dur':25},
+    'water':{'name':'images/water.png','dur':25},
+    'iron_up_left':{'name':'images/iron_up_left.png','dur':300},
+    'iron_down_left':{'name':'images/iron_down_left.png','dur':300},
+    'iron_up_right':{'name':'images/iron_up_right.png','dur':300},
+    'iron_down_right': {'name': 'images/iron_down_right.png', 'dur': 300},
+    'iron':{'name':'images/iron.png','dur':300},
+    'ice':{'name':'images/ice.png','dur':50}
 }
 
-# 背景种类
-kindOfGround = {
-    'grass_surface': ['grass_left', 'grass_middle', 'grass_right'],
-    'grass_soil': ['grass_inside', 'grass_inside', 'grass_inside'],
-    'long_wood': ['long_wood', 'long_wood', 'long_wood'],
-    'long_stone': ['long_stone', 'long_stone', 'long_stone'],
-}
+#背景种类
+kindOfGround={
+    'grass_surface':['grass_left', 'grass_middle', 'grass_right'],
+    'grass_soil':['grass_inside', 'grass_inside', 'grass_inside'],
+    'long_wood':['long_wood', 'long_wood', 'long_wood'],
+    'long_stone':['long_stone', 'long_stone', 'long_stone'],
+    'cool_grass_surface':['cool_grass_left','cool_grass_mid','cool_grass_right'],
+    'cool_grass_soil':['cool_grass_inside_left','cool_grass_inside_mid','cool_grass_inside_right'],
+    'air_grass':['left_grass','cool_grass_inside_mid','right_grass'],
+    'water':['water','water','water'],
+    'iron':['iron_up_right','iron','iron_up_left'],
+    'long_iron':['iron','iron','iron'],
+    'ice':['ice','ice','ice'],
+ }
 
 # 道具种类
 kindOfProps = {
