@@ -75,3 +75,21 @@ class MPsphere(Sprite):
         self.rect = self.image.get_rect()
         self.rect.left = x
         self.rect.top = y
+
+IconsCons = {
+    c.DARLING:"images/icons/darling.png",
+    c.GUAN_GONG: "images/icons/Guan_gong.png",
+    c.K: "images/icons/k.png",
+    c.ARCHER: "images/icons/Archer.png",
+    c.SPIDER_PRINCE: "images/icons/Spider_prince.png",
+    c.POENA: "images/icons/Poena.png",
+    c.GHOST: "images/icons/Ghost.png"
+}
+
+class Icon(Sprite):
+    def __init__(self, x, y, charactor):
+        super().__init__()
+        self.image = pg.transform.scale(pg.image.load(IconsCons[charactor]), (c.BRICK_WIDTH*2, c.BRICK_HEIGHT*2))
+        self.rect = self.image.get_rect()
+        self.rect.left = x
+        self.rect.top = y
