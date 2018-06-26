@@ -1,38 +1,38 @@
-
+import os
 import pygame as pg
 
 from . import constants as c
 
 direct2pos = {
     c.RIGHT: (50, 0),
-    c.LEFT : (-50, 0),
-    c.UP   : (0, -50),
-    c.DOWN : (0, 50),
+    c.LEFT: (-50, 0),
+    c.UP: (0, -50),
+    c.DOWN: (0, 50),
 }
 
 keybinding = [
     {
-        c.ACTION  : pg.K_j,
-        c.SKILL   : pg.K_l,
-        c.JUMP    : pg.K_w,
-        c.GO_LEFT : pg.K_a,
+        c.ACTION: pg.K_j,
+        c.SKILL: pg.K_l,
+        c.JUMP: pg.K_w,
+        c.GO_LEFT: pg.K_a,
         c.GO_RIGHT: pg.K_d,
-        c.GO_DOWN : pg.K_s
+        c.GO_DOWN: pg.K_s
     },
     {
-        c.ACTION  : pg.K_KP1,
-        c.SKILL   : pg.K_KP3,
-        c.JUMP    : pg.K_UP,
-        c.GO_LEFT : pg.K_LEFT,
+        c.ACTION: pg.K_KP1,
+        c.SKILL: pg.K_KP3,
+        c.JUMP: pg.K_UP,
+        c.GO_LEFT: pg.K_LEFT,
         c.GO_RIGHT: pg.K_RIGHT,
-        c.GO_DOWN : pg.K_DOWN
+        c.GO_DOWN: pg.K_DOWN
     }
 ]
 
-#砖块种类
-kindOfBrick={
-    'grass_left':{'name':'images/grass_left.png','dur':25},
-    'grass_middle':{'name':'images/grass_middle.png','dur':25 },
+# 砖块种类
+kindOfBrick = {
+    'grass_left': {'name': 'images/grass_left.png', 'dur': 25},
+    'grass_middle': {'name': 'images/grass_middle.png', 'dur': 25},
     'grass_right': {'name': 'images/grass_right.png', 'dur': 25},
     'grass_inside': {'name': 'images/grass_inside.png', 'dur': 25},
     'long_wood':{'name':'images/long_wood.png', 'dur': 50},
@@ -69,16 +69,20 @@ kindOfGround={
     'ice':['ice','ice','ice'],
  }
 
-#道具种类
-kindOfProps={
-    'Prop_HP_potion':{'name':'images/Prop_HP_potion.png', 'dur': 25},
-    'Prop_MP_potion':{'name':'images/Prop_MP_potion.png', 'dur': 25},
-    'Prop_HP_Apple':{'name':'images/Prop_HP_Apple.png', 'dur': 25},
-    'Prop_HP_Ginseng':{'name':'images/Prop_HP_Ginseng.png', 'dur': 25},
+# 道具种类
+kindOfProps = {
+    'Prop_HP_potion': {'name': 'images/Prop_HP_potion.png', 'dur': 25},
+    'Prop_MP_potion': {'name': 'images/Prop_MP_potion.png', 'dur': 25},
+    'Prop_HP_Apple': {'name': 'images/Prop_HP_Apple.png', 'dur': 25},
+    'Prop_HP_Ginseng': {'name': 'images/Prop_HP_Ginseng.png', 'dur': 25},
+    'Prop_Shoe': {'name': 'images/shoe.png', 'dur': 25},
+    'Prop_Corselet': {'name': 'images/Prop_Corselet.png', 'dur': 25},
 }
+
 
 class Control(object):
     ''' Control object for entire project '''
+
     def __init__(self, caption):
         self.screen = pg.display.get_surface()
         self.done = False
@@ -90,6 +94,7 @@ class Control(object):
         self.state_name = None
         self.state = None
 
+
     def setup_states(self, state_dict, start_state):
         self.state_dict = state_dict
         self.state_name = start_state
@@ -99,13 +104,16 @@ class Control(object):
         persist = self.state.cleanup()
         self.state.startup(self.current_time, persist)
 
+
     def update(self):
         self.current_time = pg.time.get_ticks()
+        print(self.current_time)
         if self.state.quit:
             self.done = True
         elif self.state.done:
             self.flip_state()
         self.state.update(self.screen, self.keys, self.current_time)
+
 
     def flip_state(self):
         previous, self.state_name = self.state_name, self.state.next
@@ -113,6 +121,7 @@ class Control(object):
         self.state = self.state_dict[self.state_name]
         self.state.startup(self.current_time, persist)
         self.state.previous = previous
+
 
     def event_loop(self):
         for event in pg.event.get():
@@ -124,13 +133,14 @@ class Control(object):
                 self.keys = pg.key.get_pressed()
             self.state.get_event(event)
 
+
     def main(self):
         while not self.done:
             self.event_loop()
             self.update()
             pg.display.update()
             self.clock.tick(c.FPS)
-            print(self.clock.get_fps())
+            #print(self.clock.get_fps())
 
 
 class _State(object):
@@ -156,3 +166,13 @@ class _State(object):
 
     def update(self, surface, keys, current_time):
         pass
+
+
+def load_all_music(directory, accept=('.wav', '.mp3', '.ogg', '.mdi', '.flac')):
+    songs = {}
+    for song in os.listdir(directory):
+        name, ext = os.path.splitext(song)
+        if ext.lower() in accept:
+            songs[name] = os.path.join(directory, song)
+    print(songs.values())
+    return songs

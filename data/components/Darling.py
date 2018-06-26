@@ -2,19 +2,18 @@ from . import gun_guy
 from .. import constants as c
 import pygame as pg
 
+
 class Darling(gun_guy.GunGuy):
     def __init__(self):
         super().__init__()
 
+        self.name = c.DARLING
         self.bullet_damage = c.BULLET_DAMAGE
-        self.HP = 500
-        self.MP = 3
 
 
     def skill(self, action_group):
-        super().skill('Darling',16,'png')
+        super().skill('Darling', 16, 'gif')
         self.wild_shot_bullets(action_group)
-
 
     def action(self, action_group):
         self.allow_action = False
@@ -31,18 +30,17 @@ class Darling(gun_guy.GunGuy):
         action_group.add(firing_bullet)
         self.state = c.FALLING
 
-
     def setup_character_image_initial(self, character_name, postfix):
-        super().setup_character_image_initial(c.DARLING,'png')
+        super().setup_character_image_initial(c.DARLING, 'gif')
 
-    def setup_character_image_stand(self, character_name,max_frame_number,postfix):
-        super().setup_character_image_stand(c.DARLING,2,'png')
+    def setup_character_image_stand(self, character_name, max_frame_number, postfix):
+        super().setup_character_image_stand(c.DARLING, 2, 'gif')
 
-    def setup_character_image_walk(self, character_name,max_frame_number,postfix):
-        super().setup_character_image_walk(c.DARLING,4,'png')
+    def setup_character_image_walk(self, character_name, max_frame_number, postfix):
+        super().setup_character_image_walk(c.DARLING, 4, 'gif')
 
-    def wild_shot_bullets(self,action_group):
-        if not self.skill_counter%(c.SKILL_SPEED['Darling']):
+    def wild_shot_bullets(self, action_group):
+        if not self.skill_counter % (c.SKILL_SPEED['Darling']):
             bullets = [self.get_bullet_type(c.DARLING, c.LEFT), self.get_bullet_type(c.DARLING, c.RIGHT),
                        self.get_bullet_type(c.DARLING, c.UP), self.get_bullet_type(c.DARLING, c.RIGHT_UP),
                        self.get_bullet_type(c.DARLING, c.LEFT_UP)]
@@ -64,4 +62,3 @@ class Darling(gun_guy.GunGuy):
                 if i >= 2:
                     bullets[i].rect.bottom = self.rect.top
                 action_group.add(bullets[i])
-

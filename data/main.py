@@ -1,10 +1,10 @@
 from . import tools, setup
 from . import constants as c
 
-from . states import main_menu
-from . states import gaming
-from . states import choosing
-from . states import game_over
+from .states import main_menu
+from .states import gaming
+from .states import choosing
+from .states import game_over
 
 
 def main():
