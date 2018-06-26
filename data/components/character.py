@@ -31,6 +31,7 @@ class Character(Sprite):
         self.setup_state_booleans()
 
         self.HP = 0
+        self.max_HP = 0
 
         self.stand_counter = 0
         self.walk_counter = 0
@@ -286,6 +287,8 @@ class Character(Sprite):
             self.state = c.FALLING
 
     def skill(self, character_name=None, max_frame_number=None, postfix=None, size=None):
+        if self.allow_skill == True:
+            self.MP -= 1
         self.allow_skill = False
 
         self.x_vel = 0
@@ -307,12 +310,13 @@ class Character(Sprite):
 
         if self.skill_counter == max_frame_number * c.SKILL_SPEED[character_name] - 1:
             self.state = c.FALLING
-            self.MP -= 1
+            #self.MP -= 1
 
     def freeze(self):
         if self.current_time - self.freeze_time >= c.RELIVE_TIME:
             print(self.current_time, self.freeze_time)
             self.state = c.STANDING
+            self.reset_character_state()
 
     def check_to_allow_jump(self):
         if not self.commands[c.JUMP]:

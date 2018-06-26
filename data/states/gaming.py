@@ -241,8 +241,9 @@ class Gaming(tools._State):
             self.check_character_x_collisions(character)
 
             character.rect.y += round(character.y_vel)
+            self.check_character_under_bottom(character)
             self.check_character_y_collisions(character)
-            self.check_collider_under_bottom(character)
+            #self.check_collider_under_bottom(character)
 
 
     def check_character_x_edge(self, character):
@@ -300,6 +301,11 @@ class Gaming(tools._State):
                 character.rect.top = collider.rect.bottom
 
             character.y_vel = 0
+
+
+    def check_character_under_bottom(self, character):
+        if character.rect.top >= self.viewport.bottom:
+            self.reset_character(character)
 
 
     def check_collider_under_bottom(self, collider):
@@ -481,7 +487,8 @@ class Gaming(tools._State):
         if character.heart <= 0:
             character.kill()
         else:
-            character.reset_character_state()
+            #character.HP = 0
+            #character.reset_character_state()
             character.rect.left = random.randint(1, c.SCREEN_WIDTH-c.BRICK_WIDTH)
             character.rect.bottom = self.viewport.top
             character.state = c.FREEZING
