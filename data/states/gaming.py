@@ -57,11 +57,11 @@ class Gaming(tools._State):
         for character in self.characters_group.sprites():
             self.MaxHP.append(character.HP)
         self.HPSplinesSpace = Group()
-        self.HPSplinesSpace.add(props.Spline_Space(0, 0, 6))
-        self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(40, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(630, 0, 6))
         self.HPSplines = Group()
-        self.HPSplines.add(props.Spline(40, 0, self.MaxHP[0], 6))
-        self.HPSplines.add(props.Spline(630, 0, self.MaxHP[1], 6))
+        self.HPSplines.add(props.Spline(40, 1, self.MaxHP[0], 6))
+        self.HPSplines.add(props.Spline(630, 1, self.MaxHP[1], 6))
 
 
     def setup_background(self):
@@ -95,10 +95,10 @@ class Gaming(tools._State):
             self.MaxHP.append(character.HP)
         self.HPSplinesSpace = Group()
         self.HPSplinesSpace.add(props.Spline_Space(0, 0, 6))
-        self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(630, 0, 6))
         self.HPSplines = Group()
-        self.HPSplines.add(props.Spline(0, 0, self.MaxHP[0], 6))
-        self.HPSplines.add(props.Spline(650, 0, self.MaxHP[1], 6))
+        self.HPSplines.add(props.Spline(40, 0, self.MaxHP[0], 6))
+        self.HPSplines.add(props.Spline(630, 0, self.MaxHP[1], 6))
 
 
     def setup_props(self):
