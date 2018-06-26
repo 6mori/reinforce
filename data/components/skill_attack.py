@@ -37,6 +37,11 @@ class Skill_attack(bullet.Bullet):
             self.skill_size = (154 // 3, 150 // 3)
             self.image = pg.transform.scale(pg.image.load('images/bullet/' + skill_style + '/0.png'), self.skill_size)
             self.frame_numbers = 6
+        elif self.skill_style == 'ice_flame' and self.owner_name == 'Iccy':
+            self.animation_speed = 4
+            self.skill_size = (154 // 3, 150 // 3)
+            self.image = pg.transform.scale(pg.image.load('images/bullet/' + skill_style + '/0.png'), self.skill_size)
+            self.frame_numbers = 6
 
     def update(self):
         if self.skill_style == 'skull' and self.owner_name == 'Spider_prince':

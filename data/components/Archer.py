@@ -33,17 +33,18 @@ class Archer(gun_guy.GunGuy):
     # 发射弓箭
     def action(self, action_group):
         self.allow_action = False
-        # 弓箭方向
+        # 子弹类型
         if self.facing_right:
-            firing_arrow = self.get_bullet_type(c.ARCHER, c.RIGHT)
+            firing_bullet = self.get_bullet_type(c.ARCHER, c.RIGHT)
         else:
-            firing_arrow = self.get_bullet_type(c.ARCHER, c.LEFT)
-        # 弓箭方向
-        self.handle_bullet_direction(firing_arrow)
-        # 弓箭发射位置
-        firing_arrow.rect.top = self.rect.top
-        # 弓箭组
-        action_group.add(firing_arrow)
+            firing_bullet = self.get_bullet_type(c.ARCHER, c.LEFT)
+        # 子弹方向
+        self.handle_bullet_direction(firing_bullet)
+        # 子弹发射位置
+        firing_bullet.rect.centery = self.rect.centery
+        # 子弹组
+        action_group.add(firing_bullet)
+        self.state = c.FALLING
 
     def setup_character_image_initial(self, character_name, postfix):
         super().setup_character_image_initial(c.ARCHER, 'gif')
