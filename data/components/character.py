@@ -8,6 +8,7 @@ class Character(Sprite):
 
     def __init__(self):
         super().__init__()
+        self.heart = c.PLAYER_HEART
         # 大招次数  默认为3
         self.MP = 3
 
@@ -41,6 +42,8 @@ class Character(Sprite):
         # for props
         self.acctime = 0
         self.invtime = 0
+
+        self.freeze_time = 0.0
 
     def setup_character_image_initial(self, character_name='Darling', postfix='png'):
         self.image = pg.transform.scale(pg.image.load('images/%s/stand/0.%s' % (character_name, postfix)).convert(),
@@ -118,6 +121,8 @@ class Character(Sprite):
             self.skill(action_group)
         if self.state == c.ACTIONING:
             self.action(action_group)
+        if self.state == c.FREEZING:
+            self.freeze()
 
     def stand(self, action_group):
         self.check_to_allow_jump()
@@ -304,6 +309,11 @@ class Character(Sprite):
             self.state = c.FALLING
             self.MP -= 1
 
+    def freeze(self):
+        if self.current_time - self.freeze_time >= c.RELIVE_TIME:
+            print(self.current_time, self.freeze_time)
+            self.state = c.STANDING
+
     def check_to_allow_jump(self):
         if not self.commands[c.JUMP]:
             self.allow_jump = True
@@ -315,3 +325,9 @@ class Character(Sprite):
     def check_to_allow_skill(self):
         if (not self.commands[c.SKILL]) and (self.MP > 0):
             self.allow_skill = True
+
+
+    def reset_character_state(self):
+        self.HP = self.max_HP
+        self.MP = 3
+        self.heart -= 1

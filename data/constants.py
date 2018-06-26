@@ -49,6 +49,7 @@ FALLING = 'falling'
 CLIMBING = 'climbing'
 SKILLING = 'skilling'
 ACTIONING = 'actioning'
+FREEZING = 'freezing'
 
 # Character command
 
@@ -73,7 +74,9 @@ P1_CHARACTER = 'p1 character'
 P2_CHARACTER = 'p2 character'
 CURRENT_TIME = 'current time'
 P1_HP = 'p1 hp'
-P2_HP = 'p2_hp'
+P2_HP = 'p2 hp'
+P1_HEART = 'p1 heart'
+P2_HEART = 'p2 heart'
 
 KEYBINDING = 'keybinding'
 
@@ -228,3 +231,6 @@ SCROLL_LEN = BRICK_HEIGHT
 TITLE_BGM = 'title.bgm.mp3'
 CHOOSING_BGM = 'choosing_bgm.mp3'
 GAMING_BGM = 'main_theme.ogg'
+
+PLAYER_HEART = 3
+RELIVE_TIME = 3000

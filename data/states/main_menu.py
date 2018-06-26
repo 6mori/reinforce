@@ -71,5 +71,7 @@ class MainMenu(tools._State):
             c.CURRENT_TIME: 0.0,
             c.P1_HP: 0,
             c.P2_HP: 0,
+            c.P1_HEART: 0,
+            c.P2_HEART: 0,
         }
         self.persist = self.game_info
