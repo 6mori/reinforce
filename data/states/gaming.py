@@ -79,14 +79,10 @@ class Gaming(tools._State):
 
 
     def setup_MPsphere(self):
-        self.MPgroup1MAX = Group()
-        self.MPgroup2MAX = Group()
+        self.MPgroupMAX = [Group(), Group()]
         for i in range(0, 6):
-            c.P1MPPOS = (c.P1MPPOS[0] + 20, c.P1MPPOS[1])
-            self.MPgroup1MAX.add(props.MPsphere(c.P1MPPOS[0], c.P1MPPOS[1]))
-        for i in range(0, 6):
-            c.P2MPPOS = (c.P2MPPOS[0] + 20, c.P2MPPOS[1])
-            self.MPgroup2MAX.add(props.MPsphere(c.P2MPPOS[0], c.P2MPPOS[1]))
+            self.MPgroupMAX[0].add(props.MPsphere(c.MP_POS[0][0] + i * 20, c.MP_POS[0][1]))
+            self.MPgroupMAX[1].add(props.MPsphere(c.MP_POS[1][0] - i * 20, c.MP_POS[1][1]))
 
 
     def setup_splines(self):
@@ -303,6 +299,7 @@ class Gaming(tools._State):
 
     def check_character_under_bottom(self, character):
         if character.rect.top >= self.viewport.bottom:
+            character.HP = 0
             self.reset_character(character)
 
 
@@ -447,23 +444,10 @@ class Gaming(tools._State):
             surface.blit(icon.image, icon.rect)
 
         # MP
-        self.PlayerMP = []
-        for character in self.characters_group.sprites():
-            self.PlayerMP.append(character.MP)
-        i = 0
-        for mpsphere in self.MPgroup1MAX.sprites():
-            if i == self.PlayerMP[0]:
-                break
-            else:
-                surface.blit(mpsphere.image, mpsphere.rect)
-                i = i + 1
-        i = 0
-        for mpsphere in self.MPgroup2MAX.sprites():
-            if i == self.PlayerMP[1]:
-                break
-            else:
-                surface.blit(mpsphere.image, mpsphere.rect)
-                i = i + 1
+        for i in range(0, 2):
+            for k in range(0, self.characters_group.sprites()[i].MP):
+                surface.blit(self.MPgroupMAX[i].sprites()[k].image, self.MPgroupMAX[i].sprites()[k].rect)
+
         # HP
         for spline_space_item in self.HPSplinesSpace.sprites():
             self.map.blit(spline_space_item.image, spline_space_item.rect)
@@ -478,7 +462,7 @@ class Gaming(tools._State):
                 surface.blit(spline_item.image, spline_item.rect)
             except:
                 pass
-        self.setup_props()
+        #self.setup_props()
 
 
     def reset_character(self, character):

@@ -313,9 +313,15 @@ class Character(Sprite):
             #self.MP -= 1
 
     def freeze(self):
+        self.x_vel = 0
+        self.y_vel = 0
+        self.allow_skill = False
+        self.allow_action = False
+        self.allow_jump = False
+
         if self.current_time - self.freeze_time >= c.RELIVE_TIME:
             print(self.current_time, self.freeze_time)
-            self.state = c.STANDING
+            self.state = c.FALLING
             self.reset_character_state()
 
     def check_to_allow_jump(self):

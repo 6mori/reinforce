@@ -9,7 +9,7 @@ class GunGuy(character.Character):
         super().__init__()
 
         self.bullet_damage = c.BULLET_DAMAGE
-        self.max_HP = 5
+        self.max_HP = 500
         self.HP = self.max_HP
 
     def get_bullet_type(self, character_name, direction):
