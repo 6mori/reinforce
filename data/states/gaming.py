@@ -42,7 +42,7 @@ class Gaming(tools._State):
         # self.setup_killing_items()
         self.setup_action_group()
         # self.setup_spritegroups()
-        #self.setup_props()
+        self.setup_props()
         self.setup_splines()
         self.setup_MPsphere()
         self.setup_icons()

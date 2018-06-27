@@ -17,8 +17,10 @@ class MainMenu(tools._State):
 
         self.next = c.CHOOSING
 
+        self.state = c.PLAY
+
         self.setup_background()
-        self.setup_cursor()
+        #self.setup_cursor()
         self.setup_UI()
 
     def setup_UI(self):
@@ -33,7 +35,7 @@ class MainMenu(tools._State):
         self.background_rect = self.background.get_rect()
 
     def setup_cursor(self):
-        self.state = c.PLAY
+        pass
         # self.cursor.image = pg.Surface([c.TITLE_CURSOR_WIDTH, c.TITLE_CURSOR_HEIGHT])
         # self.cursor.image.set_colorkey(c.BLACK)
         # self.cursor.rect = self.cursor.image.get_rect()
