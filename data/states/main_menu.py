@@ -22,8 +22,8 @@ class MainMenu(tools._State):
 
     def setup_UI(self):
         self.UI = []
-        #self.UI[0] =
-        #self.UI[1] =
+        self.UI[0] = pg.image.load('images/UI/start_game.png')
+        self.UI[1] = pg.image.load('images/UI/exit_game.png')
 
     def setup_background(self):
         self.background = pg.transform.scale(pg.image.load('images/%s' % c.TITLE_SCREEN), c.SCREEN_SIZE)
