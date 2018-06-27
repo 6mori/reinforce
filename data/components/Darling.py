@@ -9,6 +9,7 @@ class Darling(gun_guy.GunGuy):
 
         self.name = c.DARLING
         self.bullet_damage = c.BULLET_DAMAGE
+        self.HP = 100
 
 
     def skill(self, action_group):

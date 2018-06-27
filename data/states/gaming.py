@@ -4,18 +4,19 @@ from pygame.sprite import Group
 from .. import tools
 from .. import setup
 from .. import constants as c
-
-from .. components import brick
-from .. components import props
-from .. components import Darling
-from .. components import guan_gong
-from .. components import k
-from .. components import Archer
-from .. components import spider_prince
-from .. components import poena
-from .. components import ghost
+from ..components import character as ch
+from ..components import brick
+from ..components import props
+from ..components import Darling
+from ..components import guan_gong
+from ..components import k
+from ..components import Archer
+from ..components import spider_prince
+from ..components import poena
+from ..components import ghost
+from ..components import iccy
 import random
-
+from ..components import skill_attack
 
 class Gaming(tools._State):
     def __init__(self):
@@ -27,6 +28,7 @@ class Gaming(tools._State):
         self.game_info[c.CURRENT_TIME] = current_time
         self.next = c.GAME_OVER
 
+        self.x_collide_counter = 0
         #self.done = True
 
         self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
@@ -57,11 +59,11 @@ class Gaming(tools._State):
         for character in self.characters_group.sprites():
             self.MaxHP.append(character.HP)
         self.HPSplinesSpace = Group()
-        self.HPSplinesSpace.add(props.Spline_Space(40, 0, 6))
-        self.HPSplinesSpace.add(props.Spline_Space(630, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(0, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
         self.HPSplines = Group()
-        self.HPSplines.add(props.Spline(40, 1, self.MaxHP[0], 6))
-        self.HPSplines.add(props.Spline(630, 1, self.MaxHP[1], 6))
+        self.HPSplines.add(props.Spline(40, 0, self.MaxHP[0], 6))
+        self.HPSplines.add(props.Spline(630, 0, self.MaxHP[1], 6))
 
 
     def setup_background(self):
@@ -91,10 +93,10 @@ class Gaming(tools._State):
             self.MaxHP.append(character.HP)
         self.HPSplinesSpace = Group()
         self.HPSplinesSpace.add(props.Spline_Space(0, 0, 6))
-        self.HPSplinesSpace.add(props.Spline_Space(630, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
         self.HPSplines = Group()
-        self.HPSplines.add(props.Spline(40, 0, self.MaxHP[0], 6))
-        self.HPSplines.add(props.Spline(630, 0, self.MaxHP[1], 6))
+        self.HPSplines.add(props.Spline(0, 0, self.MaxHP[0], 6))
+        self.HPSplines.add(props.Spline(650, 0, self.MaxHP[1], 6))
 
 
     def setup_props(self):
@@ -106,6 +108,7 @@ class Gaming(tools._State):
         x = row * c.BRICK_WIDTH
         y = col * c.BRICK_HEIGHT
         props_group.add(props.Prop(x, y, prop_kind))
+
 
     def setup_bricks(self):
         map = "images/map.txt"
@@ -145,7 +148,8 @@ class Gaming(tools._State):
                 c.ARCHER: Archer.Archer(),
                 c.SPIDER_PRINCE: spider_prince.Spider_prince(),
                 c.POENA: poena.Poena(),
-                c.GHOST: ghost.Ghost()
+                c.GHOST: ghost.Ghost(),
+                c.ICCY: iccy.Iccy()
             },
             {
                 c.DARLING: Darling.Darling(),
@@ -154,7 +158,8 @@ class Gaming(tools._State):
                 c.ARCHER: Archer.Archer(),
                 c.SPIDER_PRINCE: spider_prince.Spider_prince(),
                 c.POENA: poena.Poena(),
-                c.GHOST: ghost.Ghost()
+                c.GHOST: ghost.Ghost(),
+                c.ICCY: iccy.Iccy()
             },
         ]
 
@@ -221,6 +226,7 @@ class Gaming(tools._State):
             if self.scroll_count == c.SCROLL_LEN:
                 self.scrolling_up = False
 
+
     def adjust_sprite_positions(self):
         self.adjust_characters_position()
         # self.adjust_bullets_position()
@@ -252,6 +258,18 @@ class Gaming(tools._State):
     def check_character_x_collisions(self, character):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
         prop = pg.sprite.spritecollideany(character, self.props_group)
+        if character.name == c.GUAN_GONG and character.state == c.SKILLING:
+            for ch in self.characters_group:
+                if ch != character:
+                    another_character = pg.sprite.collide_rect(character, ch)
+            if another_character:
+                another_character.HP -= character.skill_damage
+                if another_character.HP <= 0:
+                    self.reset_character(another_character)
+                else:
+                    another_character.rect.x -= 10
+                    another_character.rect.y -= 10
+                character.state = c.FALLING
 
         if brick:
             self.adjust_character_for_x_collisions(character, brick)
@@ -261,6 +279,7 @@ class Gaming(tools._State):
 
 
     def adjust_character_for_x_collisions(self, character, collider):
+
         if character.name == c.GUAN_GONG and character.state == c.SKILLING:
             collider.kill()
         else:
@@ -351,17 +370,13 @@ class Gaming(tools._State):
                     character.HP -= bullet.damage
                 if character.HP <= 0:
                     self.reset_character(character)
+                bullet.kill()
 
-                if bullet.penetration_mode == 1:
-                    bullet.kill()
-                elif bullet.penetration_mode == 2:
-                    bullet.damage -= tmp
-                    if bullet.damage <= 0:
-                        bullet.kill()
 
         if brick:
             tmp = brick.HP
-            brick.HP -= bullet.damage
+            if bullet.penetration_mode != 3:
+                brick.HP -= bullet.damage
             if brick.HP <= 0:
                 brick.kill()
             if bullet.penetration_mode == 1:
