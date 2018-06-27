@@ -42,7 +42,7 @@ class Gaming(tools._State):
         # self.setup_killing_items()
         self.setup_action_group()
         # self.setup_spritegroups()
-        self.setup_props()
+        #self.setup_props()
         self.setup_splines()
         self.setup_MPsphere()
         self.setup_icons()
@@ -52,6 +52,7 @@ class Gaming(tools._State):
         self.icons = Group()
         self.icons.add(props.Icon(0, 1, self.game_info[c.P1_CHARACTER]))
         self.icons.add(props.Icon(760, 1, self.game_info[c.P2_CHARACTER]))
+
 
     def setup_splines(self):
         self.MaxHP = []
@@ -191,7 +192,7 @@ class Gaming(tools._State):
     def handle_state(self, keys):
         self.update_all_sprites(keys)
         self.update_viewport()
-        self.update_props()
+        #self.update_props()
 
     def update_props(self):
         self.prop_count += 1
@@ -443,6 +444,9 @@ class Gaming(tools._State):
         self.map.blit(self.background, self.viewport)
         for character in self.characters_group.sprites():
             self.map.blit(character.image, character.show_xy)
+        '''for brick in self.bricks_group.sprites():
+            if brick.rect.top < self.viewport.bottom:
+                self.map.blit(brick.image, brick.rect)'''
         self.bricks_group.draw(self.map)
         self.props_group.draw(self.map)
         for action_item in self.action_group.sprites():
