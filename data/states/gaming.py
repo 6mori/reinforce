@@ -16,6 +16,7 @@ from ..components import poena
 from ..components import ghost
 from ..components import iccy
 import random
+import threading
 from ..components import skill_attack
 
 class Gaming(tools._State):
@@ -41,8 +42,6 @@ class Gaming(tools._State):
         # self.setup_killing_items()
         self.setup_action_group()
         # self.setup_spritegroups()
-        self.prop_count = 0
-        self.props_group = Group()
         self.setup_props()
         self.setup_splines()
         self.setup_MPsphere()
@@ -443,11 +442,6 @@ class Gaming(tools._State):
     def blit_everything(self, surface):
         self.map.blit(self.background, self.viewport)
         for character in self.characters_group.sprites():
-            if character.acctime:
-                character.acctime -= 1
-                character.max_x_vel = c.MAX_X_VEL * 2
-            else:
-                character.max_x_vel = c.MAX_X_VEL
             self.map.blit(character.image, character.show_xy)
         self.bricks_group.draw(self.map)
         self.props_group.draw(self.map)
@@ -475,7 +469,6 @@ class Gaming(tools._State):
             '''else:
                 spline_item.reset()
                 surface.blit(spline_item.image, spline_item.rect)'''
-
 
 
     def reset_character(self, character):

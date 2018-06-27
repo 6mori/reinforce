@@ -93,8 +93,18 @@ class Character(Sprite):
         self.show_xy = (self.rect.topleft)
         self.bind_keys(keys, keybinding)
         self.current_time = game_info[c.CURRENT_TIME]
+        self.check_props_effect()
         self.handle_state(action_group)
         self.character_direction()
+
+    def check_props_effect(self):
+        if self.acctime:
+            self.acctime -= 1
+            if self.acctime <= 0:
+                self.max_x_vel = c.MAX_X_VEL
+
+        if self.invtime:
+            pass
 
     def character_direction(self):
         if self.facing_right:

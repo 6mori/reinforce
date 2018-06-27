@@ -19,15 +19,19 @@ class Prop(Sprite):
         self.state = c.FALLING
 
     def ActOnCharacters(self, character):
-        if self.kind == 'Prop_HP_potion':
-            character.HP = character.HP + 80
-        elif self.kind == 'Prop_MP_potion':
-            if character.MP < 6:
-                character.MP = character.MP + 1
-        elif self.kind == 'Prop_Shoe':
-            character.acctime = 120
-        elif self.kind == 'Prop_Corselet':
-            character.invtime = 120
+        if character.state != c.FREEZING:
+            if self.kind == 'Prop_HP_potion':
+                character.HP += 80
+                if character.HP >= character.max_HP:
+                    character.HP = character.max_HP
+            elif self.kind == 'Prop_MP_potion':
+                if character.MP < 6:
+                    character.MP = character.MP + 1
+            elif self.kind == 'Prop_Shoe':
+                character.acctime = 120
+                character.max_x_vel *= 2
+            elif self.kind == 'Prop_Corselet':
+                character.invtime = 120
 
     def update(self):
         if self.state == c.FALLING:
