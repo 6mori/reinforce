@@ -33,13 +33,13 @@ class MainMenu(tools._State):
         self.background_rect = self.background.get_rect()
 
     def setup_cursor(self):
-        self.cursor = pg.sprite.Sprite()
-        self.cursor.image = pg.Surface([c.TITLE_CURSOR_WIDTH, c.TITLE_CURSOR_HEIGHT])
-        self.cursor.image.set_colorkey(c.BLACK)
-        self.cursor.rect = self.cursor.image.get_rect()
-        self.cursor.rect.x = 350
-        self.cursor.rect.y = 300
-        self.cursor.state = c.PLAY
+        self.state = c.PLAY
+        # self.cursor.image = pg.Surface([c.TITLE_CURSOR_WIDTH, c.TITLE_CURSOR_HEIGHT])
+        # self.cursor.image.set_colorkey(c.BLACK)
+        # self.cursor.rect = self.cursor.image.get_rect()
+        # self.cursor.rect.x = 350
+        # self.cursor.rect.y = 300
+        # self.cursor.state = c.PLAY
 
     def update(self, surface, keys, current_time):
         self.current_time = current_time
@@ -48,29 +48,27 @@ class MainMenu(tools._State):
         self.blit_everything(surface)
 
     def update_cursor(self, keys):
-        if self.cursor.state == c.PLAY:
-            self.cursor.rect.y = 300
+        if self.state == c.PLAY:
             if keys[pg.K_DOWN]:
-                self.cursor.state = c.QUIT
+                self.state = c.QUIT
             if keys[pg.K_RETURN]:
                 self.reset_game_info()
                 self.done = True
-        elif self.cursor.state == c.QUIT:
-            self.cursor.rect.y = 450
+        elif self.state == c.QUIT:
             if keys[pg.K_UP]:
-                self.cursor.state = c.PLAY
+                self.state = c.PLAY
             if keys[pg.K_RETURN]:
                 self.quit = True
 
     def blit_everything(self, surface):
         surface.blit(self.background, self.background_rect)
-        surface.blit(self.cursor.image, self.cursor.rect)
+        # surface.blit(self.cursor.image, self.cursor.rect)
         for state in self.UI.keys():
             if state == c.PLAY:
                 show_xy = (350, 300)
             if state == c.QUIT:
                 show_xy = (350, 450)
-            if state == self.cursor.state:
+            if state == self.state:
                 surface.blit(self.UI[state][1], show_xy)
             else:
                 surface.blit(self.UI[state][0], show_xy)
