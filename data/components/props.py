@@ -43,6 +43,7 @@ class Spline(Sprite):
         self.x = x
         self.y = y
         self.HP = HP
+        self.height = height
         self.width = width
         self.image = pg.transform.scale(pg.image.load('images/spline.png'),
                                         (c.BRICK_WIDTH * width, c.BRICK_HEIGHT * height // 2))
@@ -53,6 +54,12 @@ class Spline(Sprite):
     def scale_change(self, current_HP):
         rate = current_HP / self.HP
         self.image = pg.transform.scale(self.image, ((int)(c.BRICK_WIDTH * self.width * rate), c.BRICK_HEIGHT // 2))
+        self.rect = self.image.get_rect()
+        self.rect.left = self.x
+        self.rect.top = self.y
+
+    def reset(self):
+        self.image = pg.transform.scale(pg.image.load('images/spline.png'), (c.BRICK_WIDTH * self.width, c.BRICK_HEIGHT * self.height // 2))
         self.rect = self.image.get_rect()
         self.rect.left = self.x
         self.rect.top = self.y
@@ -83,7 +90,8 @@ IconsCons = {
     c.ARCHER: "images/icons/Archer.png",
     c.SPIDER_PRINCE: "images/icons/Spider_prince.png",
     c.POENA: "images/icons/Poena.png",
-    c.GHOST: "images/icons/Ghost.png"
+    c.GHOST: "images/icons/Ghost.png",
+    c.ICCY:"images/icons/Iccy.png"
 }
 
 class Icon(Sprite):
