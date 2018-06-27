@@ -365,17 +365,17 @@ class Gaming(tools._State):
 
         if character:
             if bullet.owner != character.player_num:
-                tmp = character.HP
                 if (character.vincible):
                     character.HP -= bullet.damage
                 if character.HP <= 0:
                     self.reset_character(character)
-                bullet.kill()
+                if bullet.penetration_mode != 4:
+                    bullet.kill()
 
 
         if brick:
             tmp = brick.HP
-            if bullet.penetration_mode != 3:
+            if bullet.penetration_mode < 3:
                 brick.HP -= bullet.damage
             if brick.HP <= 0:
                 brick.kill()

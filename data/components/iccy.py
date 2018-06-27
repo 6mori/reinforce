@@ -1,6 +1,7 @@
 from . import gun_guy
 from .. import constants as c
 from . import skill_attack
+import pygame as pg
 
 
 class Iccy(gun_guy.GunGuy):
@@ -9,12 +10,24 @@ class Iccy(gun_guy.GunGuy):
 
         self.bullet_damage = 50
         self.HP = 100
-        self.MP = 3
+        self.MP = 5
         self.name = c.ICCY
 
     def skill(self, action_group):
         super().skill(c.ICCY, 11, 'gif')
-
+        if self.skill_counter == 1:
+            if self.facing_right:
+                attack = skill_attack.Skill_attack(self.player_num, 100, c.RIGHT, 'ice_flame',
+                                                   c.ICCY)
+                attack.rect.left = self.rect.right - 20
+            else:
+                attack = skill_attack.Skill_attack(self.player_num, 100, c.LEFT, 'ice_flame',
+                                                   c.ICCY)
+                attack.rect.right = self.rect.left - 180
+            attack.rect.bottom = self.rect.top
+            attack.penetration_mode = 4
+            attack.damage = 2
+            action_group.add(attack)
 
     def action(self, action_group):
         super().action(c.ICCY, 8, 'gif')
