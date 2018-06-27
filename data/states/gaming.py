@@ -60,7 +60,7 @@ class Gaming(tools._State):
             self.MaxHP.append(character.HP)
         self.HPSplinesSpace = Group()
         self.HPSplinesSpace.add(props.Spline_Space(0, 0, 6))
-        self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(630, 0, 6))
         self.HPSplines = Group()
         self.HPSplines.add(props.Spline(40, 0, self.MaxHP[0], 6))
         self.HPSplines.add(props.Spline(630, 0, self.MaxHP[1], 6))
@@ -93,10 +93,10 @@ class Gaming(tools._State):
             self.MaxHP.append(character.HP)
         self.HPSplinesSpace = Group()
         self.HPSplinesSpace.add(props.Spline_Space(0, 0, 6))
-        self.HPSplinesSpace.add(props.Spline_Space(650, 0, 6))
+        self.HPSplinesSpace.add(props.Spline_Space(630, 0, 6))
         self.HPSplines = Group()
-        self.HPSplines.add(props.Spline(0, 0, self.MaxHP[0], 6))
-        self.HPSplines.add(props.Spline(650, 0, self.MaxHP[1], 6))
+        self.HPSplines.add(props.Spline(40, 0, self.MaxHP[0], 6))
+        self.HPSplines.add(props.Spline(630, 0, self.MaxHP[1], 6))
 
 
     def setup_props(self):
@@ -470,6 +470,10 @@ class Gaming(tools._State):
             if character.HP > 0:
                 spline_item.scale_change(character.HP)
                 surface.blit(spline_item.image, spline_item.rect)
+            else:
+                spline_item.reset()
+                surface.blit(spline_item.image, spline_item.rect)
+
         #self.setup_props()
 
 
