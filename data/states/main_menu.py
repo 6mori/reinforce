@@ -19,11 +19,14 @@ class MainMenu(tools._State):
 
         self.setup_background()
         self.setup_cursor()
+        self.setup_UI()
 
     def setup_UI(self):
-        self.UI = []
-        self.UI[0] = pg.image.load('images/UI/start_game.png')
-        self.UI[1] = pg.image.load('images/UI/exit_game.png')
+        self.UI = {}
+        self.UI[c.PLAY] = [pg.transform.scale(pg.image.load('images/UI/start_game.png'), (150, 50)),
+                           pg.transform.scale(pg.image.load('images/UI/start_game.png'), (180, 60))]
+        self.UI[c.QUIT] = [pg.transform.scale(pg.image.load('images/UI/exit_game.png'), (150, 50)),
+                           pg.transform.scale(pg.image.load('images/UI/exit_game.png'), (180, 60))]
 
     def setup_background(self):
         self.background = pg.transform.scale(pg.image.load('images/%s' % c.TITLE_SCREEN), c.SCREEN_SIZE)
@@ -32,10 +35,10 @@ class MainMenu(tools._State):
     def setup_cursor(self):
         self.cursor = pg.sprite.Sprite()
         self.cursor.image = pg.Surface([c.TITLE_CURSOR_WIDTH, c.TITLE_CURSOR_HEIGHT])
-        # self.cursor.image.set_colorkey(c.BLACK)
+        self.cursor.image.set_colorkey(c.BLACK)
         self.cursor.rect = self.cursor.image.get_rect()
         self.cursor.rect.x = 350
-        self.cursor.rect.y = 400
+        self.cursor.rect.y = 300
         self.cursor.state = c.PLAY
 
     def update(self, surface, keys, current_time):
@@ -46,7 +49,7 @@ class MainMenu(tools._State):
 
     def update_cursor(self, keys):
         if self.cursor.state == c.PLAY:
-            self.cursor.rect.y = 400
+            self.cursor.rect.y = 300
             if keys[pg.K_DOWN]:
                 self.cursor.state = c.QUIT
             if keys[pg.K_RETURN]:
@@ -62,11 +65,19 @@ class MainMenu(tools._State):
     def blit_everything(self, surface):
         surface.blit(self.background, self.background_rect)
         surface.blit(self.cursor.image, self.cursor.rect)
+        for state in self.UI.keys():
+            if state == c.PLAY:
+                show_xy = (350, 300)
+            if state == c.QUIT:
+                show_xy = (350, 450)
+            if state == self.cursor.state:
+                surface.blit(self.UI[state][1], show_xy)
+            else:
+                surface.blit(self.UI[state][0], show_xy)
 
 
     def get_event(self, event):
-        if event.type == pg.KEYUP:
-            self.done = True
+        pass
 
 
     def reset_game_info(self):
