@@ -4,7 +4,6 @@ from pygame.sprite import Group
 from .. import tools
 from .. import setup
 from .. import constants as c
-
 from .. components import brick
 from .. components import props
 from .. components import Darling
@@ -212,7 +211,11 @@ class Gaming(tools._State):
 
 
     def update_viewport(self):
-        if self.current_time - self.last_scroll_time >= c.SCROLL_TIME:
+        if self.current_time<=20000:
+           pass
+        elif self.current_time>=46400:
+            pass
+        elif self.current_time - self.last_scroll_time >= c.SCROLL_TIME:
             self.scrolling_up = True
             self.scroll_count = 0
             self.last_scroll_time = self.current_time

@@ -8,16 +8,10 @@ class Brick(Sprite):
 
     def __init__(self, x, y, kind, width=1, height=1):  # width和height为砖块长宽
         super().__init__()
-        # self.rect = pg.Rect((x, y), (c.BRICK_WIDTH, c.BRICK_HEIGHT))
-
         self.image = pg.transform.scale(pg.image.load(t.kindOfBrick[kind]['name']).convert(), (c.BRICK_WIDTH*width, c.BRICK_HEIGHT*height))
-
         self.rect = self.image.get_rect()
-        # self.rect.width=x
-        # self.rect.bottom=y
         self.rect.left = x
         self.rect.top = y
-
         self.HP = t.kindOfBrick[kind]['dur']
         self.vincible = True
         # for test
