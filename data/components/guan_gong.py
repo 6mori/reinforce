@@ -9,6 +9,7 @@ class Guan_gong(sword_guy.SwordGuy):
         self.name = c.GUAN_GONG
         self.sword_damage = 5
         self.HP = 500
+        self.skill_damage = 50
 
     def skill(self, action_group):
         super().skill(c.GUAN_GONG, 10, 'gif')

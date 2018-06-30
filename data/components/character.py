@@ -31,6 +31,7 @@ class Character(Sprite):
         self.setup_state_booleans()
 
         self.HP = 0
+        self.max_HP = 0
 
         self.stand_counter = 0
         self.walk_counter = 0
@@ -92,8 +93,18 @@ class Character(Sprite):
         self.show_xy = (self.rect.topleft)
         self.bind_keys(keys, keybinding)
         self.current_time = game_info[c.CURRENT_TIME]
+        self.check_props_effect()
         self.handle_state(action_group)
         self.character_direction()
+
+    def check_props_effect(self):
+        if self.acctime:
+            self.acctime -= 1
+            if self.acctime <= 0:
+                self.max_x_vel = c.MAX_X_VEL
+
+        if self.invtime:
+            pass
 
     def character_direction(self):
         if self.facing_right:
@@ -286,6 +297,8 @@ class Character(Sprite):
             self.state = c.FALLING
 
     def skill(self, character_name=None, max_frame_number=None, postfix=None, size=None):
+        if self.allow_skill == True:
+            self.MP -= 1
         self.allow_skill = False
 
         self.x_vel = 0
@@ -307,12 +320,19 @@ class Character(Sprite):
 
         if self.skill_counter == max_frame_number * c.SKILL_SPEED[character_name] - 1:
             self.state = c.FALLING
-            self.MP -= 1
+            #self.MP -= 1
 
     def freeze(self):
+        self.x_vel = 0
+        self.y_vel = 0
+        self.allow_skill = False
+        self.allow_action = False
+        self.allow_jump = False
+
         if self.current_time - self.freeze_time >= c.RELIVE_TIME:
             print(self.current_time, self.freeze_time)
-            self.state = c.STANDING
+            self.state = c.FALLING
+            self.reset_character_state()
 
     def check_to_allow_jump(self):
         if not self.commands[c.JUMP]:

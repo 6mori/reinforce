@@ -15,17 +15,17 @@ class Poena(sword_guy.SwordGuy):
         super().skill(c.POENA, 5, 'gif', (107 // 3, 111 // 3))
         if self.skill_counter == 1:
             if self.facing_right:
-                attack = skill_attack.Skill_attack(self.player_num, 2000, c.RIGHT, 'cross',
+                attack = skill_attack.Skill_attack(self.player_num, 10, c.RIGHT, 'cross',
                                                    c.POENA)
                 attack.rect.left = self.rect.right
                 attack.x_vel = 4
             else:
-                attack = skill_attack.Skill_attack(self.player_num, 2000, c.LEFT, 'cross',
+                attack = skill_attack.Skill_attack(self.player_num, 10, c.LEFT, 'cross',
                                                    c.POENA)
                 attack.rect.right = self.rect.left
                 attack.x_vel = -4
             attack.rect.bottom = self.rect.bottom
-            attack.penetration_mode = 2
+            attack.penetration_mode = 3
             action_group.add(attack)
 
     def action(self, action_group):

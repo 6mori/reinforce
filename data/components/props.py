@@ -19,15 +19,19 @@ class Prop(Sprite):
         self.state = c.FALLING
 
     def ActOnCharacters(self, character):
-        if self.kind == 'Prop_HP_potion':
-            character.HP = character.HP + 80
-        elif self.kind == 'Prop_MP_potion':
-            if character.MP < 6:
-                character.MP = character.MP + 1
-        elif self.kind == 'Prop_Shoe':
-            character.acctime = 120
-        elif self.kind == 'Prop_Corselet':
-            character.invtime = 120
+        if character.state != c.FREEZING:
+            if self.kind == 'Prop_HP_potion':
+                character.HP += 80
+                if character.HP >= character.max_HP:
+                    character.HP = character.max_HP
+            elif self.kind == 'Prop_MP_potion':
+                if character.MP < 6:
+                    character.MP = character.MP + 1
+            elif self.kind == 'Prop_Shoe':
+                character.acctime = 120
+                character.max_x_vel *= 2
+            elif self.kind == 'Prop_Corselet':
+                character.invtime = 120
 
     def update(self):
         if self.state == c.FALLING:
@@ -43,6 +47,7 @@ class Spline(Sprite):
         self.x = x
         self.y = y
         self.HP = HP
+        self.height = height
         self.width = width
         self.image = pg.transform.scale(pg.image.load('images/spline.png'),
                                         (c.BRICK_WIDTH * width, c.BRICK_HEIGHT * height // 2))
@@ -53,6 +58,12 @@ class Spline(Sprite):
     def scale_change(self, current_HP):
         rate = current_HP / self.HP
         self.image = pg.transform.scale(self.image, ((int)(c.BRICK_WIDTH * self.width * rate), c.BRICK_HEIGHT // 2))
+        self.rect = self.image.get_rect()
+        self.rect.left = self.x
+        self.rect.top = self.y
+
+    def reset(self):
+        self.image = pg.transform.scale(pg.image.load('images/spline.png'), (c.BRICK_WIDTH * self.width, c.BRICK_HEIGHT * self.height // 2))
         self.rect = self.image.get_rect()
         self.rect.left = self.x
         self.rect.top = self.y
@@ -76,20 +87,11 @@ class MPsphere(Sprite):
         self.rect.left = x
         self.rect.top = y
 
-IconsCons = {
-    c.DARLING:"images/icons/darling.png",
-    c.GUAN_GONG: "images/icons/Guan_gong.png",
-    c.K: "images/icons/k.png",
-    c.ARCHER: "images/icons/Archer.png",
-    c.SPIDER_PRINCE: "images/icons/Spider_prince.png",
-    c.POENA: "images/icons/Poena.png",
-    c.GHOST: "images/icons/Ghost.png"
-}
 
 class Icon(Sprite):
     def __init__(self, x, y, charactor):
         super().__init__()
-        self.image = pg.transform.scale(pg.image.load(IconsCons[charactor]), (c.BRICK_WIDTH*2, c.BRICK_HEIGHT*2))
+        self.image = pg.transform.scale(pg.image.load("images/icons/%s.png"%(charactor)), (c.BRICK_WIDTH*2, c.BRICK_HEIGHT*2))
         self.rect = self.image.get_rect()
         self.rect.left = x
         self.rect.top = y

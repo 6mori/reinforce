@@ -10,7 +10,7 @@ class SwordGuy(character.Character):
         super(SwordGuy, self).__init__()
 
         self.sword_damage = c.SWORD_DAMAGE
-        self.max_HP = 5
+        self.max_HP = 500
         self.HP = self.max_HP
 
     def action(self, action_group, character_name, frame_nums, postfix, size=None,attack_size=None):

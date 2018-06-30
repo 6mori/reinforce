@@ -149,6 +149,7 @@ ARCHER = 'Archer'
 SPIDER_PRINCE = 'Spider_prince'
 POENA = 'Poena'
 GHOST = 'Ghost'
+ICCY = 'Iccy'
 
 CHARACTERS = [
     DARLING,
@@ -157,7 +158,8 @@ CHARACTERS = [
     ARCHER,
     SPIDER_PRINCE,
     POENA,
-    GHOST
+    GHOST,
+    ICCY
 ]
 
 # Character speeds(higher = slower)
@@ -169,7 +171,8 @@ CHARACTER_MOVING_SPEED = {
     'Archer': 10,
     'Spider_prince': 10,
     'Poena': 8,
-    'Ghost': 8
+    'Ghost': 8,
+    'Iccy':8
 }
 # Character size
 
@@ -180,7 +183,8 @@ CHARACTER_SIZE = {
     'Archer': (103 // 3, 131 // 3),
     'Spider_prince': (103 // 2, 131 // 2),
     'Poena': (69 // 3, 154 // 3),
-    'Ghost': (239 // 4, 213 // 4)
+    'Ghost': (239 // 4, 213 // 4),
+    'Iccy': (141//3,118//2)
 }
 # Character skill
 SKILL_SPEED = {
@@ -190,7 +194,8 @@ SKILL_SPEED = {
     'Archer': 20,
     'Spider_prince': 5,
     'Poena': 10,
-    'Ghost': 5
+    'Ghost': 5,
+    'Iccy':5
 }
 
 # Stand animation
@@ -201,7 +206,8 @@ STAND_ANIMATION_SPEED = {
     'Archer': 100,
     'Spider_prince': 35,
     'Poena': 10,
-    'Ghost': 100
+    'Ghost': 100,
+    'Iccy':10
 }
 
 # Character action_aninamation_speed
@@ -212,12 +218,15 @@ ACTION_SPEED = {
     'Archer': 20,
     'Spider_prince': 10,
     'Poena': 10,
-    'Ghost': 2
+    'Ghost': 2,
+    'Iccy':2
 }
 
 # MP
-P1MPPOS = (40, 20)
-P2MPPOS = (630, 20)
+MP_POS = [
+    (40, 20),
+    (730, 20),
+]
 
 # Action item type
 BULLET = 'bullet'
@@ -234,3 +243,5 @@ GAMING_BGM = 'main_theme.ogg'
 
 PLAYER_HEART = 3
 RELIVE_TIME = 3000
+
+DAMAGE_CHECK_FRAME = 6

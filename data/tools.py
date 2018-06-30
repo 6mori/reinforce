@@ -107,7 +107,7 @@ class Control(object):
 
     def update(self):
         self.current_time = pg.time.get_ticks()
-        print(self.current_time)
+        #print(self.current_time)
         if self.state.quit:
             self.done = True
         elif self.state.done:
@@ -140,13 +140,14 @@ class Control(object):
             self.update()
             pg.display.update()
             self.clock.tick(c.FPS)
-            #print(self.clock.get_fps())
+            print(self.clock.get_fps())
 
 
 class _State(object):
     def __init__(self):
         self.start_time = 0.0
         self.current_time = 0.0
+        self.current_screen_bottom=c.SCREEN_HEIGHT
         self.done = False
         self.quit = False
         self.next = None
