@@ -16,7 +16,6 @@
 15,4,18,1,'cool_grass_surface'
 0,14,8,1,'cool_grass_surface'
 0,15,7,1,'cool_grass_soil'
-24,23,1,22,'water'
 20,23,4,3,'cool_grass_soil'
 0,25,16,1,'grass_surface'
 3,29,21,1,'grass_surface'
@@ -58,3 +57,5 @@
 4,81,32,1,'ice'
 2,82,34,1,'ice'
 0,83,40,1,'ice'
+24,23,1,10,'water'
+10,5,1,1,'fire'

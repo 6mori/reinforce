@@ -212,6 +212,7 @@ class Gaming(tools._State):
         self.adjust_sprite_positions()
         self.action_group.update()
         self.props_group.update()
+        self.bricks_group.update()
 
 
     def update_viewport(self,map_bottom=2075):
@@ -277,7 +278,12 @@ class Gaming(tools._State):
                 character.state = c.FALLING
 
         if brick:
-            self.adjust_character_for_x_collisions(character, brick)
+            if brick.kind != 'water':
+                self.adjust_character_for_x_collisions(character, brick)
+            if brick.kind == 'fire':
+                pass
+            if brick.HP<=0:
+                brick.kill()
         if prop:
             prop.ActOnCharacters(character)
             prop.kill()
@@ -301,8 +307,12 @@ class Gaming(tools._State):
         prop = pg.sprite.spritecollideany(character, self.props_group)
 
         if brick:
-            self.adjust_character_for_y_collisions(character, brick)
-
+            if brick.kind != 'water':
+                self.adjust_character_for_y_collisions(character, brick)
+            if brick.kind == 'fire':
+                pass
+            if brick.HP<=0:
+                brick.kill()
         if prop:
             prop.ActOnCharacters(character)
             prop.kill()

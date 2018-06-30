@@ -31,27 +31,28 @@ keybinding = [
 
 # 砖块种类
 kindOfBrick = {
-    'grass_left': {'name': 'images/grass_left.png', 'dur': 25},
-    'grass_middle': {'name': 'images/grass_middle.png', 'dur': 25},
-    'grass_right': {'name': 'images/grass_right.png', 'dur': 25},
-    'grass_inside': {'name': 'images/grass_inside.png', 'dur': 25},
-    'long_wood':{'name':'images/long_wood.png', 'dur': 50},
-    'long_stone':{'name':'images/long_stone.png', 'dur': 10000},
-    'cool_grass_left':{'name':'images/cool_grass_left.png','dur':25},
-    'cool_grass_mid':{'name':'images/cool_grass_mid.png','dur':25},
-    'cool_grass_right':{'name':'images/cool_grass_right.png','dur':25},
-    'cool_grass_inside_left':{'name':'images/cool_grass_inside_left.png','dur':25},
-    'cool_grass_inside_mid':{'name':'images/cool_grass_inside_mid.png','dur':25},
-    'cool_grass_inside_right':{'name':'images/cool_grass_inside_right.png','dur':25},
-    'left_grass': {'name':'images/left_grass.png','dur':25},
-    'right_grass':{'name':'images/right_grass.png','dur':25},
-    'water':{'name':'images/water.png','dur':25},
-    'iron_up_left':{'name':'images/iron_up_left.png','dur':300},
-    'iron_down_left':{'name':'images/iron_down_left.png','dur':300},
-    'iron_up_right':{'name':'images/iron_up_right.png','dur':300},
-    'iron_down_right': {'name': 'images/iron_down_right.png', 'dur': 300},
-    'iron':{'name':'images/iron.png','dur':300},
-    'ice':{'name':'images/ice.png','dur':50}
+    'grass_left': {'name': 'images/grass_left', 'dur': 25,'movable':0},
+    'grass_middle': {'name': 'images/grass_middle', 'dur': 25,'movable':0},
+    'grass_right': {'name': 'images/grass_right', 'dur': 25,'movable':0},
+    'grass_inside': {'name': 'images/grass_inside', 'dur': 25,'movable':0},
+    'long_wood':{'name':'images/long_wood', 'dur': 50,'movable':0},
+    'long_stone':{'name':'images/long_stone', 'dur': 10000,'movable':0},
+    'cool_grass_left':{'name':'images/cool_grass_left','dur':25,'movable':0},
+    'cool_grass_mid':{'name':'images/cool_grass_mid','dur':25,'movable':0},
+    'cool_grass_right':{'name':'images/cool_grass_right','dur':25,'movable':0},
+    'cool_grass_inside_left':{'name':'images/cool_grass_inside_left','dur':25,'movable':0},
+    'cool_grass_inside_mid':{'name':'images/cool_grass_inside_mid','dur':25,'movable':0},
+    'cool_grass_inside_right':{'name':'images/cool_grass_inside_right','dur':25,'movable':0},
+    'left_grass': {'name':'images/left_grass','dur':25,'movable':0},
+    'right_grass':{'name':'images/right_grass','dur':25,'movable':0},
+    'water':{'name':'images/water','dur':10000,'movable':1,'frame':2 },
+    'fire':{'name':'images/fire','dur':50,'movable':1,'frame':5},
+    'iron_up_left':{'name':'images/iron_up_left','dur':300,'movable':0},
+    'iron_down_left':{'name':'images/iron_down_left','dur':300,'movable':0},
+    'iron_up_right':{'name':'images/iron_up_right','dur':300,'movable':0},
+    'iron_down_right': {'name': 'images/iron_down_right', 'dur': 300,'movable':0},
+    'iron':{'name':'images/iron','dur':300,'movable':0},
+    'ice':{'name':'images/ice','dur':50,'movable':0},
 }
 
 #背景种类
@@ -64,6 +65,7 @@ kindOfGround={
     'cool_grass_soil':['cool_grass_inside_left','cool_grass_inside_mid','cool_grass_inside_right'],
     'air_grass':['left_grass','cool_grass_inside_mid','right_grass'],
     'water':['water','water','water'],
+    'fire':['fire','fire','fire'],
     'iron':['iron_up_right','iron','iron_up_left'],
     'long_iron':['iron','iron','iron'],
     'ice':['ice','ice','ice'],
@@ -113,6 +115,7 @@ class Control(object):
         elif self.state.done:
             self.flip_state()
         self.state.update(self.screen, self.keys, self.current_time)
+
 
 
     def flip_state(self):
