@@ -41,6 +41,6 @@ class Brick(Sprite):
     #    screen.blit( self.image, self.rect )
 
     # for test
-    def ActOnCharacters(self,character):
+    def ActOnCharacter(self,character):
         if self.kind=='fire':
-            character.HP-=1
+            character.HP -= c.FIRE_BRICK_DAMAGE

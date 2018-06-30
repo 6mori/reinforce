@@ -350,13 +350,15 @@ class Gaming(tools._State):
         #test_collide_group = pg.sprite.Group(self.bricks_group)
         bricks_list = pg.sprite.spritecollide(collider, self.bricks_group, False)
 
-        if bricks_list is None:
+        if len(bricks_list) == 0:
             if collider.state != c.JUMPING and collider.state != c.SKILLING and \
                             collider.state != c.ACTIONING and collider.state != c.FREEZING:  # 飞起来
                 collider.state = c.FALLING
         else:
             for brick in bricks_list:
                 brick.ActOnCharacter(collider)
+                if collider.HP <= 0:
+                    self.reset_character(collider)
 
         collider.rect.y -= 1
 
