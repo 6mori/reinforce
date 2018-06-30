@@ -194,6 +194,7 @@ class Gaming(tools._State):
         self.update_viewport()
         #self.update_props()
 
+
     def update_props(self):
         self.prop_count += 1
         if self.prop_count >= 400:
@@ -346,12 +347,16 @@ class Gaming(tools._State):
 
     def check_if_collider_is_falling(self, collider):
         collider.rect.y += 1
-        test_collide_group = pg.sprite.Group(self.bricks_group)
+        #test_collide_group = pg.sprite.Group(self.bricks_group)
+        bricks_list = pg.sprite.spritecollide(collider, self.bricks_group, False)
 
-        if pg.sprite.spritecollideany(collider, test_collide_group) is None:
+        if bricks_list is None:
             if collider.state != c.JUMPING and collider.state != c.SKILLING and \
                             collider.state != c.ACTIONING and collider.state != c.FREEZING:  # 飞起来
                 collider.state = c.FALLING
+        else:
+            for brick in bricks_list:
+                brick.ActOnCharacter(collider)
 
         collider.rect.y -= 1
 
