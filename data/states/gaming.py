@@ -139,6 +139,7 @@ class Gaming(tools._State):
         bricks.add(brick.Brick(x, y, brick_kind))
 
 
+
     def setup_characters(self):
         characters = [
             {

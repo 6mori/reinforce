@@ -46,13 +46,14 @@ kindOfBrick = {
     'left_grass': {'name':'images/left_grass','dur':25,'movable':0},
     'right_grass':{'name':'images/right_grass','dur':25,'movable':0},
     'water':{'name':'images/water','dur':10000,'movable':1,'frame':2 },
-    'fire':{'name':'images/fire','dur':50,'movable':1,'frame':5},
+    'fire':{'name':'images/fire','dur':50,'movable':0},
     'iron_up_left':{'name':'images/iron_up_left','dur':300,'movable':0},
     'iron_down_left':{'name':'images/iron_down_left','dur':300,'movable':0},
     'iron_up_right':{'name':'images/iron_up_right','dur':300,'movable':0},
     'iron_down_right': {'name': 'images/iron_down_right', 'dur': 300,'movable':0},
     'iron':{'name':'images/iron','dur':300,'movable':0},
     'ice':{'name':'images/ice','dur':50,'movable':0},
+    'glass':{'name':'images/glass','dur':50,'movable':0},
 }
 
 #背景种类
@@ -69,6 +70,7 @@ kindOfGround={
     'iron':['iron_up_right','iron','iron_up_left'],
     'long_iron':['iron','iron','iron'],
     'ice':['ice','ice','ice'],
+    'glass':['glass','glass','glass'],
  }
 
 # 道具种类

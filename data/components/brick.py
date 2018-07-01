@@ -44,3 +44,9 @@ class Brick(Sprite):
     def ActOnCharacter(self,character):
         if self.kind=='fire':
             character.HP -= c.FIRE_BRICK_DAMAGE
+        if self.kind=='glass':
+            self.HP-=1
+            if self.HP==25:
+                self.image=pg.transform.scale(pg.image.load(t.kindOfBrick[self.kind]['name']+'0.png').convert(),(c.BRICK_WIDTH * self.width, c.BRICK_HEIGHT * self.height))
+            if self.HP<=0:
+                self.kill()
