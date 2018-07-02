@@ -42,7 +42,7 @@ class Brick(Sprite):
 
     # for test
     def ActOnCharacter(self,character):
-        if self.kind=='fire':
+        if self.kind=='fire' and character.HP > 0:
             character.HP -= c.FIRE_BRICK_DAMAGE
         if self.kind=='glass':
             self.HP-=1

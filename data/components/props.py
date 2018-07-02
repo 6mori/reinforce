@@ -49,8 +49,9 @@ class Spline(Sprite):
         self.HP = HP
         self.height = height
         self.width = width
-        self.image = pg.transform.scale(pg.image.load('images/spline.png'),
+        self.origin_image = pg.transform.scale(pg.image.load('images/spline.png'),
                                         (c.BRICK_WIDTH * width, c.BRICK_HEIGHT * height // 2))
+        self.image = self.origin_image
         self.rect = self.image.get_rect()
         self.rect.left = x
         self.rect.top = y
@@ -63,7 +64,7 @@ class Spline(Sprite):
         self.rect.top = self.y
 
     def reset(self):
-        self.image = pg.transform.scale(pg.image.load('images/spline.png'), (c.BRICK_WIDTH * self.width, c.BRICK_HEIGHT * self.height // 2))
+        self.image = self.origin_image
         self.rect = self.image.get_rect()
         self.rect.left = self.x
         self.rect.top = self.y

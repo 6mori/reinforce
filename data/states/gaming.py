@@ -361,6 +361,7 @@ class Gaming(tools._State):
                 if collider.HP <= 0:
                     self.reset_character(collider)
 
+
         collider.rect.y -= 1
 
 
@@ -493,9 +494,9 @@ class Gaming(tools._State):
             if character.HP > 0:
                 spline_item.scale_change(character.HP)
                 surface.blit(spline_item.image, spline_item.rect)
-            '''else:
+            else:
                 spline_item.reset()
-                surface.blit(spline_item.image, spline_item.rect)'''
+                #surface.blit(spline_item.image, spline_item.rect)
 
 
     def reset_character(self, character):
