@@ -242,7 +242,7 @@ TITLE_BGM = 'title.bgm.mp3'
 CHOOSING_BGM = 'choosing_bgm.mp3'
 GAMING_BGM = 'main_theme.ogg'
 
-PLAYER_HEART = 3
+PLAYER_HEART = 2
 RELIVE_TIME = 3000
 
 DAMAGE_CHECK_FRAME = 6

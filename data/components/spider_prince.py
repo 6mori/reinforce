@@ -8,7 +8,7 @@ class Spider_prince(gun_guy.GunGuy):
         super().__init__()
 
         self.bullet_damage = 5
-        self.HP = 25
+        #self.HP = 25
         self.MP = 3
         self.name = c.SPIDER_PRINCE
 

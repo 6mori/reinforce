@@ -350,4 +350,4 @@ class Character(Sprite):
     def reset_character_state(self):
         self.HP = self.max_HP
         self.MP = 3
-        self.heart -= 1
+        #self.heart -= 1

@@ -108,7 +108,7 @@ class Choosing(tools._State):
                         if next_pos in self.pos2Chara.keys():
                             self.cursor_1.offset = next_pos
 
-            if self.cursor_2.confirm == False:
+            elif self.cursor_2.confirm == False:
                 if event.key in P2_input_list.keys():
                     command = P2_input_list[event.key]
                     if command == c.CONFIRM:

@@ -185,9 +185,9 @@ class Gaming(tools._State):
 
     def update(self, surface, keys, current_time):
         self.game_info[c.CURRENT_TIME] = self.current_time = current_time
-        self.blit_everything(surface)
         self.handle_state(keys)
-        self.check_if_finish()
+        #self.check_if_finish()
+        self.blit_everything(surface)
 
 
     def handle_state(self, keys):
@@ -499,8 +499,10 @@ class Gaming(tools._State):
 
 
     def reset_character(self, character):
+        character.heart -= 1
         if character.heart <= 0:
-            character.kill()
+            #character.kill()
+            self.finish()
         else:
             #character.HP = 0
             #character.reset_character_state()
@@ -511,13 +513,12 @@ class Gaming(tools._State):
             #print(self.current_time, character.freeze_time)
 
 
-    def check_if_finish(self):
-        if len(self.characters_group) < 2:
-            for character in self.characters_group.sprites():
-                if character.player_num == 0:
-                    self.game_info[c.P1_HP] = character.HP
-                    self.game_info[c.P1_HEART] = character.heart
-                else:
-                    self.game_info[c.P2_HP] = character.HP
-                    self.game_info[c.P2_HEART] = character.heart
-            self.done = True
+    def finish(self):
+        for character in self.characters_group.sprites():
+            if character.player_num == 0:
+                self.game_info[c.P1_HP] = character.HP
+                self.game_info[c.P1_HEART] = character.heart
+            else:
+                self.game_info[c.P2_HP] = character.HP
+                self.game_info[c.P2_HEART] = character.heart
+        self.done = True
