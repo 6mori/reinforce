@@ -97,18 +97,7 @@ class Choosing(tools._State):
         }
 
         if event.type == pg.KEYDOWN:
-            if self.cursor_1.confirm == False:
-                if event.key in P1_input_list.keys():
-                    command = P1_input_list[event.key]
-                    if command == c.CONFIRM:
-                        self.cursor_1.confirm = True
-                    else:
-                        next_pos = tuple(
-                            [cur + off for cur, off in zip(self.cursor_1.offset, tools.direct2pos[command])])
-                        if next_pos in self.pos2Chara.keys():
-                            self.cursor_1.offset = next_pos
-
-            elif self.cursor_2.confirm == False:
+            if self.cursor_2.confirm == False:
                 if event.key in P2_input_list.keys():
                     command = P2_input_list[event.key]
                     if command == c.CONFIRM:
@@ -118,6 +107,17 @@ class Choosing(tools._State):
                             [cur + off for cur, off in zip(self.cursor_2.offset, tools.direct2pos[command])])
                         if next_pos in self.pos2Chara.keys():
                             self.cursor_2.offset = next_pos
+
+            elif self.cursor_1.confirm == False:
+                if event.key in P1_input_list.keys():
+                    command = P1_input_list[event.key]
+                    if command == c.CONFIRM:
+                        self.cursor_1.confirm = True
+                    else:
+                        next_pos = tuple(
+                            [cur + off for cur, off in zip(self.cursor_1.offset, tools.direct2pos[command])])
+                        if next_pos in self.pos2Chara.keys():
+                            self.cursor_1.offset = next_pos
 
 
     def update_cursor(self):
