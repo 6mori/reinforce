@@ -35,7 +35,7 @@ class Gaming(tools._State):
         self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
 
         self.setup_background()
-        #self.setup_BGM()
+        # self.setup_BGM()
 
         self.setup_bricks()
         self.setup_characters()
@@ -271,12 +271,20 @@ class Gaming(tools._State):
                 if ch != character:
                     another_character = pg.sprite.collide_rect(character, ch)
             if another_character:
-                another_character.HP -= character.skill_damage
-                if another_character.HP <= 0:
-                    self.reset_character(another_character)
-                else:
-                    another_character.rect.x -= 10
-                    another_character.rect.y -= 10
+                for ch in self.characters_group:
+                    if ch != character:
+                        ch.HP -= character.skill_damage
+                        if ch.HP <= 0:
+                            self.reset_character(ch)
+                        else:
+                            ch.rect.x -= 10
+                            ch.rect.y -= 10
+                # another_character.HP -= character.skill_damage
+                # if another_character.HP <= 0:
+                #     self.reset_character(another_character)
+                # else:
+                #     another_character.rect.x -= 10
+                #     another_character.rect.y -= 10
                 character.state = c.FALLING
 
         if brick:

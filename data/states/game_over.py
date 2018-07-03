@@ -74,9 +74,9 @@ class GameOver(tools._State):
         #surface.blit(self.cursor.image, self.cursor.rect)
         for state in self.UI.keys():
             if state == c.PLAY:
-                show_xy = (350, 300)
+                show_xy = (350, 400)
             if state == c.QUIT:
-                show_xy = (350, 450)
+                show_xy = (350, 465)
             if state == self.state:
                 surface.blit(self.UI[state][1], show_xy)
             else:

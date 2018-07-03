@@ -116,7 +116,7 @@ RIGHT_DOWN = 'right_down'
 LEFT_UP = 'left_up'
 LEFT_DOWN = 'left_down'
 
-TITLE_SCREEN = 'title_screen.jpg'
+TITLE_SCREEN = 'title_screen.png'
 CHOOSING_SCREEN = 'choosing_screen.jpg'
 RESULT_SCREEN = 'result_screen.png'
 
