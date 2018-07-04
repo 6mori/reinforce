@@ -8,8 +8,9 @@ class Guan_gong(sword_guy.SwordGuy):
 
         self.name = c.GUAN_GONG
         self.sword_damage = 5
-        self.HP = 500
         self.skill_damage = 50
+        self.max_HP = c.MAX_HP[self.name]
+        self.HP = self.max_HP
 
     def skill(self, action_group):
         super().skill(c.GUAN_GONG, 10, 'gif')
@@ -24,7 +25,7 @@ class Guan_gong(sword_guy.SwordGuy):
 
 
     def action(self, action_group):
-        super().action(action_group, c.GUAN_GONG, 6, 'gif', (374 // 3, 157 // 2),c.CHARACTER_SIZE[c.GUAN_GONG])
+        super().action(action_group, c.GUAN_GONG, 6, 'gif', (192 // 4, 133 // 4),c.CHARACTER_SIZE[c.GUAN_GONG])
 
     def setup_character_image_initial(self, character_name, postfix):
         super().setup_character_image_initial(c.GUAN_GONG, 'gif')

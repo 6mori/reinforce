@@ -119,7 +119,7 @@ LEFT_DOWN = 'left_down'
 
 TITLE_SCREEN = 'title_screen.png'
 CHOOSING_SCREEN = 'choosing_screen.jpg'
-RESULT_SCREEN = 'result_screen.png'
+RESULT_SCREEN = 'result_screen.jpg'
 
 # Main menu options
 
@@ -179,14 +179,14 @@ CHARACTER_MOVING_SPEED = {
 # Character size
 
 CHARACTER_SIZE = {
-    'Guan_gong': (93 // 3, 116 // 3),
+    'Guan_gong': (89 // 3, 116 // 3),
     'Darling': (103 // 3, 131 // 3),
     'k': (75 // 3, 119 // 3),
     'Archer': (63 // 3, 193 // 3),
-    'Spider_prince': (103 // 2, 131 // 2),
+    'Spider_prince': (70 // 3, 145 // 3),
     'Poena': (69 // 3, 154 // 3),
-    'Ghost': (239 // 4, 213 // 4),
-    'Iccy': (141//3,118//2)
+    'Ghost': (119 // 4, 196 // 4),
+    'Iccy': (141//3,118//3)
 }
 # Character skill
 SKILL_SPEED = {
@@ -215,7 +215,7 @@ STAND_ANIMATION_SPEED = {
 # Character action_aninamation_speed
 ACTION_SPEED = {
     'Darling': 10,
-    'Guan_gong': 2,
+    'Guan_gong': 10,
     'k': 5,
     'Archer': 20,
     'Spider_prince': 10,
@@ -223,6 +223,20 @@ ACTION_SPEED = {
     'Ghost': 2,
     'Iccy':2
 }
+
+#Character max hp
+MAX_HP = {
+    'Darling': 200,
+    'Guan_gong': 1000,
+    'k': 800,
+    'Archer': 250,
+    'Spider_prince': 200,
+    'Poena': 700,
+    'Ghost': 150,
+    'Iccy':200
+}
+
+
 
 # MP
 MP_POS = [

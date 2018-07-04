@@ -290,7 +290,16 @@ class Character(Sprite):
                                                   c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
         image_rect = self.image_right.get_rect()
-        self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y)
+        if size:
+            if self.name == c.GUAN_GONG:
+                self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y + 7)
+            elif self.name == c.K:
+                self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y + 7)
+            else:
+                self.show_xy = (
+                self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y + size[1] // 2)
+        else:
+            self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y)
 
         if self.action_counter == max_frame_number * c.ACTION_SPEED[character_name] - 1:
             self.action_counter = 0
