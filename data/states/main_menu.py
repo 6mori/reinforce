@@ -22,6 +22,7 @@ class MainMenu(tools._State):
         self.setup_background()
         #self.setup_cursor()
         self.setup_UI()
+        self.setup_BGM()
 
     def setup_UI(self):
         self.UI = {}
@@ -93,3 +94,7 @@ class MainMenu(tools._State):
             c.P2_HEART: 0,
         }
         self.persist = self.game_info
+
+    def setup_BGM(self):
+        pg.mixer.music.load('music/{}'.format(c.TITLE_BGM))
+        pg.mixer.music.play()

@@ -239,10 +239,10 @@ class Gaming(tools._State):
         #self.brick_counter %= self.max_frame * c.MOVING_BRICK_SPEED
 
 
-    def update_viewport(self,map_bottom=2075):
-        if self.current_time<=20000:
+    def update_viewport(self):
+        if self.current_time<=0:
            pass
-        elif self.current_screen_bottom>=map_bottom:
+        elif self.current_screen_bottom>=c.MAP_HEIGHT-50:
             pass
         elif self.current_time - self.last_scroll_time >= c.SCROLL_TIME:
             self.scrolling_up = True
