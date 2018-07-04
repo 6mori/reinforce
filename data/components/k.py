@@ -7,12 +7,13 @@ class K(sword_guy.SwordGuy):
     def __init__(self):
         super().__init__()
 
-        self.sword_damage = 5
-        self.HP = 10
+        self.sword_damage = 50
         self.name = c.K
+        self.max_HP = c.MAX_HP[self.name]
+        self.HP = self.max_HP
 
     def skill(self, action_group):
-        super().skill(c.K, 21, 'gif', (40, 65))
+        super().skill(c.K, 21, 'gif', (60, 90))
         # 冲刺
         if self.facing_right:
             self.rect.x += 1
@@ -29,7 +30,7 @@ class K(sword_guy.SwordGuy):
         action_group.add(cutting_sword)
 
     def action(self, action_group):
-        super().action(action_group, c.K, 7, 'gif', (139 // 3, 119 // 3))
+        super().action(action_group, c.K, 7, 'gif', (89 // 3, 103 // 3))
 
     def setup_character_image_initial(self, character_name, postfix):
         super().setup_character_image_initial(c.K, 'gif')

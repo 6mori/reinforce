@@ -24,6 +24,8 @@ class GunGuy(character.Character):
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'flamebow')
             else:
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'freezebow')
+        elif character_name == c.ARCHER:
+            return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'zidan')
         else:  # 默认为Darling
             if self.player_num == 0:
                 return bullet.Bullet(self.player_num, self.bullet_damage, direction, 'flamebow')

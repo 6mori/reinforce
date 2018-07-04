@@ -63,10 +63,10 @@ GO_DOWN = 'go down'
 # Character property
 
 MAX_X_VEL = 6
-MAX_Y_VEL = 11
+MAX_Y_VEL = 10
 JUMP_VEL = -10
-GRAVITY = 1.01
-JUMP_GRAVITY = 0.2
+GRAVITY = 1.5
+JUMP_GRAVITY = 0.4
 
 # Game info
 
@@ -84,6 +84,7 @@ KEYBINDING = 'keybinding'
 
 BRICK_WIDTH = 20
 BRICK_HEIGHT = 25
+BRICK_SIZE = (BRICK_WIDTH, BRICK_HEIGHT)
 BRICK_DUR = 25
 MOVING_BRICK_SPEED=16
 
@@ -116,9 +117,9 @@ RIGHT_DOWN = 'right_down'
 LEFT_UP = 'left_up'
 LEFT_DOWN = 'left_down'
 
-TITLE_SCREEN = 'title_screen.jpg'
+TITLE_SCREEN = 'title_screen.png'
 CHOOSING_SCREEN = 'choosing_screen.jpg'
-RESULT_SCREEN = 'result_screen.png'
+RESULT_SCREEN = 'result_screen.jpg'
 
 # Main menu options
 
@@ -168,9 +169,9 @@ CHARACTERS = [
 CHARACTER_MOVING_SPEED = {
     'Guan_gong': 6,
     'Darling': 8,
-    'k': 6,
+    'k': 8,
     'Archer': 10,
-    'Spider_prince': 10,
+    'Spider_prince': 20,
     'Poena': 8,
     'Ghost': 8,
     'Iccy':8
@@ -178,22 +179,22 @@ CHARACTER_MOVING_SPEED = {
 # Character size
 
 CHARACTER_SIZE = {
-    'Guan_gong': (103 // 3, 200 // 3),
+    'Guan_gong': (89 // 3, 116 // 3+10),
     'Darling': (103 // 3, 131 // 3),
     'k': (75 // 3, 119 // 3),
-    'Archer': (103 // 3, 131 // 3),
-    'Spider_prince': (103 // 2, 131 // 2),
+    'Archer': (56 // 3, 145 // 3),
+    'Spider_prince': (70 // 3, 145 // 3),
     'Poena': (69 // 3, 154 // 3),
-    'Ghost': (239 // 4, 213 // 4),
-    'Iccy': (141//3,118//2)
+    'Ghost': (119 // 4, 196 // 4),
+    'Iccy': (141//3,118//3)
 }
 # Character skill
 SKILL_SPEED = {
     'Darling': 10,
-    'Guan_gong': 10,
+    'Guan_gong': 5,
     'k': 5,
-    'Archer': 20,
-    'Spider_prince': 5,
+    'Archer': 10,
+    'Spider_prince': 15,
     'Poena': 10,
     'Ghost': 5,
     'Iccy':5
@@ -204,7 +205,7 @@ STAND_ANIMATION_SPEED = {
     'Darling': 100,
     'Guan_gong': 8,
     'k': 6,
-    'Archer': 100,
+    'Archer': 6,
     'Spider_prince': 35,
     'Poena': 10,
     'Ghost': 100,
@@ -214,14 +215,28 @@ STAND_ANIMATION_SPEED = {
 # Character action_aninamation_speed
 ACTION_SPEED = {
     'Darling': 10,
-    'Guan_gong': 2,
+    'Guan_gong': 10,
     'k': 5,
-    'Archer': 20,
+    'Archer': 4,
     'Spider_prince': 10,
-    'Poena': 10,
+    'Poena': 7,
     'Ghost': 2,
     'Iccy':2
 }
+
+#Character max hp
+MAX_HP = {
+    'Darling': 200,
+    'Guan_gong': 1000,
+    'k': 800,
+    'Archer': 250,
+    'Spider_prince': 200,
+    'Poena': 700,
+    'Ghost': 150,
+    'Iccy':200
+}
+
+
 
 # MP
 MP_POS = [
@@ -242,7 +257,7 @@ TITLE_BGM = 'title.bgm.mp3'
 CHOOSING_BGM = 'choosing_bgm.mp3'
 GAMING_BGM = 'main_theme.ogg'
 
-PLAYER_HEART = 3
+PLAYER_HEART = 2
 RELIVE_TIME = 3000
 
 DAMAGE_CHECK_FRAME = 6
