@@ -45,7 +45,7 @@ kindOfBrick = {
     'cool_grass_inside_right':{'name':'images/cool_grass_inside_right','dur':25,'movable':0},
     'left_grass': {'name':'images/left_grass','dur':25,'movable':0},
     'right_grass':{'name':'images/right_grass','dur':25,'movable':0},
-    'water':{'name':'images/water','dur':10000,'movable':1,'frame':2 },
+    'water':{'name':'images/water','dur':10000,'movable':1,'frame':4},
     'fire':{'name':'images/fire','dur':50,'movable':0},
     'iron_up_left':{'name':'images/iron_up_left','dur':300,'movable':0},
     'iron_down_left':{'name':'images/iron_down_left','dur':300,'movable':0},
