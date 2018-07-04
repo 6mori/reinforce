@@ -468,10 +468,10 @@ class Gaming(tools._State):
         self.map.blit(self.background, self.viewport)
         for character in self.characters_group.sprites():
             self.map.blit(character.image, character.show_xy)
-        '''for brick in self.bricks_group.sprites():
+        for brick in self.bricks_group.sprites():
             if brick.rect.top < self.viewport.bottom:
-                self.map.blit(brick.image, brick.rect)'''
-        self.bricks_group.draw(self.map)
+                self.map.blit(brick.image, brick.rect)
+        #self.bricks_group.draw(self.map)
         self.props_group.draw(self.map)
         for action_item in self.action_group.sprites():
             if action_item.type == c.BULLET:
