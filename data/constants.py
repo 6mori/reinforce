@@ -62,7 +62,7 @@ GO_DOWN = 'go down'
 
 # Character property
 
-MAX_X_VEL = 6
+MAX_X_VEL = 4
 MAX_Y_VEL = 10
 JUMP_VEL = -10
 GRAVITY = 1.5
