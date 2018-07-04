@@ -19,6 +19,7 @@ class Choosing(tools._State):
         self.setup_position()
         self.setup_icon()
         self.setup_poster()
+        self.setup_BGM()
 
 
     def setup_background(self):
@@ -150,3 +151,7 @@ class Choosing(tools._State):
             self.game_info[c.P1_CHARACTER] = self.pos2Chara[self.p1_offset]
             self.game_info[c.P2_CHARACTER] = self.pos2Chara[self.p2_offset]
             self.done = True
+
+    def setup_BGM(self):
+        pg.mixer.music.load('music/{}'.format(c.CHOOSING_BGM))
+        pg.mixer.music.play()
