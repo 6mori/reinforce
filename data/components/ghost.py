@@ -10,10 +10,11 @@ class Ghost(gun_guy.GunGuy):
         super().__init__()
 
         self.bullet_damage = 50
-        self.HP = 100
         self.MP = 3
         self.invincible_time_counter = time.time()
         self.name = c.GHOST
+        self.max_HP = c.MAX_HP[self.name]
+        self.HP = self.max_HP
 
     def skill(self, action_group):
         super().skill(c.GHOST, 6, 'gif')

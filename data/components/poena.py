@@ -8,8 +8,9 @@ class Poena(sword_guy.SwordGuy):
         super().__init__()
 
         self.sword_damage = 5
-        self.HP = 10
         self.name = c.POENA
+        self.max_HP = c.MAX_HP[self.name]
+        self.HP = self.max_HP
 
     def skill(self, action_group):
         super().skill(c.POENA, 5, 'gif', (107 // 3, 111 // 3))

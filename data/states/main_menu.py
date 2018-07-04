@@ -33,7 +33,7 @@ class MainMenu(tools._State):
             for i in range(0, 2):
                  rect = self.UI[state][i]['image'].get_rect()
                  rect.centerx = c.SCREEN_WIDTH // 2
-                 rect.centery = 430 + 60 * k
+                 rect.centery = 450 + 60 * k
                  self.UI[state][i]['rect'] = rect
 
     def setup_background(self):

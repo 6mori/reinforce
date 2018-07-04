@@ -8,9 +8,10 @@ class Archer(gun_guy.GunGuy):
         super().__init__()
 
         self.bullet_damage = 5
-        self.HP = 25
         self.MP = 3
         self.name = c.ARCHER
+        self.max_HP = c.MAX_HP[self.name]
+        self.HP = self.max_HP
 
     # 大招
     def skill(self, action_group):

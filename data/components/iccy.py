@@ -9,9 +9,10 @@ class Iccy(gun_guy.GunGuy):
         super().__init__()
 
         self.bullet_damage = 50
-        self.HP = 100
         self.MP = 5
         self.name = c.ICCY
+        self.max_HP = c.MAX_HP[self.name]
+        self.HP = self.max_HP
 
     def skill(self, action_group):
         super().skill(c.ICCY, 11, 'gif')
@@ -30,7 +31,7 @@ class Iccy(gun_guy.GunGuy):
             action_group.add(attack)
 
     def action(self, action_group):
-        super().action(c.ICCY, 8, 'gif')
+        super().action(c.ICCY, 9, 'gif')
         if self.action_counter == 1:
             # 子弹类型
             if self.facing_right:
