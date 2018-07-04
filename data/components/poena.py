@@ -7,7 +7,7 @@ class Poena(sword_guy.SwordGuy):
     def __init__(self):
         super().__init__()
 
-        self.sword_damage = 5
+        self.sword_damage = 75
         self.name = c.POENA
         self.max_HP = c.MAX_HP[self.name]
         self.HP = self.max_HP

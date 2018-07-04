@@ -7,13 +7,13 @@ class K(sword_guy.SwordGuy):
     def __init__(self):
         super().__init__()
 
-        self.sword_damage = 5
+        self.sword_damage = 50
         self.name = c.K
         self.max_HP = c.MAX_HP[self.name]
         self.HP = self.max_HP
 
     def skill(self, action_group):
-        super().skill(c.K, 21, 'gif', (40, 65))
+        super().skill(c.K, 21, 'gif', (60, 90))
         # 冲刺
         if self.facing_right:
             self.rect.x += 1

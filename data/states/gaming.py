@@ -299,8 +299,7 @@ class Gaming(tools._State):
                         if ch.HP <= 0:
                             self.reset_character(ch)
                         else:
-                            ch.rect.x -= 10
-                            ch.rect.y -= 10
+                            ch.rect.y -= 50
                 # another_character.HP -= character.skill_damage
                 # if another_character.HP <= 0:
                 #     self.reset_character(another_character)

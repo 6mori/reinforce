@@ -13,12 +13,13 @@ class Skill_attack(bullet.Bullet):
         if self.skill_style == 'skull' and self.owner_name == 'Spider_prince':
             self.passed_distance = 0
             self.animation_speed = 8
-            self.skill_size = (178 // 3, 709 // 3)
-            self.image = pg.transform.scale(pg.image.load('images/bullet/' + skill_style + '/0.gif').convert(), self.skill_size)
+            self.skill_size = (178 // 3, 709 // 4)
+            self.image = pg.transform.scale(pg.image.load('images/bullet/' + skill_style + '/0.png'), self.skill_size)
             self.rect = self.image.get_rect()
             self.frame_numbers = 6
             self.decay_distance = [40, 80, 120, 160, 200, 300]
             self.decay_range = 1.2
+            self.penetration_mode = 3
         elif self.skill_style == 'cross' and self.owner_name == 'Poena':
             self.animation_speed = 4
             self.skill_size = (137 // 2, 178 // 2)
@@ -40,7 +41,7 @@ class Skill_attack(bullet.Bullet):
         elif self.skill_style == 'ice_flame' and self.owner_name == 'Iccy':
             self.animation_speed = 4
             self.skill_size = (154 // 3, 150 // 3)
-            self.image = pg.transform.scale(pg.image.load('images/bullet/' + skill_style + '/0.gif').convert(), self.skill_size)
+            self.image = pg.transform.scale(pg.image.load('images/bullet/' + skill_style + '/0.png'), self.skill_size)
             self.frame_numbers = 24
             self.rect = self.image.get_rect()
 
@@ -59,8 +60,8 @@ class Skill_attack(bullet.Bullet):
                         self.counter %= self.frame_numbers * self.animation_speed
                         self.image = pg.transform.scale(
                             pg.image.load(
-                                'images/bullet/%s/%s.gif' % (self.skill_style, self.counter // self.animation_speed)),
-                            self.skill_size).convert()
+                                'images/bullet/%s/%s.png' % (self.skill_style, self.counter // self.animation_speed)),
+                            self.skill_size)
                         self.rect.size = self.skill_size
                         self.rect.bottom = tmp
             else:
@@ -68,7 +69,7 @@ class Skill_attack(bullet.Bullet):
                 self.counter %= self.frame_numbers * self.animation_speed
                 if self.counter // self.animation_speed != (self.counter - 1) // self.animation_speed:
                     self.image = pg.transform.scale(
-                        pg.image.load('images/bullet/%s/%s.gif' % (self.skill_style, self.counter // self.animation_speed)).convert(),
+                        pg.image.load('images/bullet/%s/%s.png' % (self.skill_style, self.counter // self.animation_speed)),
                         self.skill_size)
         elif self.skill_style == 'cross' and self.owner_name == 'Poena':
             if self.counter != self.frame_numbers * self.animation_speed - 1:

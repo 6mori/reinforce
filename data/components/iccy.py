@@ -8,7 +8,7 @@ class Iccy(gun_guy.GunGuy):
     def __init__(self):
         super().__init__()
 
-        self.bullet_damage = 50
+        self.bullet_damage = 30
         self.MP = 5
         self.name = c.ICCY
         self.max_HP = c.MAX_HP[self.name]

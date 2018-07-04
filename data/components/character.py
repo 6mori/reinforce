@@ -325,7 +325,10 @@ class Character(Sprite):
                                                   c.CHARACTER_SIZE[character_name])
         self.image_left = pg.transform.flip(self.image_right, True, False)
         image_rect = self.image_right.get_rect()
-        self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y)
+        if self.name == c.K:
+            self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y -50)
+        else:
+            self.show_xy = (self.rect.centerx - (image_rect.right - image_rect.left) // 2, self.rect.y)
 
         if self.skill_counter == max_frame_number * c.SKILL_SPEED[character_name] - 1:
             self.state = c.FALLING

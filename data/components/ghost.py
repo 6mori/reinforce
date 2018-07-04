@@ -9,7 +9,7 @@ class Ghost(gun_guy.GunGuy):
     def __init__(self):
         super().__init__()
 
-        self.bullet_damage = 50
+        self.bullet_damage = 30
         self.MP = 3
         self.invincible_time_counter = time.time()
         self.name = c.GHOST

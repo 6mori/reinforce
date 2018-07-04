@@ -7,7 +7,7 @@ class Spider_prince(gun_guy.GunGuy):
     def __init__(self):
         super().__init__()
 
-        self.bullet_damage = 5
+        self.bullet_damage = 20
         self.MP = 3
         self.name = c.SPIDER_PRINCE
         self.max_HP = c.MAX_HP[self.name]
@@ -19,16 +19,16 @@ class Spider_prince(gun_guy.GunGuy):
         if self.skill_counter == 1 or self.skill_counter == 2 * c.SKILL_SPEED[
             c.SPIDER_PRINCE] or self.skill_counter == 4 * c.SKILL_SPEED[c.SPIDER_PRINCE] or self.skill_counter == 6 * \
                 c.SKILL_SPEED[c.SPIDER_PRINCE]:
-            attack = skill_attack.Skill_attack(self.player_num, self.bullet_damage * 2, c.RIGHT, 'skull',
+            attack = skill_attack.Skill_attack(self.player_num, 100, c.RIGHT, 'skull',
                                                c.SPIDER_PRINCE)
-            attack.x_vel = c.BULLET_VEL * 2
+            attack.x_vel = c.BULLET_VEL // 2
             attack.rect.left = self.rect.right
             attack.rect.bottom = self.rect.bottom
             action_group.add(attack)
 
-            attack2 = skill_attack.Skill_attack(self.player_num, self.bullet_damage * 2, c.LEFT, 'skull',
+            attack2 = skill_attack.Skill_attack(self.player_num, 100, c.LEFT, 'skull',
                                                 c.SPIDER_PRINCE)
-            attack2.x_vel = -c.BULLET_VEL * 2
+            attack2.x_vel = -c.BULLET_VEL // 2
             attack2.rect.right = self.rect.left
             attack2.rect.bottom = self.rect.bottom
             action_group.add(attack2)

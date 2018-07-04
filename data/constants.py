@@ -64,7 +64,7 @@ GO_DOWN = 'go down'
 
 MAX_X_VEL = 6
 MAX_Y_VEL = 11
-JUMP_VEL = -10
+JUMP_VEL = -7
 GRAVITY = 1.01
 JUMP_GRAVITY = 0.2
 
@@ -169,9 +169,9 @@ CHARACTERS = [
 CHARACTER_MOVING_SPEED = {
     'Guan_gong': 6,
     'Darling': 8,
-    'k': 6,
+    'k': 8,
     'Archer': 10,
-    'Spider_prince': 10,
+    'Spider_prince': 20,
     'Poena': 8,
     'Ghost': 8,
     'Iccy':8
@@ -179,10 +179,10 @@ CHARACTER_MOVING_SPEED = {
 # Character size
 
 CHARACTER_SIZE = {
-    'Guan_gong': (89 // 3, 116 // 3),
+    'Guan_gong': (89 // 3, 116 // 3+10),
     'Darling': (103 // 3, 131 // 3),
     'k': (75 // 3, 119 // 3),
-    'Archer': (63 // 3, 193 // 3),
+    'Archer': (56 // 3, 145 // 3),
     'Spider_prince': (70 // 3, 145 // 3),
     'Poena': (69 // 3, 154 // 3),
     'Ghost': (119 // 4, 196 // 4),
@@ -191,10 +191,10 @@ CHARACTER_SIZE = {
 # Character skill
 SKILL_SPEED = {
     'Darling': 10,
-    'Guan_gong': 10,
+    'Guan_gong': 5,
     'k': 5,
-    'Archer': 20,
-    'Spider_prince': 5,
+    'Archer': 10,
+    'Spider_prince': 15,
     'Poena': 10,
     'Ghost': 5,
     'Iccy':5
@@ -205,7 +205,7 @@ STAND_ANIMATION_SPEED = {
     'Darling': 100,
     'Guan_gong': 8,
     'k': 6,
-    'Archer': 100,
+    'Archer': 6,
     'Spider_prince': 35,
     'Poena': 10,
     'Ghost': 100,
@@ -217,9 +217,9 @@ ACTION_SPEED = {
     'Darling': 10,
     'Guan_gong': 10,
     'k': 5,
-    'Archer': 20,
+    'Archer': 4,
     'Spider_prince': 10,
-    'Poena': 10,
+    'Poena': 7,
     'Ghost': 2,
     'Iccy':2
 }
@@ -249,7 +249,7 @@ BULLET = 'bullet'
 SWORD = 'sword'
 
 # SCROLL_BRICK = 10
-SCROLL_TIME = 200
+SCROLL_TIME = 20000
 SCROLL_LEN = BRICK_HEIGHT
 
 # BGM
