@@ -113,6 +113,23 @@ class Gaming(tools._State):
     def setup_bricks(self):
         map = "images/map.txt"
         self.bricks_group = Group()
+        self.bricks_images = {}
+        self.brick_counter = 0
+        for brick_kind in tools.kindOfBrick.keys():
+            self.bricks_images[brick_kind] = {}
+            self.bricks_images[brick_kind]['image'] = []
+            if tools.kindOfBrick[brick_kind]['movable']:
+                self.bricks_images[brick_kind]['max_frame'] = tools.kindOfBrick[brick_kind]['frame']
+                for frame in range(0, self.bricks_images[brick_kind]['max_frame']):
+                    self.bricks_images[brick_kind]['image'].append(
+                        pg.transform.scale(pg.image.load(tools.kindOfBrick[brick_kind]['name'] + '%d.png' %
+                                                        (frame)).convert(),
+                                                    (c.BRICK_WIDTH, c.BRICK_HEIGHT)))
+            else:
+                self.bricks_images[brick_kind]['max_frame'] = 1
+                self.bricks_images[brick_kind]['image'].append(
+                    pg.transform.scale(pg.image.load(tools.kindOfBrick[brick_kind]['name'] + '.png').convert(),
+                                                (c.BRICK_WIDTH, c.BRICK_HEIGHT)))
         with open(map) as file_object:
             lines = file_object.readlines()
             for line in lines:
@@ -214,7 +231,12 @@ class Gaming(tools._State):
         self.adjust_sprite_positions()
         self.action_group.update()
         self.props_group.update()
-        self.bricks_group.update()
+        self.update_brick()
+
+
+    def update_brick(self):
+        self.brick_counter += 1
+        #self.brick_counter %= self.max_frame * c.MOVING_BRICK_SPEED
 
 
     def update_viewport(self,map_bottom=2075):
@@ -476,10 +498,11 @@ class Gaming(tools._State):
         self.map.blit(self.background, self.viewport)
         for character in self.characters_group.sprites():
             self.map.blit(character.image, character.show_xy)
-        '''for brick in self.bricks_group.sprites():
+        for brick in self.bricks_group.sprites():
             if brick.rect.top < self.viewport.bottom:
-                self.map.blit(brick.image, brick.rect)'''
-        self.bricks_group.draw(self.map)
+                max_frame = self.bricks_images[brick.kind]['max_frame']
+                self.map.blit(self.bricks_images[brick.kind]['image'][self.brick_counter % (max_frame * c.MOVING_BRICK_SPEED) // c.MOVING_BRICK_SPEED], brick.rect)
+        #self.bricks_group.draw(self.map)
         self.props_group.draw(self.map)
         for action_item in self.action_group.sprites():
             if action_item.type == c.BULLET:
