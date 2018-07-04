@@ -152,6 +152,7 @@ SPIDER_PRINCE = 'Spider_prince'
 POENA = 'Poena'
 GHOST = 'Ghost'
 ICCY = 'Iccy'
+RANDOM = 'random'
 
 CHARACTERS = [
     DARLING,
@@ -161,7 +162,8 @@ CHARACTERS = [
     SPIDER_PRINCE,
     POENA,
     GHOST,
-    ICCY
+    ICCY,
+    RANDOM,
 ]
 
 # Character speeds(higher = slower)
