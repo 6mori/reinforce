@@ -27,7 +27,7 @@ class Darling(gun_guy.GunGuy):
         # 子弹方向
         self.handle_bullet_direction(firing_bullet)
         # 子弹发射位置
-        firing_bullet.rect.centery = self.rect.centery
+        firing_bullet.rect.centery = self.rect.centery - 11
         # 子弹组
         action_group.add(firing_bullet)
         self.state = c.FALLING
