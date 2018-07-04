@@ -8,7 +8,8 @@ class Darling(gun_guy.GunGuy):
         super().__init__()
 
         self.name = c.DARLING
-        self.bullet_damage = c.BULLET_DAMAGE
+        self.bullet_damage = 20
+        self.max_HP = c.MAX_HP[self.name]
         self.HP = self.max_HP
 
 
@@ -26,7 +27,7 @@ class Darling(gun_guy.GunGuy):
         # 子弹方向
         self.handle_bullet_direction(firing_bullet)
         # 子弹发射位置
-        firing_bullet.rect.centery = self.rect.centery
+        firing_bullet.rect.centery = self.rect.centery - 11
         # 子弹组
         action_group.add(firing_bullet)
         self.state = c.FALLING

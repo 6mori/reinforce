@@ -35,7 +35,7 @@ class Gaming(tools._State):
         self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
 
         self.setup_background()
-        self.setup_BGM()
+        #self.setup_BGM()
 
         self.setup_bricks()
         self.setup_characters()
@@ -210,28 +210,28 @@ class Gaming(tools._State):
     def handle_state(self, keys):
         self.update_all_sprites(keys)
         self.update_viewport()
-        #self.update_props()
 
 
     def update_props(self):
         self.prop_count += 1
-        if self.prop_count >= 400:
-            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_MP_potion')
-            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_HP_potion')
-            self.create_prop(self.props_group, random.randint(1, 30), 1, 'Prop_Shoe')
+        if self.prop_count >= 1000:
+            self.create_prop(self.props_group, random.randint(1, 30), 0, 'Prop_MP_potion')
+            self.create_prop(self.props_group, random.randint(1, 30), 0, 'Prop_HP_potion')
+            self.create_prop(self.props_group, random.randint(1, 30), 0, 'Prop_Shoe')
+            #self.create_prop(self.props_group, random.randint(1, 30), 0, 'Prop_HP_Apple')
+            #self.create_prop(self.props_group, random.randint(1, 30), 0, 'Prop_HP_Ginseng')
             self.prop_count = 0
-            # self.create_prop(self.props_group, 4, 1, 'Prop_HP_Apple')
-            # self.create_prop(self.props_group, 2, 2, 'Prop_HP_Ginseng')
 
 
     def update_all_sprites(self, keys):
+        self.update_props()
+        self.update_brick()
         for character in self.characters_group.sprites():
             character.update(keys, tools.keybinding[character.player_num],
                              self.game_info, self.action_group)
         self.adjust_sprite_positions()
         self.action_group.update()
         self.props_group.update()
-        self.update_brick()
 
 
     def update_brick(self):
@@ -299,8 +299,7 @@ class Gaming(tools._State):
                         if ch.HP <= 0:
                             self.reset_character(ch)
                         else:
-                            ch.rect.x -= 10
-                            ch.rect.y -= 10
+                            ch.rect.y -= 50
                 # another_character.HP -= character.skill_damage
                 # if another_character.HP <= 0:
                 #     self.reset_character(another_character)
@@ -390,7 +389,6 @@ class Gaming(tools._State):
                 brick.ActOnCharacter(collider)
                 if collider.HP <= 0:
                     self.reset_character(collider)
-
 
         collider.rect.y -= 1
 
