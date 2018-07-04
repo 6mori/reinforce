@@ -272,7 +272,7 @@ class Character(Sprite):
     def action(self, character_name=None, max_frame_number=None, postfix=None, size=None):
         self.allow_action = False
 
-        self.y_vel = 0
+        #self.y_vel = 0
 
         if size and self.action_counter == 0:
             self.origin_rect_action = self.rect
