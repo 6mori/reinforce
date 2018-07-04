@@ -493,7 +493,7 @@ class Gaming(tools._State):
         for brick in self.bricks_group.sprites():
             if brick.rect.top < self.viewport.bottom:
                 max_frame = self.bricks_images[brick.kind]['max_frame']
-                self.map.blit(self.bricks_images[brick.kind]['image'][(self.brick_counter % max_frame * c.MOVING_BRICK_SPEED) // c.MOVING_BRICK_SPEED], brick.rect)
+                self.map.blit(self.bricks_images[brick.kind]['image'][self.brick_counter % (max_frame * c.MOVING_BRICK_SPEED) // c.MOVING_BRICK_SPEED], brick.rect)
         #self.bricks_group.draw(self.map)
         self.props_group.draw(self.map)
         for action_item in self.action_group.sprites():
