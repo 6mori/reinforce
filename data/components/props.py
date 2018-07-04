@@ -15,6 +15,8 @@ class Prop(Sprite):
         self.rect.left = x
         self.rect.top = y
 
+        self.HP = 1000000000
+
         self.y_vel = 0
         self.state = c.FALLING
 

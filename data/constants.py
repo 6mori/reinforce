@@ -63,10 +63,10 @@ GO_DOWN = 'go down'
 # Character property
 
 MAX_X_VEL = 6
-MAX_Y_VEL = 11
-JUMP_VEL = -7
-GRAVITY = 1.01
-JUMP_GRAVITY = 0.2
+MAX_Y_VEL = 10
+JUMP_VEL = -10
+GRAVITY = 1.5
+JUMP_GRAVITY = 0.4
 
 # Game info
 

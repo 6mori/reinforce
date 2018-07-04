@@ -99,8 +99,8 @@ class GameOver(tools._State):
             else:
                 surface.blit(self.UI[state][0]['image'], self.UI[state][0]['rect'])
         if self.game_info[c.P1_HEART] == 0:
-            surface.blit(self.Victory, (c.SCREEN_WIDTH // 2, 0))
-            surface.blit(self.Defeated, (0, 0))
+            surface.blit(self.Victory, (600, 40))
+            surface.blit(self.Defeated, (0, 40))
         else:
-            surface.blit(self.Victory, (0, 0))
-            surface.blit(self.Defeated, (c.SCREEN_WIDTH // 2, 0))
+            surface.blit(self.Victory, (0, 40))
+            surface.blit(self.Defeated, (600, 40))
