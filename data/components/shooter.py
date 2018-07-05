@@ -1,10 +1,10 @@
 from .. import constants as c
-from . import character
+from . import hero
 from . import bullet
 import pygame as pg
 
 
-class GunGuy(character.Character):
+class Shooter(hero.Hero):
     def __init__(self):
         super().__init__()
 

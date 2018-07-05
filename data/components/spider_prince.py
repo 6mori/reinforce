@@ -1,9 +1,9 @@
-from . import gun_guy
+from . import shooter
 from .. import constants as c
 from . import skill_attack
 
 
-class Spider_prince(gun_guy.GunGuy):
+class Spider_prince(shooter.Shooter):
     def __init__(self):
         super().__init__()
 

@@ -1,7 +1,9 @@
 import pygame as pg
+import random
 
 from .. import tools, setup
 from .. import constants as c
+
 
 
 class Choosing(tools._State):
@@ -100,7 +102,7 @@ class Choosing(tools._State):
         }
 
         if event.type == pg.KEYDOWN:
-            if self.p1_confirm == False:
+            if not self.p1_confirm:
                 if event.key in P1_input_list.keys():
                     command = P1_input_list[event.key]
                     if command == c.CONFIRM:
@@ -111,7 +113,7 @@ class Choosing(tools._State):
                         if next_pos in self.pos2Chara.keys():
                             self.p1_offset = next_pos
 
-            if self.p2_confirm == False:
+            if not self.p2_confirm:
                 if event.key in P2_input_list.keys():
                     command = P2_input_list[event.key]
                     if command == c.CONFIRM:
@@ -121,6 +123,20 @@ class Choosing(tools._State):
                             [cur + off for cur, off in zip(self.p2_offset, tools.direct2pos[command])])
                         if next_pos in self.pos2Chara.keys():
                             self.p2_offset = next_pos
+
+        if self.p1_confirm and self.pos2Chara[self.p1_offset] == c.RANDOM:
+            times = random.randint(0, len(c.CHARACTERS)-1)
+            for pos in self.pos2Chara.keys():
+                if times == 0:
+                    self.p1_offset = pos
+                times -= 1
+
+        if self.p2_confirm and self.pos2Chara[self.p2_offset] == c.RANDOM:
+            times = random.randint(0, len(c.CHARACTERS)-1)
+            for pos in self.pos2Chara.keys():
+                if times == 0:
+                    self.p2_offset = pos
+                times -= 1
 
 
     '''def update_cursor(self):

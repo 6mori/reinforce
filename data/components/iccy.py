@@ -1,10 +1,10 @@
-from . import gun_guy
+from . import shooter
 from .. import constants as c
 from . import skill_attack
 import pygame as pg
 
 
-class Iccy(gun_guy.GunGuy):
+class Iccy(shooter.Shooter):
     def __init__(self):
         super().__init__()
 
