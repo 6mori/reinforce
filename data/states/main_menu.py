@@ -25,11 +25,10 @@ class MainMenu(tools._State):
         self.setup_BGM()
 
     def setup_UI(self):
-        self.UI = {}
-        self.UI[c.PLAY] = [{'image': pg.transform.scale(pg.image.load('images/UI/start_game.png'), (150, 50))},
-                           {'image': pg.transform.scale(pg.image.load('images/UI/start_game.png'), (180, 60))}]
-        self.UI[c.QUIT] = [{'image': pg.transform.scale(pg.image.load('images/UI/exit_game.png'), (150, 50))},
-                           {'image': pg.transform.scale(pg.image.load('images/UI/exit_game.png'), (180, 60))}]
+        self.UI = {c.PLAY: [{'image': pg.transform.scale(pg.image.load('images/UI/start_game.png'), (150, 50))},
+                            {'image': pg.transform.scale(pg.image.load('images/UI/start_game.png'), (180, 60))}],
+                   c.QUIT: [{'image': pg.transform.scale(pg.image.load('images/UI/exit_game.png'), (150, 50))},
+                            {'image': pg.transform.scale(pg.image.load('images/UI/exit_game.png'), (180, 60))}]}
         for state, k in zip(self.UI.keys(), range(0, 2)):
             for i in range(0, 2):
                  rect = self.UI[state][i]['image'].get_rect()

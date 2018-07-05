@@ -102,7 +102,7 @@ class Choosing(tools._State):
         }
 
         if event.type == pg.KEYDOWN:
-            if self.p1_confirm == False:
+            if not self.p1_confirm:
                 if event.key in P1_input_list.keys():
                     command = P1_input_list[event.key]
                     if command == c.CONFIRM:
@@ -113,7 +113,7 @@ class Choosing(tools._State):
                         if next_pos in self.pos2Chara.keys():
                             self.p1_offset = next_pos
 
-            if self.p2_confirm == False:
+            if not self.p2_confirm:
                 if event.key in P2_input_list.keys():
                     command = P2_input_list[event.key]
                     if command == c.CONFIRM:

@@ -1,8 +1,8 @@
-from . import sword_guy
+from . import warrior
 from .. import constants as c
 
 
-class Guan_gong(sword_guy.SwordGuy):
+class Guan_gong(warrior.Warrior):
     def __init__(self):
         super().__init__()
 

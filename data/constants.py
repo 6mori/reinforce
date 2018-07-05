@@ -119,7 +119,7 @@ LEFT_DOWN = 'left_down'
 
 TITLE_SCREEN = 'title_screen.png'
 CHOOSING_SCREEN = 'choosing_screen.jpg'
-RESULT_SCREEN = 'result_screen.jpg'
+RESULT_SCREEN = 'result_screen.png'
 
 # Main menu options
 
@@ -251,7 +251,7 @@ BULLET = 'bullet'
 SWORD = 'sword'
 
 # SCROLL_BRICK = 10
-SCROLL_TIME = 200
+SCROLL_TIME = 20000
 SCROLL_LEN = BRICK_HEIGHT
 
 # BGM

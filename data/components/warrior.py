@@ -1,13 +1,13 @@
 import pygame as pg
 
 from .. import constants as c
-from . import character
+from . import hero
 from . import sword
 
 
-class SwordGuy(character.Character):
+class Warrior(hero.Hero):
     def __init__(self):
-        super(SwordGuy, self).__init__()
+        super(Warrior, self).__init__()
 
         self.sword_damage = c.SWORD_DAMAGE
         self.max_HP = 500

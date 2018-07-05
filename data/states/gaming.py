@@ -4,7 +4,7 @@ from pygame.sprite import Group
 from .. import tools
 from .. import setup
 from .. import constants as c
-from ..components import character as ch
+from ..components import hero as ch
 from ..components import brick
 from ..components import props
 from ..components import Darling
@@ -65,7 +65,7 @@ class Gaming(tools._State):
         self.HPSplines.add(props.Spline(40, 0, self.MaxHP[0], 6))
         self.HPSplines.add(props.Spline(630, 0, self.MaxHP[1], 6))
 
-
+    # noinspection PyArgumentList
     def setup_background(self):
         self.viewport = self.screen_rect
         self.background = pg.transform.scale(pg.image.load('images/game_background.jpg'), c.SCREEN_SIZE)
@@ -75,7 +75,8 @@ class Gaming(tools._State):
         self.scroll_count = 0
 
 
-    def setup_BGM(self):
+    @staticmethod
+    def setup_BGM():
         pg.mixer.music.load('music/{}'.format(c.GAMING_BGM))
         pg.mixer.music.play()
 
@@ -104,7 +105,8 @@ class Gaming(tools._State):
         self.props_group = Group()
 
 
-    def create_prop(self, props_group, row, col, prop_kind):
+    @staticmethod
+    def create_prop(props_group, row, col, prop_kind):
         x = row * c.BRICK_WIDTH
         y = col * c.BRICK_HEIGHT
         props_group.add(props.Prop(x, y, prop_kind))
@@ -150,7 +152,8 @@ class Gaming(tools._State):
                     self.create_brick(bricks, row, col, tools.kindOfGround[ground_kind][1])
 
 
-    def create_brick(self, bricks, row, col, brick_kind):
+    @staticmethod
+    def create_brick(bricks, row, col, brick_kind):
         x = row * c.BRICK_WIDTH
         y = col * c.BRICK_HEIGHT
         bricks.add(brick.Brick(x, y, brick_kind))
@@ -278,7 +281,8 @@ class Gaming(tools._State):
             #self.check_collider_under_bottom(character)
 
 
-    def check_character_x_edge(self, character):
+    @staticmethod
+    def check_character_x_edge(character):
         if character.rect.left < 0:
             character.rect.left = 0
         if character.rect.right > c.SCREEN_WIDTH:
@@ -320,7 +324,8 @@ class Gaming(tools._State):
             prop.kill()
 
 
-    def adjust_character_for_x_collisions(self, character, collider):
+    @staticmethod
+    def adjust_character_for_x_collisions(character, collider):
 
         if character.name == c.GUAN_GONG and character.state == c.SKILLING:
             collider.kill()
@@ -351,7 +356,8 @@ class Gaming(tools._State):
         self.check_if_collider_is_falling(character)
 
 
-    def adjust_character_for_y_collisions(self, character, collider):
+    @staticmethod
+    def adjust_character_for_y_collisions(character, collider):
         if character.name == c.GUAN_GONG and character.state == c.SKILLING:
             pass
         else:
@@ -470,7 +476,8 @@ class Gaming(tools._State):
             self.apply_swords_damage_to_character(sword, character)
 
 
-    def apply_swords_damage_to_items(self, sword, coll_dict):
+    @staticmethod
+    def apply_swords_damage_to_items(sword, coll_dict):
         for collider in coll_dict:
             if (collider.vincible):
                 collider.HP -= sword.damage

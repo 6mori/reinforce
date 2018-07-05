@@ -39,9 +39,7 @@ class Brick(Sprite):
                 self.counter%=self.max_frame*c.MOVING_BRICK_SPEED
         else:
             pass'''
-    # def update(self):
-    # def blitme(self,screen):
-    #    screen.blit( self.image, self.rect )
+
 
     # for test
     def ActOnCharacter(self,character):
