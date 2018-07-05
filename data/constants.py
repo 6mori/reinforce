@@ -62,7 +62,7 @@ GO_DOWN = 'go down'
 
 # Character property
 
-MAX_X_VEL = 6
+MAX_X_VEL = 4
 MAX_Y_VEL = 10
 JUMP_VEL = -10
 GRAVITY = 1.5
@@ -119,7 +119,7 @@ LEFT_DOWN = 'left_down'
 
 TITLE_SCREEN = 'title_screen.png'
 CHOOSING_SCREEN = 'choosing_screen.jpg'
-RESULT_SCREEN = 'result_screen.jpg'
+RESULT_SCREEN = 'result_screen.png'
 
 # Main menu options
 
@@ -251,7 +251,7 @@ BULLET = 'bullet'
 SWORD = 'sword'
 
 # SCROLL_BRICK = 10
-SCROLL_TIME = 200
+SCROLL_TIME = 3000
 SCROLL_LEN = BRICK_HEIGHT
 
 # BGM

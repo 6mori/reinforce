@@ -39,9 +39,7 @@ class Brick(Sprite):
                 self.counter%=self.max_frame*c.MOVING_BRICK_SPEED
         else:
             pass'''
-    # def update(self):
-    # def blitme(self,screen):
-    #    screen.blit( self.image, self.rect )
+
 
     # for test
     def ActOnCharacter(self,character):
@@ -49,7 +47,7 @@ class Brick(Sprite):
             character.HP -= c.FIRE_BRICK_DAMAGE
         if self.kind=='glass' or  self.kind=='broken_glass':
             self.HP-=1
-            if self.HP==25:
+            if self.HP==50:
                 self.kind = 'broken_glass'
             if self.HP<=0:
                 self.kill()

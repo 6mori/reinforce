@@ -4,7 +4,7 @@ from pygame.sprite import Sprite
 from .. import constants as c
 
 
-class Character(Sprite):
+class Hero(Sprite):
 
     def __init__(self):
         super().__init__()
@@ -220,7 +220,7 @@ class Character(Sprite):
         self.gravity = c.JUMP_GRAVITY
         self.y_vel += self.gravity
 
-        if self.y_vel >= 0 and self.y_vel < self.max_y_vel:
+        if 0 <= self.y_vel < self.max_y_vel:
             self.gravity = c.GRAVITY
             self.state = c.FALLING
 
@@ -306,7 +306,7 @@ class Character(Sprite):
             self.state = c.FALLING
 
     def skill(self, character_name=None, max_frame_number=None, postfix=None, size=None):
-        if self.allow_skill == True:
+        if self.allow_skill:
             self.MP -= 1
         self.allow_skill = False
 
@@ -357,7 +357,6 @@ class Character(Sprite):
     def check_to_allow_skill(self):
         if (not self.commands[c.SKILL]) and (self.MP > 0):
             self.allow_skill = True
-
 
     def reset_character_state(self):
         self.HP = self.max_HP

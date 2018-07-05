@@ -1,11 +1,11 @@
-from . import gun_guy
+from . import shooter
 from .. import constants as c
 import time
 from . import skill_attack
 import pygame as pg
 
 
-class Ghost(gun_guy.GunGuy):
+class Ghost(shooter.Shooter):
     def __init__(self):
         super().__init__()
 
@@ -59,7 +59,7 @@ class Ghost(gun_guy.GunGuy):
 
     def update(self, keys, keybinding, game_info, action_group):
         super().update(keys, keybinding, game_info, action_group)
-        if self.vincible == False:
+        if not self.vincible:
             if self.facing_right:
                 attack = skill_attack.Skill_attack(self.player_num, 0, c.RIGHT, 'servent',
                                                    c.GHOST)

@@ -1,9 +1,9 @@
-from . import sword_guy
+from . import warrior
 from .. import constants as c
 from . import skill_attack
 
 
-class Poena(sword_guy.SwordGuy):
+class Poena(warrior.Warrior):
     def __init__(self):
         super().__init__()
 
