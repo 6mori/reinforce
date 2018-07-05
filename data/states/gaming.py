@@ -27,6 +27,7 @@ class Gaming(tools._State):
         self.game_info = persist
         self.persist = self.game_info
         self.game_info[c.CURRENT_TIME] = current_time
+        self.current_screen_bottom=600
         self.next = c.GAME_OVER
 
         self.x_collide_counter = 0
