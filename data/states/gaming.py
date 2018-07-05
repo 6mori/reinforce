@@ -35,7 +35,7 @@ class Gaming(tools._State):
         self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
 
         self.setup_background()
-        #self.setup_BGM()
+        self.setup_BGM()
 
         self.setup_bricks()
         self.setup_characters()

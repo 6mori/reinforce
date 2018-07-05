@@ -53,7 +53,7 @@ kindOfBrick = {
     'iron_down_right': {'name': 'images/bricks/iron_down_right', 'dur': 300,'movable':0},
     'iron':{'name':'images/bricks/iron','dur':300,'movable':0},
     'ice':{'name':'images/bricks/ice','dur':50,'movable':0},
-    'glass':{'name':'images/bricks/glass','dur':50,'movable':0},
+    'glass':{'name':'images/bricks/glass','dur':100,'movable':0},
     'broken_glass':{'name':'images/bricks/glass0','dur':50,'movable':0}
 }
 
