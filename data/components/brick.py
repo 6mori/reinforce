@@ -13,32 +13,11 @@ class Brick(Sprite):
         self.width=width
         self.height=height
         self.kind=kind
-        #self.counter=0
         self.HP = t.kindOfBrick[kind]['dur']
-        '''if t.kindOfBrick[kind]['movable']:
-            self.max_frame = t.kindOfBrick[self.kind]['frame']
-            #self.image = pg.transform.scale(pg.image.load(t.kindOfBrick[self.kind]['name'] + '%d.png' % (self.counter // c.MOVING_BRICK_SPEED)).convert(),
-                                            #(c.BRICK_WIDTH * self.width, c.BRICK_HEIGHT * self.height))
-        else:
-            self.image = pg.transform.scale(pg.image.load(t.kindOfBrick[self.kind]['name'] + '.png').convert(),
-                                            (c.BRICK_WIDTH * self.width, c.BRICK_HEIGHT * self.height))'''
-
-        #self.rect = self.image.get_rect()
         self.rect = pg.Rect((0, 0), c.BRICK_SIZE)
         self.rect.left = self.x
         self.rect.top = self.y
         self.vincible = True
-        # for test
-        #self.color = c.ORANGE
-        #self.update()
-
-    '''def update(self):
-        if t.kindOfBrick[self.kind]['movable']:
-                self.image = pg.transform.scale(pg.image.load(t.kindOfBrick[self.kind]['name']+'%d.png' % (self.counter//c.MOVING_BRICK_SPEED)).convert(),(c.BRICK_WIDTH * self.width, c.BRICK_HEIGHT * self.height))
-                self.counter+=1
-                self.counter%=self.max_frame*c.MOVING_BRICK_SPEED
-        else:
-            pass'''
 
 
     # for test
