@@ -111,7 +111,8 @@ class Gaming(tools._State):
 
 
     def setup_bricks(self):
-        map = "images/map.txt"
+        map_num=random.randint(1,100)%3
+        map = "images/map"+'%d.txt'%map_num
         self.bricks_group = Group()
         self.bricks_images = {}
         self.brick_counter = 0
