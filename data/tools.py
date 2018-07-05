@@ -144,7 +144,7 @@ class Control(object):
 
 
     def show_fps(self):
-        text_surface = self.font.render(str(int(self.clock.get_fps())), False, c.BLACK)
+        text_surface = self.font.render(str(int(self.clock.get_fps())), False, c.WHITE)
         self.screen.blit(text_surface, (c.SCREEN_WIDTH-24, c.SCREEN_HEIGHT-24))
 
 
