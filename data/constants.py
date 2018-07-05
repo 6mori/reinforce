@@ -256,7 +256,7 @@ SCROLL_LEN = BRICK_HEIGHT
 
 # BGM
 TITLE_BGM = 'start2.mp3'
-CHOOSING_BGM = 'choosing1.mp3'
+CHOOSING_BGM = 'choosing.mp3'
 GAMING_BGM = 'gaming2.mp3'
 
 PLAYER_HEART = 2
