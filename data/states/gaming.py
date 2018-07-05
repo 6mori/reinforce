@@ -36,7 +36,7 @@ class Gaming(tools._State):
         self.screen_rect = pg.Rect((0, 0), c.SCREEN_SIZE)
 
         self.setup_background()
-        self.setup_BGM()
+        #self.setup_BGM()
 
         self.setup_bricks()
         self.setup_characters()
@@ -114,8 +114,8 @@ class Gaming(tools._State):
 
 
     def setup_bricks(self):
-        map_num=random.randint(1,100)%3
-        map = "images/map"+'%d.txt'%map_num
+        #map_num=random.randint(1,100)%3
+        map = "images/map"+'0.txt'
         self.bricks_group = Group()
         self.bricks_images = {}
         self.brick_counter = 0
@@ -295,13 +295,14 @@ class Gaming(tools._State):
         brick = pg.sprite.spritecollideany(character, self.bricks_group)
         prop = pg.sprite.spritecollideany(character, self.props_group)
         if character.name == c.GUAN_GONG and character.state == c.SKILLING:
-            for ch in self.characters_group:
+            for ch in self.characters_group.sprites():
                 if ch != character:
                     another_character = pg.sprite.collide_rect(character, ch)
             if another_character:
                 for ch in self.characters_group:
                     if ch != character:
                         ch.HP -= character.skill_damage
+                        ch.state = c.FALLING
                         if ch.HP <= 0:
                             self.reset_character(ch)
                         else:
@@ -397,6 +398,7 @@ class Gaming(tools._State):
                 brick.ActOnCharacter(collider)
                 if collider.HP <= 0:
                     self.reset_character(collider)
+                    break
 
         collider.rect.y -= 1
 
@@ -431,7 +433,6 @@ class Gaming(tools._State):
                     self.reset_character(character)
                 if bullet.penetration_mode != 4:
                     bullet.kill()
-
 
         if brick:
             tmp = brick.HP

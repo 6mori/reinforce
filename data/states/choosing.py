@@ -21,7 +21,7 @@ class Choosing(tools._State):
         self.setup_position()
         self.setup_icon()
         self.setup_poster()
-        self.setup_BGM()
+        #self.setup_BGM()
 
 
     def setup_background(self):
