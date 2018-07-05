@@ -22,7 +22,7 @@ class MainMenu(tools._State):
         self.setup_background()
         #self.setup_cursor()
         self.setup_UI()
-        self.setup_BGM()
+        #self.setup_BGM()
 
     def setup_UI(self):
         self.UI = {c.PLAY: [{'image': pg.transform.scale(pg.image.load('images/UI/start_game.png'), (150, 50))},

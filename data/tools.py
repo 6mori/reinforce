@@ -99,7 +99,7 @@ class Control(object):
         self.state_name = None
         self.state = None
 
-        self.font = pg.font.SysFont("arial", 16)
+        self.font = pg.font.SysFont("arial", 24)
 
 
 
@@ -144,8 +144,8 @@ class Control(object):
 
 
     def show_fps(self):
-        text_surface = self.font.render(str(self.clock.get_fps()), False, c.GRAY)
-        self.screen.blit(text_surface, (0, 0))
+        text_surface = self.font.render(str(int(self.clock.get_fps())), False, c.BLACK)
+        self.screen.blit(text_surface, (c.SCREEN_WIDTH-24, c.SCREEN_HEIGHT-24))
 
 
     def main(self):
@@ -190,5 +190,5 @@ def load_all_music(directory, accept=('.wav', '.mp3', '.ogg', '.mdi', '.flac')):
         name, ext = os.path.splitext(song)
         if ext.lower() in accept:
             songs[name] = os.path.join(directory, song)
-    print(songs.values())
+    #print(songs.values())
     return songs
